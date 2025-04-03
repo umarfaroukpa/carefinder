@@ -1,15 +1,17 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema, Model } from 'mongoose';
 
-const hospitalSchema = new mongoose.Schema({
+const hospitalSchema = new Schema({
     name: { type: String, required: true },
     address: { type: String, required: true },
-    phone: { type: String, required: true },
-    email: { type: String, required: true },
-    city: { type: String, required: true },
-    region: { type: String, required: true },
-    description: { type: String },
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now }
-});
+    phone: String,
+    email: { type: [String], default: ['No email provided'] },
+    city: String,
+    region: String,
+    description: String,
+    specializations: [String],
+    coordinates: { type: [Number], default: [] },
+    functionalStatus: { type: String, default: 'Unknown' },
+}, { timestamps: true });
 
-export default mongoose.models.Hospital || mongoose.model('Hospital', hospitalSchema);
+// Prevent model overwrite by checking if it already exists
+export default (mongoose.models.Hospital || mongoose.model('Hospital', hospitalSchema)) as Model<any>;

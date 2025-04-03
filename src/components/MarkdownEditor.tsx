@@ -1,33 +1,34 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 export default function MarkdownEditor({
     initialContent = '',
-    onSave
+    onSave,
 }: {
     initialContent?: string;
     onSave: (content: string) => void;
 }) {
     const [content, setContent] = useState(initialContent);
 
+    useEffect(() => {
+        setContent(initialContent);
+    }, [initialContent]);
+
     return (
         <div className="grid grid-cols-2 gap-4">
             <textarea
                 value={content}
-                onChange={(e) => setContent(e.target.value)}
-                className="border p-2 h-64"
-                placeholder="Write in markdown..."
+                onChange={(e) => {
+                    setContent(e.target.value);
+                    onSave(e.target.value); // Update form field in real-time
+                }}
+                className="border p-2 h-64 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Write in markdown (e.g., **bold**, [link](url), etc.)"
             />
-            <div className="border p-2">
+            <div className="border p-2 rounded-md h-64 overflow-auto">
                 <ReactMarkdown>{content}</ReactMarkdown>
             </div>
-            <button
-                onClick={() => onSave(content)}
-                className="col-span-2 bg-blue-500 text-white p-2 rounded"
-            >
-                Save
-            </button>
         </div>
     );
 }

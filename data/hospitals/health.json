@@ -1,0 +1,1553 @@
+{
+    "cpd_provider_institutions": [
+        {
+            "sno": 1,
+            "name": "Jos University Teaching Hospital",
+            "location": "Jos",
+            "phone": "07-3454376",
+            "email": "juth-info@yahoo.com"
+        },
+        {
+            "sno": 2,
+            "name": "Ebonyi State University Teaching Hospital",
+            "location": "Abakaliki",
+            "phone": "043-221882",
+            "email": "info@ebsuth.org"
+        },
+        {
+            "sno": 3,
+            "name": "University of Calabar Teaching Hospital",
+            "location": "Calabar",
+            "phone": "087238513",
+            "email": null
+        },
+        {
+            "sno": 4,
+            "name": "University of Port Harcourt Teaching Hospital",
+            "location": "Port Harcourt",
+            "phone": "08033122701",
+            "email": "dr_etawo@yahoo.com"
+        },
+        {
+            "sno": 5,
+            "name": "Lagos State University Teaching Hospital",
+            "location": "Lagos",
+            "phone": "014710670",
+            "email": "cmd@lasuth.org"
+        },
+        {
+            "sno": 6,
+            "name": "College of Medicine, University of Ibadan",
+            "location": "Ibadan",
+            "phone": "02-8708396",
+            "email": "provost@comui.edu.ng"
+        },
+        {
+            "sno": 7,
+            "name": "Federal Medical Centre",
+            "location": "Owerri",
+            "phone": "08033411575",
+            "email": "fmcowerri@yahoo.com"
+        },
+        {
+            "sno": 8,
+            "name": "University of Uyo Teaching Hospital",
+            "location": "Uyo",
+            "phone": "08087774730",
+            "email": null
+        },
+        {
+            "sno": 9,
+            "name": "Olabisi Onabanjo University Teaching Hospital",
+            "location": "Sagamu",
+            "phone": "037-640916",
+            "email": "cmd.oouth@ogunstate.gov.ng"
+        },
+        {
+            "sno": 10,
+            "name": "Health and Human Services Hospital Management Board",
+            "location": "Abuja",
+            "phone": "08050997403",
+            "email": "cpdasokoro@gmail.com"
+        },
+        {
+            "sno": 11,
+            "name": "Irrua Specialist Teaching Hospital",
+            "location": "Irrua-Edo",
+            "phone": "08058065577",
+            "email": "irruateachhosp@yahoo.com"
+        },
+        {
+            "sno": 12,
+            "name": "National Postgraduate College of Nigeria",
+            "location": "Lagos",
+            "phone": "01-8970944",
+            "email": "enquiry@npmcn.edu.ng"
+        },
+        {
+            "sno": 13,
+            "name": "Imo State University Teaching Hospital",
+            "location": "Imo",
+            "phone": "083-520194",
+            "email": "imsuthorlu@yahoo.com"
+        },
+        {
+            "sno": 14,
+            "name": "Obafemi Awolowo University",
+            "location": "Ile-Ife",
+            "phone": "+2348034090243",
+            "email": "sologuniyi@yahoo.com"
+        },
+        {
+            "sno": 15,
+            "name": "Delta State Hospital Management Board",
+            "location": "Asaba",
+            "phone": "08077791001",
+            "email": null
+        },
+        {
+            "sno": 16,
+            "name": "University of Abuja Teaching Hospital",
+            "location": "Gwagwalada",
+            "phone": "09-2905535",
+            "email": "pitalabi@gmail.com"
+        },
+        {
+            "sno": 17,
+            "name": "Guild of Medical Directors",
+            "location": "Abuja",
+            "phone": "08057777123",
+            "email": null
+        },
+        {
+            "sno": 18,
+            "name": "Federal Medical Centre",
+            "location": "Asaba",
+            "phone": null,
+            "email": null
+        },
+        {
+            "sno": 19,
+            "name": "Lagos State Health Service Commission",
+            "location": "Lagos",
+            "phone": "01-8923056",
+            "email": "hsc@lagosstate.gov.ng"
+        },
+        {
+            "sno": 20,
+            "name": "Obafemi Awolowo University Teaching Hospital Complex",
+            "location": "Ile-Ife",
+            "phone": "036-230271-2",
+            "email": "oauthc-ile-ife@yahoo.com"
+        },
+        {
+            "sno": 21,
+            "name": "Abia State University Teaching Hospital",
+            "location": "Aba",
+            "phone": "082-232776",
+            "email": null
+        },
+        {
+            "sno": 22,
+            "name": "University College Hospital",
+            "location": "Ibadan",
+            "phone": "08033230882",
+            "email": "cmac@uch-ibadan.org"
+        },
+        {
+            "sno": 23,
+            "name": "State House Medical Centre",
+            "location": "Abuja",
+            "phone": "09-6252595",
+            "email": "cmacsoffice@gmail.com"
+        },
+        {
+            "sno": 24,
+            "name": "University of Nigeria",
+            "location": "Enugu",
+            "phone": "08033227339",
+            "email": "provost.collegeofmedicine@unn.edu.ng"
+        },
+        {
+            "sno": 25,
+            "name": "International Academy of Pathology, West African Division",
+            "location": null,
+            "phone": "+2348057791888",
+            "email": "awadiap@yahoo.com"
+        },
+        {
+            "sno": 26,
+            "name": "Federal Medical Centre, Keffi",
+            "location": "Nassarawa State",
+            "phone": "08059899009",
+            "email": "info@fmckeffi.net"
+        },
+        {
+            "sno": 27,
+            "name": "Nigerian Medical Association",
+            "location": null,
+            "phone": "08055272702",
+            "email": "lagosnma@hotmail.com"
+        },
+        {
+            "sno": 28,
+            "name": "Society of Family Physicians of Nigeria",
+            "location": "Lagos",
+            "phone": "01-4700442",
+            "email": "sofpon-ng@yahoo.com"
+        },
+        {
+            "sno": 29,
+            "name": "Federal Medical Centre",
+            "location": "Umuahia",
+            "phone": "07062141227",
+            "email": "abalichuku@yahoo.com"
+        },
+        {
+            "sno": 30,
+            "name": "Medical Women Association of Nigeria, Lagos Branch",
+            "location": "Lagos",
+            "phone": "08029293013",
+            "email": "mwanlagos@yahoo.com"
+        },
+        {
+            "sno": 31,
+            "name": "University of Ilorin Teaching Hospital",
+            "location": "Ilorin",
+            "phone": "08055763942",
+            "email": "uithilorin1980@yahoo.com"
+        },
+        {
+            "sno": 32,
+            "name": "Ophthalmology Society of Nigeria",
+            "location": null,
+            "phone": "08033084308",
+            "email": "osnigeria@yahoo.com"
+        },
+        {
+            "sno": 33,
+            "name": "Medical Association of Nigeria Across Britain",
+            "location": null,
+            "phone": "+44(0)7951490373",
+            "email": "secretary@mansag.org"
+        },
+        {
+            "sno": 34,
+            "name": "Paediatric Association of Nigeria",
+            "location": null,
+            "phone": [
+                "07037850012",
+                "08037129979"
+            ],
+            "email": "pan.nigeria@gmail.com"
+        },
+        {
+            "sno": 35,
+            "name": "Association of Public Health Physicians of Nigeria",
+            "location": null,
+            "phone": "08023381084",
+            "email": "aphpn@yahoo.com"
+        },
+        {
+            "sno": 36,
+            "name": "Aminu Kano Teaching Hospital",
+            "location": "Kano",
+            "phone": "08057203511",
+            "email": "akthkano@yahoo.com"
+        },
+        {
+            "sno": 37,
+            "name": "College of Health Sciences, Bingham University",
+            "location": "Nassarawa",
+            "phone": "08065539634",
+            "email": "binghamuniversity2005@yahoo.com"
+        },
+        {
+            "sno": 38,
+            "name": "National Hospital, Abuja",
+            "location": "Abuja",
+            "phone": "09-290886",
+            "email": "infor@nationalhospitalabuja.net"
+        },
+        {
+            "sno": 39,
+            "name": "Medical and Dental Consultants Association of Nigeria",
+            "location": null,
+            "phone": "08037147245",
+            "email": "drudofia@gmail.com"
+        },
+        {
+            "sno": 40,
+            "name": "Federal Medical Centre, Makurdi",
+            "location": "Makurdi",
+            "phone": "08069790184",
+            "email": "fmcmkd@yahoo.com"
+        },
+        {
+            "sno": 41,
+            "name": "Association of Psychiatrists in Nigeria",
+            "location": null,
+            "phone": "08037147245",
+            "email": "victorlash@yahoo.com"
+        },
+        {
+            "sno": 42,
+            "name": "College of Health Sciences, Oshogbo",
+            "location": "Oshogbo",
+            "phone": "08023277739",
+            "email": "uniosuncpd@gmail.com"
+        },
+        {
+            "sno": 43,
+            "name": "Christian Medical and Dental Association of Nigeria",
+            "location": "Abuja",
+            "phone": "08035501261",
+            "email": "cmdanigeria@yahoo.com"
+        },
+        {
+            "sno": 44,
+            "name": "Psychiatric Hospital Uselu",
+            "location": "Benin",
+            "phone": "08032331189",
+            "email": "psyuselu@yahoo.com"
+        },
+        {
+            "sno": 45,
+            "name": "Lagos University Teaching Hospital, Idi-Araba, Surulere",
+            "location": "Lagos",
+            "phone": "01-8713961",
+            "email": null
+        },
+        {
+            "sno": 46,
+            "name": "College of Health Sciences, University of Uyo",
+            "location": "Uyo",
+            "phone": "08035515388",
+            "email": "pekwere@hotmail.com"
+        },
+        {
+            "sno": 47,
+            "name": "National Tuberculosis and Leprosy Training Centre, Zaria",
+            "location": "Kaduna",
+            "phone": "069-875871",
+            "email": "ntbltc@yahoo.com"
+        },
+        {
+            "sno": 48,
+            "name": "Military Hospital Ikoyi",
+            "location": "Lagos",
+            "phone": "08191431787",
+            "email": "mhl.lagos@yahoo.com"
+        },
+        {
+            "sno": 49,
+            "name": "Medical and Dental Consultants Association of Nigeria",
+            "location": "Nnewi",
+            "phone": "08056382061",
+            "email": null
+        },
+        {
+            "sno": 50,
+            "name": "Association of General and Private Medical Practitioners of Nigeria",
+            "location": "Lagos",
+            "phone": "08032414323",
+            "email": null
+        },
+        {
+            "sno": 51,
+            "name": "Wuse General Hospital, Abuja",
+            "location": "Abuja",
+            "phone": "08035755992",
+            "email": null
+        },
+        {
+            "sno": 52,
+            "name": "Asokoro District Hospital",
+            "location": "Abuja",
+            "phone": "08050997403",
+            "email": null
+        },
+        {
+            "sno": 53,
+            "name": "Maitama District Hospital",
+            "location": "Abuja",
+            "phone": "07028390614",
+            "email": null
+        },
+        {
+            "sno": 54,
+            "name": "Federal Medical Centre, Ebute Meta",
+            "location": "Lagos",
+            "phone": "08035515388",
+            "email": "fmceblag@yahoo.com"
+        },
+        {
+            "sno": 55,
+            "name": "FCT Primary Healthcare Development Board",
+            "location": "Abuja",
+            "phone": "08036182337",
+            "email": "fctphcdb@yahoo.com"
+        },
+        {
+            "sno": 56,
+            "name": "Neuropsychiatric Hospital, Aro",
+            "location": "Abeokuta",
+            "phone": "039-779503",
+            "email": "provost@neuroaro.com"
+        },
+        {
+            "sno": 57,
+            "name": "Society of Occupational and Environmental Health Physicians of Nigeria, Lagos",
+            "location": "Lagos",
+            "phone": "08057099338",
+            "email": "nat.sec@soehpon-ng.org"
+        },
+        {
+            "sno": 58,
+            "name": "Edo State Hospital Management Board",
+            "location": "Benin",
+            "phone": "08056375250",
+            "email": "vexomokoike@yahoo.com"
+        },
+        {
+            "sno": 59,
+            "name": "Medical Women Association of Nigeria",
+            "location": "Abuja",
+            "phone": "08036650203",
+            "email": "mwanfct11@yahoo.com"
+        },
+        {
+            "sno": 60,
+            "name": "Military Hospital, Ikoyi",
+            "location": "Lagos",
+            "phone": "08191431787",
+            "email": null
+        },
+        {
+            "sno": 61,
+            "name": "Medical and Dental Consultants Association of Nigeria, Abuja Branch",
+            "location": "Abuja",
+            "phone": "08034234229",
+            "email": null
+        },
+        {
+            "sno": 62,
+            "name": "Federal Medical Centre, Nguru Yobe State",
+            "location": "Yobe",
+            "phone": "08036516134",
+            "email": "md@fmcnguru.gov.ng"
+        },
+        {
+            "sno": 63,
+            "name": "Ministry of Health, Asaba",
+            "location": "Delta",
+            "phone": "080803430118",
+            "email": "enife@yahoo.com"
+        },
+        {
+            "sno": 64,
+            "name": "Society for Gastroenterology and Hepatology in Nigeria",
+            "location": null,
+            "phone": "08037194917",
+            "email": "dendan.ndu@gmail.com"
+        },
+        {
+            "sno": 65,
+            "name": "Epidemiology Society of Nigeria",
+            "location": "Ibadan",
+            "phone": "08023392616",
+            "email": "epidsociety@yahoo.com"
+        },
+        {
+            "sno": 66,
+            "name": "Nigerian National Petroleum Corporation, Group Medical Centre",
+            "location": "Abuja",
+            "phone": "0946085039",
+            "email": null
+        },
+        {
+            "sno": 67,
+            "name": "Bowen University Teaching Hospital",
+            "location": "Oyo State",
+            "phone": "08034102152",
+            "email": "buth@gmail.com"
+        },
+        {
+            "sno": 68,
+            "name": "MENDS Training Institute MENDS Specialist Hospital",
+            "location": "Kaduna",
+            "phone": "08033112061",
+            "email": "owolabi1234@gmail.com"
+        },
+        {
+            "sno": 69,
+            "name": "Delta State University Teaching Hospital, Oghara",
+            "location": "Delta State",
+            "phone": [
+                "08035785839",
+                "08033607346"
+            ],
+            "email": "drobiaboayabo@yahoo.com"
+        },
+        {
+            "sno": 70,
+            "name": "Association of Rural Surgical Practitioners of Nigeria, ARSPON",
+            "location": "Nkwogwu, Aboh-Mbaise, Imo State",
+            "phone": [
+                "08066220361",
+                "08023138905"
+            ],
+            "email": null
+        },
+        {
+            "sno": 71,
+            "name": "Ladoke Akintola University Teaching Hospital",
+            "location": "Osogbo",
+            "phone": [
+                "07033328615",
+                "08034077336"
+            ],
+            "email": null
+        },
+        {
+            "sno": 72,
+            "name": "National Orthopaedic Hospital",
+            "location": "Kano",
+            "phone": "08023106019",
+            "email": "nohdala@orthopaedichospitaldala.org"
+        },
+        {
+            "sno": 73,
+            "name": "68 Nigerian Army Reference Hospital",
+            "location": "Lagos",
+            "phone": "08023199004",
+            "email": null
+        },
+        {
+            "sno": 74,
+            "name": "Nigerian Association of Dermatologists",
+            "location": null,
+            "phone": "08191355367",
+            "email": "www.dermatologyng.com"
+        },
+        {
+            "sno": 75,
+            "name": "College of Medicine University of Lagos",
+            "location": "Lagos",
+            "phone": "01-5835629",
+            "email": "info@cmu.edu.ng"
+        },
+        {
+            "sno": 76,
+            "name": "Intercountry Centre for Oral Health (ICOH) For Africa",
+            "location": "Jos",
+            "phone": "07098203421",
+            "email": "ectoh@yahoo.co.uk"
+        },
+        {
+            "sno": 77,
+            "name": "Nigerian Society of Neonatal Medicine",
+            "location": "UBTH",
+            "phone": "08023346693",
+            "email": "nisonm.nigeria@gmail.com"
+        },
+        {
+            "sno": 78,
+            "name": "The West African College of Surgeons (WACS)",
+            "location": "Lagos",
+            "phone": null,
+            "email": "info@wacs"
+        },
+        {
+            "sno": 79,
+            "name": "Anambra State University Teaching Hospital, Awka",
+            "location": "Anambra State",
+            "phone": "08039329882",
+            "email": null
+        },
+        {
+            "sno": 80,
+            "name": "Central Bank of Nigeria Medical Service Department",
+            "location": "Abuja",
+            "phone": "08070603521",
+            "email": null
+        },
+        {
+            "sno": 81,
+            "name": "Mother and Child Hospital, Akure",
+            "location": "Akure",
+            "phone": "08163593435",
+            "email": "omooyeneyin@yahoo.com"
+        },
+        {
+            "sno": 82,
+            "name": "Association of Rural Surgical Practitioners of Nigeria",
+            "location": "Imo State",
+            "phone": "09066220361",
+            "email": "aarspon@yahoo.com"
+        },
+        {
+            "sno": 83,
+            "name": "44 Nigerian Army Reference Hospital",
+            "location": "Kaduna",
+            "phone": "062-831194",
+            "email": "reference.hospital@yahoo.com"
+        },
+        {
+            "sno": 84,
+            "name": "Clinical Training and Research Centre",
+            "location": "Kaduna",
+            "phone": "08059600901",
+            "email": "emteetee@yahoo.com"
+        },
+        {
+            "sno": 85,
+            "name": "Seventh Day Adventist Hospital",
+            "location": "Ile-Ife",
+            "phone": "08078193640",
+            "email": "pmesda@gmail.com"
+        },
+        {
+            "sno": 86,
+            "name": "Federal Medical Centre",
+            "location": "Katsina",
+            "phone": "08035051720",
+            "email": "fmckatsina@yahoo.com"
+        },
+        {
+            "sno": 87,
+            "name": "Ahmadu Bello University Teaching Hospital, Zaria",
+            "location": "Kaduna",
+            "phone": "08033174870",
+            "email": "cmdabuth@yahoo.com"
+        },
+        {
+            "sno": 88,
+            "name": "National Orthopedic Hospital Igbobi",
+            "location": "Lagos",
+            "phone": "08122879302",
+            "email": "nohilagos@nohilagos.org"
+        },
+        {
+            "sno": 89,
+            "name": "Endocrine and Metabolism Society of Nigeria",
+            "location": "Lagos",
+            "phone": "08033008127",
+            "email": "nigerianendoctinologysoc@yahoo.com"
+        },
+        {
+            "sno": 90,
+            "name": "Federal Medical Centre",
+            "location": "Gombe",
+            "phone": "07081456608",
+            "email": "cmd@fmcgombe.org"
+        },
+        {
+            "sno": 91,
+            "name": "Federal Neuro-Psychiatric Hospital, Yaba",
+            "location": "Lagos",
+            "phone": "01-7743174",
+            "email": "neuropsychiatrichospitalyaba@yahoo.com"
+        },
+        {
+            "sno": 92,
+            "name": "Federal Medical Centre",
+            "location": "Bida",
+            "phone": [
+                "08058697801",
+                "08058697802",
+                "08058697803"
+            ],
+            "email": "fmcbida@yahoo.com"
+        },
+        {
+            "sno": 93,
+            "name": "Barau Dikko Specialist Hospital",
+            "location": "Kaduna",
+            "phone": "+234-08033146100",
+            "email": null
+        },
+        {
+            "sno": 94,
+            "name": "College of Medicine, University of Lagos",
+            "location": "Lagos",
+            "phone": "01-5835629",
+            "email": "info@cmed.edu.ng"
+        },
+        {
+            "sno": 95,
+            "name": "College of Medicine Lagos State University, Ikeja",
+            "location": "Lagos State",
+            "phone": null,
+            "email": null
+        },
+        {
+            "sno": 96,
+            "name": "Federal Medical Center, Ido-Ekiti",
+            "location": "Ekiti State",
+            "phone": null,
+            "email": "majekayod@yahoo.com"
+        },
+        {
+            "sno": 97,
+            "name": "Medical and Dental Consultants Association of Nigeria (MDCAN) NDUTH, Okolobiri",
+            "location": "Belyesa State",
+            "phone": [
+                "08034510717",
+                "07031819695"
+            ],
+            "email": "mdcanduth@yahoo.group.com"
+        },
+        {
+            "sno": 98,
+            "name": "Benue State University Teaching Hospital, Makurdi",
+            "location": "Benue",
+            "phone": "08037001800",
+            "email": "aomalu@gmail.com"
+        },
+        {
+            "sno": 99,
+            "name": "Medical Women’s Association of Nigeria (National)",
+            "location": "Abuja",
+            "phone": [
+                "08092463917",
+                "08034028617"
+            ],
+            "email": "mwaninfo@gmail.com"
+        },
+        {
+            "sno": 100,
+            "name": "Faculty of Ophthalmology, National Postgraduate Medical College of Nigeria",
+            "location": "Lagos",
+            "phone": "08031907552",
+            "email": "nwoseb@hotmail.com"
+        },
+        {
+            "sno": 101,
+            "name": "International Academy of Pathology, West African Division",
+            "location": null,
+            "phone": "+2348057791888",
+            "email": "clemabuokolo@yahoo.com"
+        },
+        {
+            "sno": 102,
+            "name": "Nigerian Association of Orthodontists",
+            "location": "Lagos",
+            "phone": "08033001207",
+            "email": "yemisanu@yahoo.com"
+        },
+        {
+            "sno": 103,
+            "name": "Nigerian Navy Reference Hospital",
+            "location": "Lagos",
+            "phone": "01-8198411",
+            "email": "nnrhojolagos@yahoo.com"
+        },
+        {
+            "sno": 104,
+            "name": "Nigerian Cardiac Society",
+            "location": "Umuahia",
+            "phone": "08067747121",
+            "email": "nigerian-cardiac-society@googlegroups.com"
+        },
+        {
+            "sno": 105,
+            "name": "University of Lagos Medical Centre",
+            "location": "Lagos",
+            "phone": "08023266787",
+            "email": "medicaldirector@unilag.edu.ng"
+        },
+        {
+            "sno": 106,
+            "name": "Federal Staff (Medical) Centre, Jabi",
+            "location": "Abuja",
+            "phone": "08033086109",
+            "email": "drcigwilo@yahoo.com"
+        },
+        {
+            "sno": 107,
+            "name": "Dalhatu Araf Specialist Hospital, Lafia",
+            "location": "Lafia",
+            "phone": "07098209527",
+            "email": null
+        },
+        {
+            "sno": 108,
+            "name": "Delta State University College of Health Sciences",
+            "location": "Abraka",
+            "phone": "08034744447",
+            "email": "provost@chsdelsu.com"
+        },
+        {
+            "sno": 109,
+            "name": "Centre for Health Professional Continuing Education",
+            "location": "Minna",
+            "phone": "08035898045",
+            "email": "drauimam@gmail.com"
+        },
+        {
+            "sno": 110,
+            "name": "Family Health International (FHI360)",
+            "location": "Abuja",
+            "phone": "+234-9-4615555",
+            "email": "hkhamofu@sidhas.org"
+        },
+        {
+            "sno": 111,
+            "name": "Kebbi State Centre for Health Professional Continuing Education",
+            "location": "Kebbi",
+            "phone": "08038354282",
+            "email": "ccpdmohkebbi@yahoo.com"
+        },
+        {
+            "sno": 112,
+            "name": "Zamfara State Centre for Continuing Professional Development",
+            "location": "Gusau",
+            "phone": "08105009888",
+            "email": "ccpdzamfaramoh@gmail.com"
+        },
+        {
+            "sno": 113,
+            "name": "Federal Medical Centre, Yenagoa",
+            "location": "Yenagoa",
+            "phone": "07039434107",
+            "email": "fmcentrey@yahoo.com"
+        },
+        {
+            "sno": 114,
+            "name": "Diabetes Association of Nigeria (DAN)",
+            "location": null,
+            "phone": "08033407316",
+            "email": "diabetesassociationdan@mail.com"
+        },
+        {
+            "sno": 115,
+            "name": "International College of Surgeons, Nigerian Section",
+            "location": null,
+            "phone": null,
+            "email": "icsnns@yahoo.com"
+        },
+        {
+            "sno": 116,
+            "name": "Department of Paediatrics/University College Hospital, Ibadan/Nestle Nutrition",
+            "location": "Ibadan",
+            "phone": "07008244357 Ext. 2410",
+            "email": "paediatrics@comui.edu.ng"
+        },
+        {
+            "sno": 117,
+            "name": "Society of Emergency Medicine Practitioners of Nigeria (SEMPON)",
+            "location": null,
+            "phone": "08035455784",
+            "email": "info@semponconference2014.org"
+        },
+        {
+            "sno": 118,
+            "name": "Ministry of Health, Cross River State",
+            "location": "Calabar",
+            "phone": "08037239898",
+            "email": "oyoita@yahoo.com"
+        },
+        {
+            "sno": 119,
+            "name": "Nigerian Dental Association",
+            "location": null,
+            "phone": null,
+            "email": null
+        },
+        {
+            "sno": 120,
+            "name": "Babcock University Teaching Hospital",
+            "location": "Ilisan-Remo",
+            "phone": "08036009740",
+            "email": "johnsotunsa@yahoo.com"
+        },
+        {
+            "sno": 121,
+            "name": "Federal Medical Centre, Birnin Kebbi",
+            "location": "Birnin Kebbi",
+            "phone": null,
+            "email": "fmcbirninkebbi@yahoo.com"
+        },
+        {
+            "sno": 122,
+            "name": "HQ 445 Nigerian Airforce Hospital, Ikeja",
+            "location": "Lagos",
+            "phone": "08037329300",
+            "email": "445nafh@airforce.mil.ng"
+        },
+        {
+            "sno": 123,
+            "name": "Niger Delta University Teaching Hospital, Okolobiri",
+            "location": "Yenagoa",
+            "phone": "08168400877",
+            "email": "cmac@nduth.org.ng"
+        },
+        {
+            "sno": 124,
+            "name": "Ministry of Health, Uyo",
+            "location": "Uyo",
+            "phone": "08035506831",
+            "email": "drefong@yahoo.com"
+        },
+        {
+            "sno": 125,
+            "name": "Department of Community Medicine, Ahmadu Bello University, Zaria",
+            "location": "Zaria",
+            "phone": "+2348037019753",
+            "email": "adamushehu@gmail.com"
+        },
+        {
+            "sno": 126,
+            "name": "Faculty of Dentistry, University of Port Harcourt",
+            "location": "Port Harcourt",
+            "phone": "08023518203",
+            "email": "proonyeaso1@yahoo.com"
+        },
+        {
+            "sno": 127,
+            "name": "Hospitals Management Board, Kano",
+            "location": "Kano",
+            "phone": null,
+            "email": null
+        },
+        {
+            "sno": 128,
+            "name": "School of Dentistry, College of Medical Sciences, University of Benin",
+            "location": "Benin",
+            "phone": "08038084336",
+            "email": "schoolofdentistry@uniben.edu"
+        },
+        {
+            "sno": 129,
+            "name": "Department of Community Medicine/Aminu Kano Teaching Hospital",
+            "location": "Kano",
+            "phone": "+234-8035738637",
+            "email": "abubakarsanusi@yahoo.com"
+        },
+        {
+            "sno": 130,
+            "name": "Association of Nigerian Physicians in the Americas",
+            "location": "USA",
+            "phone": "+16613134967",
+            "email": "nkem67@gmail.com"
+        },
+        {
+            "sno": 131,
+            "name": "National Association of Physicians of Alternative Medicine",
+            "location": "Lagos",
+            "phone": "+2348177759597",
+            "email": null
+        },
+        {
+            "sno": 132,
+            "name": "Hospital Management Board, Bauchi",
+            "location": "Bauchi",
+            "phone": "08036321293",
+            "email": "a.mangarzar@yahoo.com"
+        },
+        {
+            "sno": 133,
+            "name": "Ministry of Defence Staff Clinic",
+            "location": "Abuja",
+            "phone": null,
+            "email": "modscshiphouse@gmail.com"
+        }
+    ],
+    "cpd_providers_private": [
+        {
+            "sno": 1,
+            "name": "Emergency Response Services Nigeria Ltd",
+            "location": "Port Harcourt",
+            "phone": "08035455784",
+            "email": "indmedsu@yahoo.com"
+        },
+        {
+            "sno": 2,
+            "name": "Medical Tutors Ltd",
+            "location": "Lagos",
+            "phone": "08033209048",
+            "email": "cme@medicaltutors.com"
+        },
+        {
+            "sno": 3,
+            "name": "Trigen Healthcare Ltd",
+            "location": "Lagos",
+            "phone": "08032276766",
+            "email": "info@trigenhealth.com"
+        },
+        {
+            "sno": 4,
+            "name": "Ace Medicare Clinics Ltd",
+            "location": "Ota, Ogun State",
+            "phone": "08032276766",
+            "email": "info@medicareclinics.com"
+        },
+        {
+            "sno": 5,
+            "name": "BMJ West Africa Edition",
+            "location": "Calabar",
+            "phone": "039600100",
+            "email": "bmjwestafrica.com"
+        },
+        {
+            "sno": 6,
+            "name": "Pfizer Specialties Ltd",
+            "location": "Lagos",
+            "phone": "08063600642",
+            "email": "kodjo.soroh@pfizer.com"
+        },
+        {
+            "sno": 7,
+            "name": "United Doctors Nigeria Ltd",
+            "location": "Kaduna",
+            "phone": "017745304",
+            "email": "doctorsu@yahoo.com"
+        },
+        {
+            "sno": 8,
+            "name": "Abuja Clinics",
+            "location": "Abuja",
+            "phone": "09-8089805",
+            "email": "info@abujaclinics.com"
+        },
+        {
+            "sno": 9,
+            "name": "Structured Health Care Limited",
+            "location": "Lagos",
+            "phone": "08075958085",
+            "email": "oogberala@yahoo.com"
+        },
+        {
+            "sno": 10,
+            "name": "153 Consulting Limited",
+            "location": "Calabar",
+            "phone": "08024089182",
+            "email": "info@153consulting.com"
+        },
+        {
+            "sno": 11,
+            "name": "Pathcare Nigeria Limited",
+            "location": "Lagos",
+            "phone": "01-4616311",
+            "email": "info@pathcarenigeria.com"
+        },
+        {
+            "sno": 12,
+            "name": "Glaxo Smithkline Pharmaceutical Nigeria Ltd",
+            "location": "Lagos",
+            "phone": "01-2711000",
+            "email": "bode.b.adesoji@gsk.com"
+        },
+        {
+            "sno": 13,
+            "name": "Nordica Fertility Centre",
+            "location": "Lagos",
+            "phone": "08036003300",
+            "email": "yomiaj@gmail.com"
+        },
+        {
+            "sno": 14,
+            "name": "Medical and Dental Provider Network",
+            "location": "Lagos",
+            "phone": "08033004421",
+            "email": "nenejolad@yahoo.com"
+        },
+        {
+            "sno": 15,
+            "name": "Forest Health Services",
+            "location": "Abuja",
+            "phone": "09-786240",
+            "email": "forest.health@yahoo.com"
+        },
+        {
+            "sno": 16,
+            "name": "SPO Healthcare Quality Consultancy Services",
+            "location": "Benin",
+            "phone": "08071484084",
+            "email": "info@spohealthcare"
+        },
+        {
+            "sno": 17,
+            "name": "Zankli Medical Centre",
+            "location": "Abuja",
+            "phone": "08037012487",
+            "email": "zankli@hotmail.com"
+        },
+        {
+            "sno": 18,
+            "name": "Premier Specialist Medical Centre",
+            "location": "Lagos",
+            "phone": [
+                "01-7741463",
+                "08078518998"
+            ],
+            "email": "premiersmc@yahoo.com"
+        },
+        {
+            "sno": 19,
+            "name": "Grace of God Specialist Medical Centre",
+            "location": "Abuja",
+            "phone": "08085619012",
+            "email": "gogsmc@yahoo.com"
+        },
+        {
+            "sno": 20,
+            "name": "CEDARCREST Hospitals",
+            "location": "Abuja",
+            "phone": "08095157896",
+            "email": "info@cedarcresthospitals.com"
+        },
+        {
+            "sno": 21,
+            "name": "Maryland Global Initiative Corporation Nigeria",
+            "location": "Abuja",
+            "phone": "08086435943",
+            "email": "uolutola@umsom-ihunijera.org"
+        },
+        {
+            "sno": 22,
+            "name": "Kephalus Health Nigeria Limited",
+            "location": "Lagos",
+            "phone": "08038001903",
+            "email": "kephalushealth@gmail.com"
+        },
+        {
+            "sno": 23,
+            "name": "Genesis Health Co. Ltd",
+            "location": "Lagos",
+            "phone": [
+                "08078518998",
+                "08022123414"
+            ],
+            "email": "info@genesishealthinc.com"
+        },
+        {
+            "sno": 24,
+            "name": "Total Health Trust Limited",
+            "location": "Lagos",
+            "phone": "01-4482105-6",
+            "email": "info@totalhealthtrust.com"
+        },
+        {
+            "sno": 25,
+            "name": "Health Assurance Consultants Limited",
+            "location": null,
+            "phone": "07093177761",
+            "email": "hacconsultant@yahoo.co.uk"
+        },
+        {
+            "sno": 26,
+            "name": "VDG International Limited",
+            "location": "Lagos",
+            "phone": "08033254488",
+            "email": "fhlng@yahoo.com"
+        },
+        {
+            "sno": 27,
+            "name": "BeyHealth Consulting",
+            "location": "Lagos",
+            "phone": "012719136",
+            "email": "info@beyhealth.com"
+        },
+        {
+            "sno": 28,
+            "name": "Diamond Helix Medical Assistance Limited",
+            "location": "Lagos",
+            "phone": "08030952171",
+            "email": "helixmedical.com"
+        },
+        {
+            "sno": 29,
+            "name": "Lilly Hospital",
+            "location": "Warri",
+            "phone": "07053351741",
+            "email": "lilyclinic2005@yahoo.com"
+        },
+        {
+            "sno": 30,
+            "name": "Rainbow Specialist Medical Centre",
+            "location": "Lagos",
+            "phone": "08075067796",
+            "email": "info@rainbow.com"
+        },
+        {
+            "sno": 31,
+            "name": "Kelina Medical Limited",
+            "location": "Abuja",
+            "phone": "08035501239",
+            "email": "kelina@kelinahospital.com"
+        },
+        {
+            "sno": 32,
+            "name": "DIFF Hospital",
+            "location": "Abuja",
+            "phone": "09-2905998",
+            "email": "info@diffhospital.com"
+        },
+        {
+            "sno": 33,
+            "name": "Institute of Human Virology – Nigeria",
+            "location": "Abuja",
+            "phone": "094610342",
+            "email": "pdakum@ihunigeria.org"
+        },
+        {
+            "sno": 34,
+            "name": "IPAS Nigeria",
+            "location": "Abuja",
+            "phone": "07072206915",
+            "email": "ipas_nigeria@yahoo.com"
+        },
+        {
+            "sno": 35,
+            "name": "Safety Health and Environment Limited",
+            "location": "Lagos",
+            "phone": "08023182620",
+            "email": "safetyhealthenviroment@ymail.com"
+        },
+        {
+            "sno": 36,
+            "name": "Lagoon Hospitals",
+            "location": "Lagos",
+            "phone": "08058512336",
+            "email": "dr.coker@lagoonhospitals.com"
+        },
+        {
+            "sno": 37,
+            "name": "The Eko Hospitals",
+            "location": "Lagos",
+            "phone": "01-2716997",
+            "email": "info@ekohospitals.com"
+        },
+        {
+            "sno": 38,
+            "name": "Saint Nicholas Hospital",
+            "location": "Lagos",
+            "phone": "08022908484",
+            "email": "info@saintnicholashospital.com"
+        },
+        {
+            "sno": 39,
+            "name": "Aids Prevention Initiative in Nigeria",
+            "location": "Abuja",
+            "phone": "09-6730282",
+            "email": "pokonkwo@apin.org.ng"
+        },
+        {
+            "sno": 40,
+            "name": "First Cardiology Consultants",
+            "location": "Lagos",
+            "phone": "+23417406284",
+            "email": "dr.ko@cardiosundmd.com"
+        },
+        {
+            "sno": 41,
+            "name": "Society for Quality in Healthcare in Nigeria",
+            "location": "Lagos",
+            "phone": "0808032925",
+            "email": "infor@sqhn.org"
+        },
+        {
+            "sno": 42,
+            "name": "Funlol Medical Services",
+            "location": "Lagos",
+            "phone": "08052628954",
+            "email": "funlolmedicalservices@yahoo.com"
+        },
+        {
+            "sno": 43,
+            "name": "Roche Products Nigeria",
+            "location": "Lagos",
+            "phone": "08058698798",
+            "email": "oladipupo.hammed@roche.com"
+        },
+        {
+            "sno": 44,
+            "name": "Cardinal Academy of Emergency Care Ltd.",
+            "location": "Lagos",
+            "phone": "08088133220",
+            "email": "cardinalaca@gmail.com"
+        },
+        {
+            "sno": 45,
+            "name": "Department of State Services Medical Centre",
+            "location": "Abuja",
+            "phone": null,
+            "email": "dssmcmsd@yahoo.com"
+        },
+        {
+            "sno": 46,
+            "name": "NISA Premier Hospital",
+            "location": "Abuja",
+            "phone": null,
+            "email": "nisapremier@yahoo.com"
+        },
+        {
+            "sno": 47,
+            "name": "Service Medical International Limited",
+            "location": "Port Harcourt",
+            "phone": "+234(0)84611436",
+            "email": "smi.clinic@internationalsos.com"
+        },
+        {
+            "sno": 48,
+            "name": "Hoare’s Memorial Methodist Cathedral Clinic",
+            "location": "Lagos",
+            "phone": [
+                "01-8980372",
+                "08033351254"
+            ],
+            "email": "hmmc-clinic@yahoo.com"
+        },
+        {
+            "sno": 49,
+            "name": "Sub Saharan Health Solutions Nigeria Ltd",
+            "location": "Lagos",
+            "phone": "08169901523",
+            "email": "ejayiobe@subshs.com"
+        },
+        {
+            "sno": 50,
+            "name": "TADAM Medical Centre",
+            "location": "Jos",
+            "phone": "08062654690",
+            "email": "josephotubu@yahoo.com"
+        },
+        {
+            "sno": 51,
+            "name": "Outreach Medical Services",
+            "location": "Lagos",
+            "phone": "08027338723",
+            "email": null
+        },
+        {
+            "sno": 52,
+            "name": "Medical Global Services Limited",
+            "location": "Lagos",
+            "phone": "08056124118",
+            "email": "info@medicalglobal.com.ng"
+        },
+        {
+            "sno": 53,
+            "name": "Strategic Insight Healthcare (The Hospital Ltd)",
+            "location": "Lagos",
+            "phone": [
+                "08188343865",
+                "08108652639"
+            ],
+            "email": [
+                "joel@s-insights.com",
+                "joel@myexpert.com"
+            ]
+        },
+        {
+            "sno": 54,
+            "name": "Life Institute for Endoscopy (Life Specialist Hosp. Ltd.)",
+            "location": "Nnewi",
+            "phone": "08034044189",
+            "email": "info@lifeendoscopy.com"
+        },
+        {
+            "sno": 55,
+            "name": "Sagnoom Associates Nigeria Ltd.",
+            "location": "Abuja",
+            "phone": [
+                "07030970676",
+                "07029969571"
+            ],
+            "email": "oifudu@hotmail.com"
+        },
+        {
+            "sno": 56,
+            "name": "The Roding Medical Centre",
+            "location": "Lagos",
+            "phone": "234-1-2616057-8",
+            "email": "info@therodingmedicalcentreltd.com"
+        },
+        {
+            "sno": 57,
+            "name": "The Reddington Multi-Specialist Hospital",
+            "location": "Lagos",
+            "phone": [
+                "01-2715340-4",
+                "01-2715346-8"
+            ],
+            "email": "dominic.ukpong@reddingtonhospital.com"
+        },
+        {
+            "sno": 58,
+            "name": "D & TET Limited",
+            "location": "Lagos",
+            "phone": "018446467",
+            "email": "austin.obichere@btinternet.com"
+        },
+        {
+            "sno": 59,
+            "name": "Hygeia Nigeria Ltd",
+            "location": "Lagos",
+            "phone": [
+                "01-6283950",
+                "07069997459"
+            ],
+            "email": "dradebiyi@hygeiagroup.com"
+        },
+        {
+            "sno": 60,
+            "name": "Aubretia Quality Health Care Solutions Ltd",
+            "location": "Port Harcourt",
+            "phone": "+2348033129421",
+            "email": "admin@aubretiahealthcare.com"
+        },
+        {
+            "sno": 61,
+            "name": "Angel & Eagle Global Rescue Services Ltd",
+            "location": "Abeokuta",
+            "phone": [
+                "08038310057",
+                "012904914"
+            ],
+            "email": "adelakus@hotmail.com"
+        },
+        {
+            "sno": 62,
+            "name": "Dental Solutions (Ent) Ltd",
+            "location": "Lagos",
+            "phone": "07028071842",
+            "email": "info@dentalsolutions.cc"
+        },
+        {
+            "sno": 63,
+            "name": "E CPD Nigeria",
+            "location": "Abuja",
+            "phone": "08072548104",
+            "email": "umaru.ahmaduali@ecpdnigeria.com"
+        },
+        {
+            "sno": 64,
+            "name": "The Bridge Clinic",
+            "location": "Lagos",
+            "phone": "+234-1-4619006",
+            "email": "bridge@om.metrong.com"
+        },
+        {
+            "sno": 65,
+            "name": "The Byron Institute",
+            "location": "Abuja",
+            "phone": "08065298088",
+            "email": "byroninstitute@yahoo.com"
+        },
+        {
+            "sno": 66,
+            "name": "Excellence and Friends Management Consult",
+            "location": "Abuja",
+            "phone": "08096083335",
+            "email": "ed@expertmanagers.org"
+        },
+        {
+            "sno": 67,
+            "name": "EpiAfric",
+            "location": "Abuja",
+            "phone": "08107561754",
+            "email": "chikwe@epiafric.com"
+        },
+        {
+            "sno": 68,
+            "name": "Positive Accents Training Solutions Ltd",
+            "location": "Abuja",
+            "phone": "08035083093",
+            "email": "iikebobo@yahoo.co.uk"
+        },
+        {
+            "sno": 69,
+            "name": "MedEnhanz Resources Ltd",
+            "location": "Lagos",
+            "phone": "08135496889",
+            "email": "info@medehanz.com"
+        },
+        {
+            "sno": 70,
+            "name": "Global Health Project & Resources Nig. Ltd",
+            "location": "Lagos",
+            "phone": "08051444457",
+            "email": "globahpr@gmail.com"
+        },
+        {
+            "sno": 71,
+            "name": "St Charles Borromeo Specialist Hospital",
+            "location": "Onitsha",
+            "phone": "08138955442",
+            "email": "borromeohospital@yahoo.com"
+        },
+        {
+            "sno": 72,
+            "name": "Sickle Cell Foundation Nigeria",
+            "location": "Lagos",
+            "phone": "08100002003",
+            "email": "info@sicklecellfoundation.com"
+        },
+        {
+            "sno": 73,
+            "name": "Medical Art Center",
+            "location": "Lagos",
+            "phone": "+2348033347231",
+            "email": null
+        },
+        {
+            "sno": 74,
+            "name": "Wellington Clinics Ltd",
+            "location": "Abuja",
+            "phone": "08168704327",
+            "email": "info@wellingtonclinicsabuja.com"
+        },
+        {
+            "sno": 75,
+            "name": "CPD Online",
+            "location": "Lagos",
+            "phone": "08033184696",
+            "email": "previvahealth@gmail.com"
+        },
+        {
+            "sno": 76,
+            "name": "Shell Companies in Nigeria",
+            "location": "Lagos",
+            "phone": "08070344718",
+            "email": null
+        },
+        {
+            "sno": 77,
+            "name": "InSiGHt Health Consulting Ltd",
+            "location": "Lagos",
+            "phone": "01-7633549",
+            "email": "admin@insighthealth.biz"
+        },
+        {
+            "sno": 78,
+            "name": "Mecure Healthcare Limited",
+            "location": "Lagos",
+            "phone": "08023149120",
+            "email": "info@mecure.com.ng"
+        },
+        {
+            "sno": 79,
+            "name": "Intelligent Healthcare Solutions",
+            "location": "Lagos",
+            "phone": "08023235084",
+            "email": "management@ihsng.com"
+        },
+        {
+            "sno": 80,
+            "name": "Restore Global Project",
+            "location": "Abuja",
+            "phone": "09085393194",
+            "email": "ezeji@restoreglobalproject.com"
+        },
+        {
+            "sno": 81,
+            "name": "Minimally Invasive Surgical Solution Limited",
+            "location": "Lagos",
+            "phone": "08177788223",
+            "email": "abibey@yahoo.com"
+        }
+    ]
+}

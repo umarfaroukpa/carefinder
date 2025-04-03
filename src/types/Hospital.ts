@@ -1,12 +1,10 @@
 export interface Hospital {
-    _id?: string;
+    id: string;
     name: string;
+    location: string;
     address: string;
-    phone: string;
-    email: string;
-    city: string;
-    region: string;
+    specializations: string[];
+    contactNumber: string;
+    email?: string;
     description?: string;
-    createdAt?: Date;
-    updatedAt?: Date;
 }
