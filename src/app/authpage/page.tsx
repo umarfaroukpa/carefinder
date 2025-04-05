@@ -11,6 +11,7 @@ import {
     AuthError
 } from 'firebase/auth';
 import { auth } from '../../lib/firebase';
+import { useRouter } from 'next/navigation';
 
 const GoogleIcon = () => (
     <svg
@@ -44,6 +45,7 @@ const AuthPage = () => {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [activeTab, setActiveTab] = useState<'login' | 'signup'>('login');
+    const router = useRouter();
 
     const handleEmailSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -53,6 +55,8 @@ const AuthPage = () => {
 
             console.log('User signed up:', user);
             alert('Sign Up Successful');
+            router.push('/'); // Redirect to home page after sign up
+
         } catch (error) {
             const authError = error as AuthError;
             console.error('Sign Up Error:', error);
@@ -66,6 +70,7 @@ const AuthPage = () => {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
             console.log('User logged in:', user);
+            router.push('/'); // Redirect to home page after login
             alert('Login Successful');
         } catch (error) {
             const authError = error as AuthError;
@@ -139,7 +144,7 @@ const AuthPage = () => {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gradient-to-br pt-20 from-indigo-100 to-purple-100 p-8">
+        <div className="flex min-h-screen items-center justify-center bg-gradient-to-br pt-28 from-indigo-100 to-purple-100 p-8">
             <div className="w-full max-w-md bg-white rounded-xl shadow-2xl p-6">
                 <div className="text-center mb-6">
                     <h2 className="text-3xl font-bold text-gray-800">Welcome</h2>

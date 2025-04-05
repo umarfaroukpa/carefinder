@@ -1,8 +1,8 @@
 import './styles/globals.css';
-import AuthProvider from '../components/AuthProvider';
+import AuthProvider from './component/AuthProvider';
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
-import Header from '../components/Header';
+import Header from './component/Header';
 
 export const metadata: Metadata = {
   title: 'Carefinder',

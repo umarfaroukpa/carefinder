@@ -1548,6 +1548,43 @@
             "location": "Lagos",
             "phone": "08177788223",
             "email": "abibey@yahoo.com"
-        }
+        },
+        [
+            {
+                "sno": 1,
+                "name": "HYGEIA HMO LIMITED",
+                "location": "Lagos",
+                "phone": "01-4617071, 01-4617073, 08036710207",
+                "email": ""
+            },
+            {
+                "sno": 2,
+                "name": "TOTAL HEALTH TRUST LIMITED",
+                "location": "Lagos",
+                "phone": "01-4701813, 01-7747150",
+                "email": ""
+            },
+            {
+                "sno": 3,
+                "name": "CLEARLINE INTERNATIONAL LIMITED",
+                "location": "Lagos",
+                "phone": "01-7741092, 4977542, 09-6725605, 2730839, 0806006004",
+                "email": ""
+            },
+            {
+                "sno": 4,
+                "name": "HEALTHCARE INTERNATIONAL LIMITED",
+                "location": "Lagos/Abuja",
+                "phone": "01-4705701, 01-4705702, 09-6709099, 6739099, 09-5238589, 6724509, 08033151956",
+                "email": ""
+            },
+            {
+                "sno": 5,
+                "name": "MEDI PLAN HEALTH CARE LIMITED",
+                "location": "Lagos/Abuja",
+                "phone": "01-2611012, 01-2614828, 08033081650",
+                "email": ""
+            }
+        ]
     ]
 }

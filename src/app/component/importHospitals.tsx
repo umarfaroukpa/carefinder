@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import connectToDatabase from '../lib/mongodb';
-import Hospital from '../models/Hospital';
+import connectToDatabase from '../../lib/mongodb';
+import Hospital from '../../models/Hospital';
 
 async function importHospitals() {
     try {

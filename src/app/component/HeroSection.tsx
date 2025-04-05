@@ -1,8 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import Image from 'next/image';
-import bgImage from '../../public/bgs.png';
-import hookImage from '../../public/hook.png';
 
 export default function Hero() {
     const containerRef = useRef(null);
@@ -54,14 +52,14 @@ export default function Hero() {
                 style={{ x: transformX.get() * -1, y: transformY.get() * -1 }}
                 className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1/2 z-0"
             >
-                <Image src={hookImage} alt="Left Chain Hook" width={420} height={400} priority className="opacity-30" />
+                <Image src="/hook.png" alt="Left Chain Hook" width={420} height={400} priority className="opacity-30" />
             </motion.div>
 
             <motion.div
                 style={{ x: transformX, y: transformY }}
                 className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1/2 z-0"
             >
-                <Image src={hookImage} alt="Right Chain Hook" width={420} height={400} priority className="opacity-30 rotate-180" />
+                <Image src="/hook.png" alt="Right Chain Hook" width={420} height={400} priority className="opacity-30 rotate-180" />
             </motion.div>
 
             <div className="absolute inset-0 pointer-events-none">
@@ -92,7 +90,7 @@ export default function Hero() {
                     </motion.p>
                     <motion.a
                         variants={itemVariants}
-                        href="#booking"
+                        href="/authpage"
                         aria-label="Get started with Carefinder"
                         className="inline-block w-40 bg-[#edb13b] text-white px-8 py-3 rounded-lg hover:bg-[#f1c35e] transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                     >
@@ -101,7 +99,8 @@ export default function Hero() {
                 </motion.div>
 
                 <motion.div variants={itemVariants} className="hidden md:flex items-center justify-center">
-                    <Image src={bgImage} alt="Healthcare Illustration" width={400} height={200} priority className="object-contain" />
+                    <Image src="/bgs.png" alt="Healthcare Illustration" width={400} height={200} priority className="object-contain" />
+
                 </motion.div>
             </div>
         </motion.header>

@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Hospital } from '../types/Hospital';
+import { Hospital } from '../../types/Hospital';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 
 export default function ShareButton({ hospitals }: { hospitals: Hospital[] }) {

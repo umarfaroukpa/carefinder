@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import axios from 'axios';
-import { Hospital } from '../types/Hospital';
+import { Hospital } from '../../types/Hospital';
 import { MapPin, Search, Filter, Loader2, X, Share2, Download } from 'lucide-react';
 import debounce from 'debounce';
 import HospitalList from './HospitalList';

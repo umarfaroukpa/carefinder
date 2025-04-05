@@ -1,10 +1,15 @@
 export interface Hospital {
-    id: string;
+    id: string; // From API mapping
     name: string;
-    location: string;
     address: string;
-    specializations: string[];
-    contactNumber: string;
-    email?: string;
+    phone?: string; // From schema
+    contactNumber?: string; // From API
+    email?: string[]; // From schema
+    city?: string; // From schema
+    region?: string; // From schema
+    location?: string; // From API
     description?: string;
+    specializations?: string[];
+    coordinates?: number[]; // From schema
+    functionalStatus?: string; // From schema
 }

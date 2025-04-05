@@ -3,16 +3,16 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import { Hospital } from '../types/Hospital';
-import HospitalSearch from '../components/HospitalSearch';
-import HospitalList from '../components/HospitalList';
-import ShareButton from '../components/ShareButton';
-import Hero from '../components/HeroSection';
-import HowItWorks from '../components/HowItworks';
-import BookingSection from '../components/BookingSection';
-import Features from '../components/Features';
-import Testimonials from '../components/Testimonials';
-import FloatingActionBar from '../components/OverlappingSearchBar';
-import NaturalMedicineSection from '../components/Natural';
+import HospitalSearch from './component/HospitalSearch';
+import HospitalList from './component/HospitalList';
+import ShareButton from './component/ShareButton';
+import Hero from './component/HeroSection';
+import HowItWorks from './component/HowItworks';
+import Features from './component/Features';
+import Testimonials from './component/Testimonials';
+import FloatingActionBar from './component/OverlappingSearchBar';
+import NaturalMedicineSection from './component/Natural';
+
 
 export default function Home() {
   const [hospitals, setHospitals] = useState<Hospital[]>([]);
@@ -39,6 +39,9 @@ export default function Home() {
       <NaturalMedicineSection />
       <Features />
 
+
+      {/* Marketing sections */}
+
       {/* Search section */}
       <section className="container mx-auto p-4 py-12">
         <h2 className="text-3xl font-bold text-center mb-8">Find Healthcare Near You</h2>
@@ -57,7 +60,7 @@ export default function Home() {
       <FloatingActionBar />
 
 
-      <BookingSection />
+     
       <Testimonials />
     </main>
   );
