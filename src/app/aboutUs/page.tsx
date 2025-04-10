@@ -10,7 +10,7 @@ export default function AboutUs() {
                     <h1 className="text-4xl md:text-5xl font-bold text-[#056968] mb-4">
                         About Carefinder
                     </h1>
-                    <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">
+                    <p className="text-lg md:text-xl text-[#edb138] max-w-2xl mx-auto">
                         Your trusted partner in navigating healthcare services in Nigeria.
                     </p>
                 </section>
@@ -20,7 +20,7 @@ export default function AboutUs() {
                     <h2 className="text-2xl md:text-3xl font-semibold text-[#056968] mb-4">
                         Our Mission
                     </h2>
-                    <p className="text-gray-600 leading-relaxed">
+                    <p className="text-[#056968] leading-relaxed">
                         Access to healthcare in Nigeria can be challenging and thorough. It is absurd that the first thing to living is being healthy. Carefinder is a simple tool that aims to help users find, export, and share hospitals within the region, making healthcare more accessible and manageable for everyone.
                     </p>
                 </section>
@@ -51,7 +51,7 @@ export default function AboutUs() {
                         <h3 className="text-xl font-semibold text-[#056968] mb-2">
                             Find Healthcare Near You
                         </h3>
-                        <p className="text-gray-600">
+                        <p className="text-[#056968]">
                             Locate hospitals and clinics close to your location with ease.
                         </p>
                     </div>
@@ -79,7 +79,7 @@ export default function AboutUs() {
                         <h3 className="text-xl font-semibold text-[#056968] mb-2">
                             Find Doctors Near You
                         </h3>
-                        <p className="text-gray-600">
+                        <p className="text-[#056968]">
                             Connect with qualified doctors in your area quickly and efficiently.
                         </p>
                     </div>
@@ -101,7 +101,7 @@ export default function AboutUs() {
                         <h3 className="text-xl font-semibold text-[#056968] mb-2">
                             Healthcare Providers in Nigeria
                         </h3>
-                        <p className="text-gray-600">
+                        <p className="text-[#056968]">
                             Explore a curated list of healthcare providers across Nigeria.
                         </p>
                     </div>
@@ -123,7 +123,7 @@ export default function AboutUs() {
                         <h3 className="text-xl font-semibold text-[#056968] mb-2">
                             Specialized Care Services
                         </h3>
-                        <p className="text-gray-600">
+                        <p className="text-[#056968]">
                             Access tailored healthcare solutions for your unique needs.
                         </p>
                     </div>
@@ -134,12 +134,12 @@ export default function AboutUs() {
                     <h2 className="text-2xl md:text-3xl font-semibold text-[#056968] mb-4">
                         Ready to Get Started?
                     </h2>
-                    <p className="text-gray-600 mb-6">
+                    <p className="text-[#edb138] mb-6">
                         Join us in making healthcare accessible to all Nigerians.
                     </p>
                     <Link
                         href="/services"
-                        className="inline-block bg-[#056968] text-white px-6 py-3 rounded-md hover:bg-[#edb13b] hover:text-[#056968] transition-colors duration-300"
+                        className="inline-block bg-[#edb138] text-white px-6 py-3 rounded-md hover:bg-[#edb13b] hover:text-[#056968] transition-colors duration-300"
                     >
                         Explore Our Services
                     </Link>

@@ -45,7 +45,7 @@ export default function ContactUs() {
                     <h1 className="text-4xl md:text-5xl font-bold text-[#056968] mb-4">
                         Contact Us
                     </h1>
-                    <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">
+                    <p className="text-lg md:text-xl text-[#056968] max-w-2xl mx-auto">
                         We're here to assist you with your healthcare needs. Reach out today!
                     </p>
                 </section>
@@ -61,7 +61,7 @@ export default function ContactUs() {
                             <div className="flex items-center">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6 text-[#056968] mr-3"
+                                    className="h-6 w-6 text-[#edb138] mr-3"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -79,14 +79,14 @@ export default function ContactUs() {
                                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                                     />
                                 </svg>
-                                <p className="text-gray-600">
+                                <p className="text-[#056968]">
                                     Kaduna, North West Region, Nigeria
                                 </p>
                             </div>
                             <div className="flex items-center">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6 text-[#056968] mr-3"
+                                    className="h-6 w-6 text-[#edb138] mr-3"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -100,7 +100,7 @@ export default function ContactUs() {
                                 </svg>
                                 <a
                                     href="mailto:info@carefinder.com"
-                                    className="text-gray-600 hover:text-[#edb13b]"
+                                    className="text-[#056968] hover:text-[#edb13b]"
                                 >
                                     info@carefinder.com
                                 </a>
@@ -108,7 +108,7 @@ export default function ContactUs() {
                             <div className="flex items-center">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6 text-[#056968] mr-3"
+                                    className="h-6 w-6 text-[#edb138] mr-3"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -120,7 +120,7 @@ export default function ContactUs() {
                                         d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                                     />
                                 </svg>
-                                <p className="text-gray-600">
+                                <p className="text-[#056968]">
                                     +234 123 456 7890
                                 </p>
                             </div>
@@ -136,7 +136,7 @@ export default function ContactUs() {
                             <div>
                                 <label
                                     htmlFor="name"
-                                    className="block text-sm font-medium text-gray-700"
+                                    className="block text-sm font-medium text-[#056968]"
                                 >
                                     Name
                                 </label>
@@ -153,7 +153,7 @@ export default function ContactUs() {
                             <div>
                                 <label
                                     htmlFor="email"
-                                    className="block text-sm font-medium text-gray-700"
+                                    className="block text-sm font-medium text-[#056968]"
                                 >
                                     Email
                                 </label>
@@ -170,7 +170,7 @@ export default function ContactUs() {
                             <div>
                                 <label
                                     htmlFor="message"
-                                    className="block text-sm font-medium text-gray-700"
+                                    className="block text-sm font-medium text-[#056968]"
                                 >
                                     Message
                                 </label>
@@ -186,7 +186,7 @@ export default function ContactUs() {
                             </div>
                             <button
                                 type="submit"
-                                className="w-full bg-[#056968] text-white px-4 py-2 rounded-md hover:bg-[#edb13b] hover:text-[#056968] transition-colors duration-300"
+                                className="w-full bg-[#edb138] text-white px-4 py-2 rounded-md hover:bg-[#edb13b] hover:text-[#056968] transition-colors duration-300"
                             >
                                 Send Message
                             </button>
@@ -204,20 +204,27 @@ export default function ContactUs() {
                     </div>
                 </section>
 
-                {/* Map Section (Optional) */}
+                {/* Map Section with Google Maps iframe */}
                 <section className="text-center">
                     <h2 className="text-2xl md:text-3xl font-semibold text-[#056968] mb-4">
                         Our Location
                     </h2>
                     <div className="bg-white rounded-lg shadow-md p-6 max-w-2xl mx-auto">
-                        <p className="text-gray-600 mb-4">
+                        <p className="text-[#056968] mb-4">
                             Kaduna, North West Region, Nigeria
                         </p>
-                        {/* Placeholder for a map (e.g., Google Maps iframe) */}
-                        <div className="w-full h-64 bg-gray-200 rounded-md flex items-center justify-center">
-                            <p className="text-gray-500">
-                                [Map Placeholder - Embed a map here]
-                            </p>
+                        {/* Google Maps iframe */}
+                        <div className="w-full h-64 rounded-md overflow-hidden">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d252621.00409230212!2d7.33929385!3d10.52599185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x11b295a1e5c0c9a3%3A0x4697e3483cacf81d!2sKaduna%2C%20Nigeria!5e0!3m2!1sen!2sus!4v1712441992095!5m2!1sen!2sus"
+                                width="100%"
+                                height="100%"
+                                style={{ border: 0 }}
+                                allowFullScreen={true}
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                                title="Google Maps"
+                            ></iframe>
                         </div>
                     </div>
                 </section>

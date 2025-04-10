@@ -25,6 +25,7 @@ export default function Header() {
 
     const handleLogout = async () => {
         await logoutUser();
+        router.push('/');
     };
 
     const handleMouseEnter = () => {
@@ -228,6 +229,7 @@ export default function Header() {
                                 </Link>
                                 <Link
                                     href="/authpage"
+
                                     className={`text-sm text-white ${isScrolled ? 'bg-[#edb138] text-[#056968] hover:bg-[#edb138]' : 'bg-[#edb138] hover:bg-[#056968]'} px-3 py-1 rounded`}
                                 >
                                     Signup

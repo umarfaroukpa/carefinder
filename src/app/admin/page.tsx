@@ -1,8 +1,8 @@
 "use client";
 
 import Head from 'next/head';
-import ProtectedRoute from '../component/auth/ProtectedRoute';
-import MarkdownEditor from '../component/MarkdownEditor';
+import ProtectedRoute from '../../component/auth/ProtectedRoute';
+import MarkdownEditor from '../../component/MarkdownEditor';
 import { useState } from 'react';
 import axios from 'axios';
 import { useForm, Controller } from 'react-hook-form';
@@ -72,7 +72,7 @@ export default function Admin() {
     return (
         <ProtectedRoute>
             <Head>
-                <title className="text-center">Carefinder - Admin Dashboard</title>
+                <title className="text-center text-[#056968]">Carefinder - Admin Dashboard</title>
             </Head>
             <div className="flex flex-col min-h-screen bg-gray-100">
                 {/* Main Content Wrapper */}
@@ -80,140 +80,140 @@ export default function Admin() {
                     {/* Sidebar */}
                     <aside className="w-64 bg-white shadow-md p-6 fixed h-full">
                         <div className="flex items-center mb-8">
-                            <HospitalIcon className="w-8 h-8 text-blue-500 mr-2" />
-                            <h2 className="text-xl font-bold text-gray-800">Admin Panel</h2>
+                            <HospitalIcon className="w-8 h-8 text-[#edb138] mr-2" />
+                            <h2 className="text-xl font-bold text-[#056968]">Admin Panel</h2>
                         </div>
                         <nav className="space-y-4">
-                            <a href="#" className="flex items-center text-gray-700 hover:text-blue-500 transition">
-                                <PlusCircle className="w-5 h-5 mr-2" />
-                                Add Hospital
+                            <a href="#" className="flex items-center text-[#056968] hover:text-[#edb138] transition">
+                                <PlusCircle className="w-5 h-5 mr-2 text-[#edb138]" />
+                                Add Provider
                             </a>
                             {/* Add more nav items here if needed */}
                         </nav>
                         <button
                             onClick={handleLogout}
-                            className="absolute bottom-6 flex items-center text-gray-700 hover:text-red-500 transition"
+                            className="absolute bottom-6 flex items-center text-[#056968] hover:text-[#edb138] transition"
                         >
-                            <LogOut className="w-5 h-5 mr-2" />
+                            <LogOut className="w-5 h-5 mr-2 text-[#edb138]" />
                             Logout
                         </button>
                     </aside>
 
                     {/* Main Content */}
                     <main className="flex-1 ml-64 p-8">
-                        <h1 className="text-3xl font-bold text-gray-800 text-center mb-8">Admin Dashboard</h1>
+                        <h1 className="text-3xl font-bold text-[#056968] text-center mb-8">Admin Dashboard</h1>
 
                         <form
                             onSubmit={handleSubmit(handleSave)}
                             className="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto space-y-6 transform transition-all hover:shadow-xl"
                         >
-                            <h2 className="text-2xl text-center font-semibold text-gray-800 flex items-center justify-center">
+                            <h2 className="text-2xl text-center font-semibold text-[#056968] flex items-center justify-center">
                                 <PlusCircle className="w-6 h-6 mr-2 text-[#edb13b]" />
-                                Add New Hospital
+                                Add New Provider
                             </h2>
 
                             {/* Grid Layout for Form Fields */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {/* Hospital Name */}
                                 <div>
-                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                                    <label htmlFor="name" className="block text-sm font-medium text-[#056968] mb-1">
                                         Hospital Name
                                     </label>
                                     <input
                                         id="name"
                                         {...register('name')}
-                                        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                                        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#056968] transition"
                                         placeholder="Enter hospital name"
                                     />
                                     {errors.name && (
-                                        <p className="text-red-500 text-sm mt-1 animate-fade-in">{errors.name.message}</p>
+                                        <p className="text-[#056968] text-sm mt-1 animate-fade-in">{errors.name.message}</p>
                                     )}
                                 </div>
 
                                 {/* Address */}
                                 <div>
-                                    <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+                                    <label htmlFor="address" className="block text-sm font-medium text-[#056968] mb-1">
                                         Address
                                     </label>
                                     <input
                                         id="address"
                                         {...register('address')}
-                                        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                                        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#056968] transition"
                                         placeholder="Enter hospital address"
                                     />
                                     {errors.address && (
-                                        <p className="text-red-500 text-sm mt-1 animate-fade-in">{errors.address.message}</p>
+                                        <p className="text-[#056968] text-sm mt-1 animate-fade-in">{errors.address.message}</p>
                                     )}
                                 </div>
 
                                 {/* Phone */}
                                 <div>
-                                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                                    <label htmlFor="phone" className="block text-sm font-medium text-[#056968] mb-1">
                                         Phone Number
                                     </label>
                                     <input
                                         id="phone"
                                         {...register('phone')}
-                                        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                                        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#056968] transition"
                                         placeholder="e.g., +2341234567890"
                                     />
                                     {errors.phone && (
-                                        <p className="text-red-500 text-sm mt-1 animate-fade-in">{errors.phone.message}</p>
+                                        <p className="text-[#056968] text-sm mt-1 animate-fade-in">{errors.phone.message}</p>
                                     )}
                                 </div>
 
                                 {/* Email */}
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                                    <label htmlFor="email" className="block text-sm font-medium text-[#056968] mb-1">
                                         Email
                                     </label>
                                     <input
                                         id="email"
                                         {...register('email')}
-                                        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                                        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#056968] transition"
                                         placeholder="Enter hospital email"
                                     />
                                     {errors.email && (
-                                        <p className="text-red-500 text-sm mt-1 animate-fade-in">{errors.email.message}</p>
+                                        <p className="text-[#056968] text-sm mt-1 animate-fade-in">{errors.email.message}</p>
                                     )}
                                 </div>
 
                                 {/* City */}
                                 <div>
-                                    <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
+                                    <label htmlFor="city" className="block text-sm font-medium text-[#056968] mb-1">
                                         City
                                     </label>
                                     <input
                                         id="city"
                                         {...register('city')}
-                                        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                                        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#056968] transition"
                                         placeholder="Enter city"
                                     />
                                     {errors.city && (
-                                        <p className="text-red-500 text-sm mt-1 animate-fade-in">{errors.city.message}</p>
+                                        <p className="text-[#056968] text-sm mt-1 animate-fade-in">{errors.city.message}</p>
                                     )}
                                 </div>
 
                                 {/* Region */}
                                 <div>
-                                    <label htmlFor="region" className="block text-sm font-medium text-gray-700 mb-1">
+                                    <label htmlFor="region" className="block text-sm font-medium text-[#056968] mb-1">
                                         Region
                                     </label>
                                     <input
                                         id="region"
                                         {...register('region')}
-                                        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                                        className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#056968] transition"
                                         placeholder="Enter region"
                                     />
                                     {errors.region && (
-                                        <p className="text-red-500 text-sm mt-1 animate-fade-in">{errors.region.message}</p>
+                                        <p className="text-[#056968] text-sm mt-1 animate-fade-in">{errors.region.message}</p>
                                     )}
                                 </div>
                             </div>
 
                             {/* Markdown Description */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Description (Markdown)</label>
+                                <label className="block text-sm font-medium text-[#056968] mb-2">Description (Markdown)</label>
                                 <Controller
                                     name="description"
                                     control={control}
@@ -225,7 +225,7 @@ export default function Admin() {
                                     )}
                                 />
                                 {errors.description && (
-                                    <p className="text-red-500 text-sm mt-1 animate-fade-in">{errors.description.message}</p>
+                                    <p className="text-[#056968] text-sm mt-1 animate-fade-in">{errors.description.message}</p>
                                 )}
                             </div>
 
@@ -233,7 +233,7 @@ export default function Admin() {
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full bg-[#edb13b] text-white py-3 rounded-md hover:bg-blue-600 disabled:bg-blue-300 transition flex items-center justify-center"
+                                className="w-full bg-[#edb13b] text-white py-3 rounded-md hover:bg-[#056968] disabled:bg-blue-300 transition flex items-center justify-center"
                             >
                                 {isSubmitting ? (
                                     <svg
@@ -259,14 +259,14 @@ export default function Admin() {
                                 ) : (
                                     <PlusCircle className="w-5 h-5 mr-2" />
                                 )}
-                                {isSubmitting ? 'Saving...' : 'Add Hospital'}
+                                {isSubmitting ? 'Saving...' : 'Add Provider'}
                             </button>
 
                             {/* Feedback Message */}
                             {submitMessage && (
                                 <p
                                     className={`text-sm text-center p-2 rounded-md ${submitMessage.type === 'success'
-                                        ? 'text-green-700 bg-green-100'
+                                        ? 'text-[#056968] bg-green-100'
                                         : 'text-red-700 bg-red-100'
                                         } animate-fade-in`}
                                 >
@@ -285,10 +285,10 @@ export default function Admin() {
                             <p className="text-sm">Making healthcare accessible across Nigeria</p>
                         </div>
                         <div className="flex space-x-6">
-                            <a href="/about" className="text-sm hover:text-[#edb13b] transition">
+                            <a href="/aboutUs" className="text-sm hover:text-[#edb13b] transition">
                                 About Us
                             </a>
-                            <a href="/contact" className="text-sm hover:text-[#edb13b] transition">
+                            <a href="/contactU" className="text-sm hover:text-[#edb13b] transition">
                                 Contact Us
                             </a>
                             <a href="/services" className="text-sm hover:text-[#edb13b] transition">

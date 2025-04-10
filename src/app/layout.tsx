@@ -1,8 +1,10 @@
 import './styles/globals.css';
-import AuthProvider from './component/AuthProvider';
+import { AuthProviderContext } from '../component/auth/AuthContext';
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
-import Header from './component/Header';
+import Header from '../component/Header';
+import Footer from '../component/Footer';
+import ErrorBoundaryWithHooks from './errorRout/ErrorBoundary';
 
 export const metadata: Metadata = {
   title: 'Carefinder',
@@ -22,10 +24,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="overflow-x-hidden">
       <body className="overflow-x-hidden">
-        <AuthProvider>
-          <Header />
-          <main className="pt-18 w-full">{children}</main>
-        </AuthProvider>
+        <ErrorBoundaryWithHooks>
+          <AuthProviderContext>
+            <Header />
+            <main className="pt-18 w-full">{children}</main>
+            <Footer />
+          </AuthProviderContext>
+        </ErrorBoundaryWithHooks>
       </body>
     </html>
   );

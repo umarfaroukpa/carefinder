@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Baby, Calendar, Clock, MapPin, Phone, Star, Search, Filter, Heart, User, BookOpen } from 'lucide-react';
+import ProtectedRoute from '../../component/auth/ProtectedRoute';
 
 // Pediatric doctor/specialist interface
 interface Doctor {
@@ -177,242 +178,244 @@ const PediatricCare = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-sky-50 to-blue-100 p-6 pt-28">
-            <div className="max-w-6xl mx-auto">
-                <header className="text-center mb-12">
-                    <h1 className="text-3xl md:text-4xl font-bold text-blue-800 mb-4">Pediatric Care Services</h1>
-                    <p className="text-gray-600 max-w-2xl mx-auto">
-                        Quality healthcare for your child from trusted pediatricians and specialists.
-                        Find the right doctor for your child's specific needs.
-                    </p>
-                </header>
+        <ProtectedRoute>
+            <div className="min-h-screen bg-gradient-to-br from-sky-50 to-blue-100 p-6 pt-28">
+                <div className="max-w-6xl mx-auto">
+                    <header className="text-center mb-12">
+                        <h1 className="text-3xl md:text-4xl font-bold text-[#056968] mb-4">Pediatric Care Services</h1>
+                        <p className="text-[#056968] max-w-2xl mx-auto">
+                            Quality healthcare for your child from trusted pediatricians and specialists.
+                            Find the right doctor for your child's specific needs.
+                        </p>
+                    </header>
 
-                {/* Search and basic filters */}
-                <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-                    <div className="grid md:grid-cols-3 gap-4">
-                        <div>
-                            <label className="block text-gray-700 mb-2 flex items-center">
-                                <Search className="mr-2 h-4 w-4" /> Find a Pediatrician
-                            </label>
-                            <input
-                                type="text"
-                                placeholder="Search by doctor name or specialty"
-                                className="w-full p-2 border rounded-md"
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-gray-700 mb-2 flex items-center">
-                                <Calendar className="mr-2 h-4 w-4" /> Appointment Date
-                            </label>
-                            <input
-                                type="date"
-                                className="w-full p-2 border rounded-md"
-                                value={appointmentDate}
-                                onChange={(e) => setAppointmentDate(e.target.value)}
-                            />
-                        </div>
-                        <div>
-                            <div className="flex justify-between mb-2">
-                                <label className="block text-gray-700 flex items-center">
-                                    <Filter className="mr-2 h-4 w-4" /> More Filters
+                    {/* Search and basic filters */}
+                    <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+                        <div className="grid md:grid-cols-3 gap-4">
+                            <div>
+                                <label className=" text-[#056968] mb-2 flex items-center">
+                                    <Search className="mr-2 h-4 w-4" /> Find a Pediatrician
                                 </label>
-                                <button
-                                    onClick={() => setShowFilters(!showFilters)}
-                                    className="text-blue-600 text-sm hover:text-blue-800"
-                                >
-                                    {showFilters ? 'Hide Filters' : 'Show Filters'}
-                                </button>
-                            </div>
-                            <div className="flex items-center bg-gray-50 p-2 rounded-md">
                                 <input
-                                    type="checkbox"
-                                    id="acceptingNew"
-                                    checked={acceptingNewOnly}
-                                    onChange={() => setAcceptingNewOnly(!acceptingNewOnly)}
-                                    className="mr-2"
+                                    type="text"
+                                    placeholder="Search by doctor name or specialty"
+                                    className="w-full p-2 border rounded-md"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
                                 />
-                                <label htmlFor="acceptingNew" className="text-gray-700 text-sm">
-                                    Accepting New Patients Only
+                            </div>
+                            <div>
+                                <label className=" text-[#056968] mb-2 flex items-center">
+                                    <Calendar className="mr-2 h-4 w-4" /> Appointment Date
                                 </label>
+                                <input
+                                    type="date"
+                                    className="w-full text-[#056968] p-2 border rounded-md"
+                                    value={appointmentDate}
+                                    onChange={(e) => setAppointmentDate(e.target.value)}
+                                />
                             </div>
-                        </div>
-                    </div>
-
-                    {/* Additional filters that can be shown/hidden */}
-                    {showFilters && (
-                        <div className="mt-4 pt-4 border-t border-gray-200">
-                            <h3 className="text-sm font-medium text-gray-700 mb-2">Filter by specialty:</h3>
-                            <div className="flex flex-wrap gap-2">
-                                <button
-                                    className={`px-3 py-1 rounded-full text-sm ${selectedSpecialty === null ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-800'}`}
-                                    onClick={() => setSelectedSpecialty(null)}
-                                >
-                                    All Specialties
-                                </button>
-                                {serviceTypes.map(service => (
+                            <div>
+                                <div className="flex justify-between mb-2">
+                                    <label className=" text-[#056968] flex items-center">
+                                        <Filter className="mr-2 h-4 w-4" /> More Filters
+                                    </label>
                                     <button
-                                        key={service.id}
-                                        className={`px-3 py-1 rounded-full text-sm flex items-center ${selectedSpecialty === service.id ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-800'}`}
-                                        onClick={() => setSelectedSpecialty(selectedSpecialty === service.id ? null : service.id)}
+                                        onClick={() => setShowFilters(!showFilters)}
+                                        className="text-[#edb138] text-sm hover:text-[#056968]"
                                     >
-                                        <span className="mr-1">{service.name}</span>
+                                        {showFilters ? 'Hide Filters' : 'Show Filters'}
                                     </button>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-                </div>
-
-                {/* Service Types */}
-                <div className="mb-12">
-                    <h2 className="text-2xl font-semibold text-gray-800 mb-6">Our Pediatric Services</h2>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {serviceTypes.map(service => (
-                            <div
-                                key={service.id}
-                                className={`bg-white rounded-lg shadow-md p-6 cursor-pointer transition 
-                  ${selectedSpecialty === service.id ? 'ring-2 ring-blue-500' : 'hover:shadow-lg'}`}
-                                onClick={() => setSelectedSpecialty(selectedSpecialty === service.id ? null : service.id)}
-                            >
-                                <div className="flex flex-col items-center text-center">
-                                    <div className="mb-4">
-                                        {service.icon}
-                                    </div>
-                                    <h3 className="text-lg font-semibold mb-2">{service.name}</h3>
-                                    <p className="text-gray-600 text-sm">{service.description}</p>
+                                </div>
+                                <div className="flex items-center bg-gray-50 p-2 rounded-md">
+                                    <input
+                                        type="checkbox"
+                                        id="acceptingNew"
+                                        checked={acceptingNewOnly}
+                                        onChange={() => setAcceptingNewOnly(!acceptingNewOnly)}
+                                        className="mr-2"
+                                    />
+                                    <label htmlFor="acceptingNew" className="text-[#056968] text-sm">
+                                        Accepting New Patients Only
+                                    </label>
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Pediatric Doctors */}
-                <div>
-                    <h2 className="text-2xl font-semibold text-gray-800 mb-6">Our Pediatric Doctors</h2>
-
-                    {filteredDoctors.length === 0 ? (
-                        <div className="text-center p-8 bg-white rounded-lg shadow">
-                            <p className="text-gray-500">No doctors match your search criteria. Please try different filters.</p>
                         </div>
-                    ) : (
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {filteredDoctors.map(doctor => (
-                                <div key={doctor.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                                    <div className="p-6">
-                                        <div className="flex items-center mb-4">
-                                            <div className="w-16 h-16 bg-gray-200 rounded-full overflow-hidden mr-4">
-                                                <img
-                                                    src={doctor.image}
-                                                    alt={doctor.name}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            </div>
-                                            <div>
-                                                <h3 className="text-xl font-semibold text-blue-700">{doctor.name}</h3>
-                                                <p className="text-gray-600">{doctor.specialty}</p>
-                                            </div>
-                                        </div>
 
-                                        <div className="flex items-center mb-4">
-                                            <div className="flex text-yellow-400">
-                                                {[...Array(5)].map((_, i) => (
-                                                    <Star
-                                                        key={i}
-                                                        className={`w-4 h-4 ${i < Math.floor(doctor.rating) ? 'fill-current' : 'fill-none'}`}
-                                                    />
-                                                ))}
-                                            </div>
-                                            <span className="text-gray-600 ml-2">{doctor.rating}</span>
-                                            <span className="mx-2 text-gray-400">•</span>
-                                            <span className="text-gray-600">{doctor.experience}</span>
-                                        </div>
-
-                                        <div className="space-y-2 mb-4">
-                                            <div className="flex items-start text-gray-600">
-                                                <MapPin className="h-4 w-4 mr-2 mt-1 flex-shrink-0" />
-                                                <span>{doctor.address}</span>
-                                            </div>
-                                            <div className="flex items-start text-gray-600">
-                                                <Clock className="h-4 w-4 mr-2 mt-1 flex-shrink-0" />
-                                                <div className="flex flex-col">
-                                                    {doctor.availability.map((time, index) => (
-                                                        <span key={index}>{time}</span>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                            <div className="flex items-center text-gray-600">
-                                                <Phone className="h-4 w-4 mr-2 flex-shrink-0" />
-                                                <span>{doctor.phone}</span>
-                                            </div>
-                                            <div className="flex items-center text-gray-600">
-                                                <BookOpen className="h-4 w-4 mr-2 flex-shrink-0" />
-                                                <span>Languages: {doctor.languages.join(', ')}</span>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-center mb-4">
-                                            <span className={`px-2 py-1 rounded text-xs ${doctor.acceptingNewPatients ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                                                {doctor.acceptingNewPatients ? 'Accepting New Patients' : 'Not Accepting New Patients'}
-                                            </span>
-                                        </div>
-
+                        {/* Additional filters that can be shown/hidden */}
+                        {showFilters && (
+                            <div className="mt-4 pt-4 border-t border-gray-200">
+                                <h3 className="text-sm font-medium text-[#056968] mb-2">Filter by specialty:</h3>
+                                <div className="flex flex-wrap gap-2">
+                                    <button
+                                        className={`px-3 py-1 rounded-full text-sm ${selectedSpecialty === null ? 'bg-[#edb138] text-white' : 'bg-gray-100 text-[#056968]'}`}
+                                        onClick={() => setSelectedSpecialty(null)}
+                                    >
+                                        All Specialties
+                                    </button>
+                                    {serviceTypes.map(service => (
                                         <button
-                                            className={`w-full py-2 rounded-md transition ${doctor.acceptingNewPatients
-                                                ? 'bg-blue-600 text-white hover:bg-blue-700'
-                                                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                                }`}
-                                            onClick={() => doctor.acceptingNewPatients && handleBookAppointment(doctor.id)}
-                                            disabled={!doctor.acceptingNewPatients}
+                                            key={service.id}
+                                            className={`px-3 py-1 rounded-full text-sm flex items-center ${selectedSpecialty === service.id ? 'bg-[#edb138] text-white' : 'bg-gray-100 text-[#056968]'}`}
+                                            onClick={() => setSelectedSpecialty(selectedSpecialty === service.id ? null : service.id)}
                                         >
-                                            Book Appointment
+                                            <span className="mr-1">{service.name}</span>
                                         </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Service Types */}
+                    <div className="mb-12">
+                        <h2 className="text-2xl font-semibold text-[#056968] mb-6">Our Pediatric Services</h2>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {serviceTypes.map(service => (
+                                <div
+                                    key={service.id}
+                                    className={`bg-white rounded-lg shadow-md p-6 cursor-pointer transition 
+                  ${selectedSpecialty === service.id ? 'ring-2 ring-blue-500' : 'hover:shadow-lg'}`}
+                                    onClick={() => setSelectedSpecialty(selectedSpecialty === service.id ? null : service.id)}
+                                >
+                                    <div className="flex flex-col items-center text-center">
+                                        <div className="mb-4">
+                                            {service.icon}
+                                        </div>
+                                        <h3 className="text-lg text-[#056968] font-semibold mb-2">{service.name}</h3>
+                                        <p className="text-[#056968] text-sm">{service.description}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
-                    )}
-                </div>
+                    </div>
 
-                {/* Child Health Resources */}
-                <div className="mt-12 bg-white rounded-lg shadow-lg p-6">
-                    <h3 className="text-xl font-semibold mb-6">Child Health Resources</h3>
-                    <div className="grid md:grid-cols-3 gap-6">
-                        <div className="bg-blue-50 p-4 rounded-md">
-                            <h4 className="font-medium mb-2">Vaccination Schedules</h4>
-                            <p className="text-sm text-gray-700">
-                                Stay up-to-date with recommended immunizations for your child from birth to 18 years.
-                                Regular vaccinations help protect your child from serious illnesses.
-                            </p>
-                            <button className="mt-4 text-blue-600 text-sm font-medium hover:text-blue-800">
-                                View Schedule →
-                            </button>
-                        </div>
-                        <div className="bg-green-50 p-4 rounded-md">
-                            <h4 className="font-medium mb-2">Developmental Milestones</h4>
-                            <p className="text-sm text-gray-700">
-                                Learn about important physical, cognitive, and social milestones to track your child's development
-                                from infancy through adolescence.
-                            </p>
-                            <button className="mt-4 text-blue-600 text-sm font-medium hover:text-blue-800">
-                                Explore Milestones →
-                            </button>
-                        </div>
-                        <div className="bg-purple-50 p-4 rounded-md">
-                            <h4 className="font-medium mb-2">Nutrition & Healthy Habits</h4>
-                            <p className="text-sm text-gray-700">
-                                Find guidance on age-appropriate nutrition, establishing healthy eating habits, and
-                                supporting your child's physical activity needs.
-                            </p>
-                            <button className="mt-4 text-blue-600 text-sm font-medium hover:text-blue-800">
-                                Get Nutrition Tips →
-                            </button>
+                    {/* Pediatric Doctors */}
+                    <div>
+                        <h2 className="text-2xl font-semibold text-[#056968] text[#056968] mb-6">Our Pediatric Doctors</h2>
+
+                        {filteredDoctors.length === 0 ? (
+                            <div className="text-center p-8 bg-white rounded-lg shadow">
+                                <p className="text-[#056968]">No doctors match your search criteria. Please try different filters.</p>
+                            </div>
+                        ) : (
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {filteredDoctors.map(doctor => (
+                                    <div key={doctor.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+                                        <div className="p-6">
+                                            <div className="flex items-center mb-4">
+                                                <div className="w-16 h-16 bg-gray-200 rounded-full overflow-hidden mr-4">
+                                                    <img
+                                                        src={doctor.image}
+                                                        alt={doctor.name}
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <h3 className="text-xl font-semibold text-[#056968]">{doctor.name}</h3>
+                                                    <p className="text-[#edb138]">{doctor.specialty}</p>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex items-center mb-4">
+                                                <div className="flex text-yellow-400">
+                                                    {[...Array(5)].map((_, i) => (
+                                                        <Star
+                                                            key={i}
+                                                            className={`w-4 h-4 ${i < Math.floor(doctor.rating) ? 'fill-current' : 'fill-none'}`}
+                                                        />
+                                                    ))}
+                                                </div>
+                                                <span className="text-[#056968] ml-2">{doctor.rating}</span>
+                                                <span className="mx-2 text-[#056968]">•</span>
+                                                <span className="text-[#056968]">{doctor.experience}</span>
+                                            </div>
+
+                                            <div className="space-y-2 mb-4">
+                                                <div className="flex items-start text-[#056968]">
+                                                    <MapPin className="h-4 text-[#edb138] w-4 mr-2 mt-1 flex-shrink-0" />
+                                                    <span>{doctor.address}</span>
+                                                </div>
+                                                <div className="flex items-start text-[#056968]">
+                                                    <Clock className="h-4 text-[#edb138] w-4 mr-2 mt-1 flex-shrink-0" />
+                                                    <div className="flex flex-col">
+                                                        {doctor.availability.map((time, index) => (
+                                                            <span key={index}>{time}</span>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-center text-[#056968]">
+                                                    <Phone className="h-4 text-[#edb138] w-4 mr-2 flex-shrink-0" />
+                                                    <span>{doctor.phone}</span>
+                                                </div>
+                                                <div className="flex items-center text-[#056968]">
+                                                    <BookOpen className="h-4 text-[#edb138] w-4 mr-2 flex-shrink-0" />
+                                                    <span>Languages: {doctor.languages.join(', ')}</span>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex text-[#056968] items-center mb-4">
+                                                <span className={`px-2 py-1 rounded text-xs ${doctor.acceptingNewPatients ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                                                    {doctor.acceptingNewPatients ? 'Accepting New Patients' : 'Not Accepting New Patients'}
+                                                </span>
+                                            </div>
+
+                                            <button
+                                                className={`w-full py-2 rounded-md transition ${doctor.acceptingNewPatients
+                                                    ? 'bg-[#edb138] text-white hover:bg-[#056968]'
+                                                    : 'bg-gray-300 text-[#056968] cursor-not-allowed'
+                                                    }`}
+                                                onClick={() => doctor.acceptingNewPatients && handleBookAppointment(doctor.id)}
+                                                disabled={!doctor.acceptingNewPatients}
+                                            >
+                                                Book Appointment
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Child Health Resources */}
+                    <div className="mt-12 bg-white rounded-lg shadow-lg p-6">
+                        <h3 className="text-xl text-[#056968] font-semibold mb-6">Child Health Resources</h3>
+                        <div className="grid md:grid-cols-3 gap-6">
+                            <div className="bg-blue-50 p-4 rounded-md">
+                                <h4 className="font-bold text-[#056968] mb-2">Vaccination Schedules</h4>
+                                <p className="text-sm text-[#056968]">
+                                    Stay up-to-date with recommended immunizations for your child from birth to 18 years.
+                                    Regular vaccinations help protect your child from serious illnesses.
+                                </p>
+                                <button className="mt-4 text-[#056968] text-sm font-medium hover:text-[#edb138]">
+                                    View Schedule →
+                                </button>
+                            </div>
+                            <div className="bg-green-50 p-4 rounded-md">
+                                <h4 className="font-bold text-[#056968] mb-2">Developmental Milestones</h4>
+                                <p className="text-sm text-[#056968]">
+                                    Learn about important physical, cognitive, and social milestones to track your child's development
+                                    from infancy through adolescence.
+                                </p>
+                                <button className="mt-4 text-[#056968] text-sm font-medium hover:text-[#edb138]">
+                                    Explore Milestones →
+                                </button>
+                            </div>
+                            <div className="bg-purple-50 p-4 rounded-md">
+                                <h4 className="font-bold text-[#056968] mb-2">Nutrition & Healthy Habits</h4>
+                                <p className="text-sm text-[#056968]">
+                                    Find guidance on age-appropriate nutrition, establishing healthy eating habits, and
+                                    supporting your child's physical activity needs.
+                                </p>
+                                <button className="mt-4 text-[#056968] text-sm font-medium hover:text-[#edb138]">
+                                    Get Nutrition Tips →
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </ProtectedRoute>
     );
 };
 
