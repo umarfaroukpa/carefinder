@@ -213,19 +213,19 @@ const AuthPage = () => {
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br pt-28 from-indigo-100 to-purple-100 p-8">
       <div className="w-full max-w-md bg-white rounded-xl shadow-2xl p-6">
         <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold text-gray-800">Welcome</h2>
-          <p className="text-gray-500">Sign in or create an account</p>
+          <h2 className="text-3xl font-bold text-[#056968]">Welcome</h2>
+          <p className="text-[#056968]">Sign in or create an account</p>
         </div>
 
         <div className="flex mb-4">
           <button
-            className={`w-1/2 py-2 ${activeTab === 'login' ? 'border-b-2 border-blue-500 text-blue-500' : 'text-gray-500'}`}
+            className={`w-1/2 py-2 ${activeTab === 'login' ? 'border-b-2 border-[#edb138] text-[#056968]' : 'text-[#056968]'}`}
             onClick={() => setActiveTab('login')}
           >
             Login
           </button>
           <button
-            className={`w-1/2 py-2 ${activeTab === 'signup' ? 'border-b-2 border-blue-500 text-blue-500' : 'text-gray-500'}`}
+            className={`w-1/2 py-2 ${activeTab === 'signup' ? 'border-b-2 border-[#edb138] text-[#056968]' : 'text-[#056968]'}`}
             onClick={() => setActiveTab('signup')}
           >
             Sign Up
@@ -265,7 +265,7 @@ const AuthPage = () => {
             <div className="text-right">
               <button
                 type="button"
-                className="text-sm text-blue-500 hover:underline"
+                className="text-sm text-[#edb138] hover:underline"
                 onClick={() => setIsForgotPasswordOpen(true)}
               >
                 Forgot Password?
@@ -273,7 +273,7 @@ const AuthPage = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+              className="w-full bg-[#056968] text-white py-2 rounded-md hover:bg-[#edb138] transition"
             >
               Login
             </button>
@@ -297,14 +297,14 @@ const AuthPage = () => {
             <div className="flex justify-between">
               <button
                 type="button"
-                className="text-sm text-gray-500 hover:underline"
+                className="text-sm text-[#056968] hover:underline"
                 onClick={() => setIsForgotPasswordOpen(false)}
               >
                 Back to Login
               </button>
               <button
                 type="submit"
-                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition disabled:bg-blue-300"
+                className="bg-[#056968] text-white py-2 px-4 rounded-md hover:[#edb138] transition disabled:bg-blue-300"
                 disabled={isResetting}
               >
                 {isResetting ? 'Sending...' : 'Send Reset Link'}
@@ -357,7 +357,7 @@ const AuthPage = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+              className="w-full bg-[#056968] text-white py-2 rounded-md hover:bg-[#edb138] transition"
             >
               Create Account
             </button>
@@ -376,14 +376,14 @@ const AuthPage = () => {
         </div>
         <div className="space-y-4">
           <button
-            className="w-full flex items-center justify-center gap-2 py-2 border rounded-md hover:bg-gray-100 transition"
+            className="w-full flex items-center justify-center gap-2 py-2 border rounded-md hover:bg-[#edb138] transition"
             onClick={signInWithGoogle}
           >
             <GoogleIcon />
             Sign in with Google
           </button>
           <button
-            className="w-full flex items-center justify-center gap-2 py-2 border rounded-md hover:bg-gray-100 transition"
+            className="w-full flex items-center justify-center gap-2 py-2 border rounded-md hover:bg-[#edb138] transition"
             onClick={signInWithGithub}
           >
             <Github className="h-5 w-5" />

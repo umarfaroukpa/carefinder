@@ -125,7 +125,8 @@ export default function Account() {
           fetchPediatricServices();
           break;
       }
-      fetchUserActivity(); // Refresh the activity timeline
+       // Refresh the activity timeline
+      fetchUserActivity();
     } catch (error) {
       console.error(`Error cancelling ${collection}:`, error);
       if (error instanceof FirebaseError && error.code === 'unavailable') {

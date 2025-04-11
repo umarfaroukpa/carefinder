@@ -16,8 +16,8 @@ export default function NotFound() {
         </div>
 
         <h1 className="text-6xl font-bold text-[#056968]">404</h1>
-        <h2 className="mt-3 text-2xl font-semibold text-gray-800">Page not found</h2>
-        <p className="mt-4 text-gray-600">
+        <h2 className="mt-3 text-2xl font-semibold text-[#056968]">Page not found</h2>
+        <p className="mt-4 text-[#056968]">
           Sorry, the page you are looking for doesn't exist or has been moved.
         </p>
 
@@ -43,16 +43,16 @@ export default function NotFound() {
             <input
               type="text"
               placeholder="Search for services..."
-              className="w-full px-4 py-3 pl-12 bg-white border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#edb13b] focus:border-transparent"
+              className="w-full px-4 py-3 pl-12 bg-white border border-[#056968] rounded-full focus:outline-none focus:ring-2 focus:ring-[#edb13b] focus:border-transparent"
             />
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center">
-              <FaSearch className="text-gray-400" />
+              <FaSearch className="text-[#056968]" />
             </div>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-gray-200">
-          <p className="text-gray-500">
+          <p className="text-[#056968]">
             Need immediate assistance? <Link href="/contact" className="text-[#edb13b] hover:underline">Contact our support team</Link>
           </p>
         </div>

@@ -185,7 +185,7 @@ export default function HospitalSearch({ onSearch }: HospitalSearchProps) {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-[#edb138] text-white p-3 rounded-lg hover:bg-[#edb13b] hover:text-[#056968] disabled:bg-gray-400 disabled:text-gray-700 transition duration-300 flex items-center justify-center"
+                className="w-full bg-[#edb138] cursor-pointer  text-white p-3 rounded-lg hover:bg-[#edb13b] hover:text-[#056968] disabled:bg-gray-400 disabled:text-gray-700 transition duration-300 flex items-center justify-center"
               >
                 {isLoading ? (
                   <Loader2 className="animate-spin mr-2" size={20} />
@@ -201,7 +201,7 @@ export default function HospitalSearch({ onSearch }: HospitalSearchProps) {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-[#edb138] text-white p-3 rounded-lg hover:bg-[#edb13b] hover:text-[#056968] disabled:bg-gray-400 disabled:text-gray-700 transition duration-300 flex items-center justify-center"
+              className="w-full bg-[#edb138] cursor-pointer  text-white p-3 rounded-lg hover:bg-[#edb13b] hover:text-[#056968] disabled:bg-gray-400 disabled:text-gray-700 transition duration-300 flex items-center justify-center"
             >
               {isLoading ? (
                 <Loader2 className="animate-spin mr-2" size={20} />

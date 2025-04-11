@@ -1,4 +1,5 @@
 import './styles/globals.css';
+import { Toaster } from 'react-hot-toast';
 import { AuthProviderContext } from '../component/auth/AuthContext';
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
@@ -27,7 +28,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <ErrorBoundaryWithHooks>
           <AuthProviderContext>
             <Header />
-            <main className="pt-18 w-full">{children}</main>
+            <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
+            <main className="pt-18 w-full">{ children }</main>
             <Footer />
           </AuthProviderContext>
         </ErrorBoundaryWithHooks>

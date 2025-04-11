@@ -54,7 +54,7 @@ export default function Hero() {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="w-full min-h-[80vh] sm:min-h-screen bg-gradient-to-br from-[#056968] via-[#04807D] to-[#02A69A] py-12 sm:py-20 overflow-hidden relative"
+      className="w-full min-h-[80vh] sm:min-h-screen bg-gradient-to-br from-[#056968] via-[#04807D] to-[#02A69A]  py-12 sm:py-20 overflow-hidden relative"
     >
       <motion.div
         style={{ x: transformX.get() * -1, y: transformY.get() * -1 }}
@@ -101,15 +101,15 @@ export default function Hero() {
           </motion.p>
           <motion.a
             variants={itemVariants}
-            href={currentUser ? "/dashboard" : "/authpage"}
+            href={currentUser ? "/useraccount" : "/authpage"}
             aria-label="Get started with Carefinder"
             className="inline-block w-36 sm:w-40 bg-[#edb13b] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg hover:bg-[#f1c35e] transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 mx-auto md:mx-0"
           >
-            {currentUser ? "Get Started" : "Login to Start"}
+            {currentUser ? "Get Started" : "Get Started"}
           </motion.a>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="flex items-center justify-center mt-8 md:mt-0">
+        <motion.div variants={itemVariants} className="flex items-center justify-center mt-20 md:mt-0">
           <Image
             src="/bgs.png"
             alt="Healthcare Illustration"

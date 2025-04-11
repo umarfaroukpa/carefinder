@@ -50,15 +50,15 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
                   </svg>
                 </div>
               </div>
-              <h1 className="mt-5 text-2xl font-bold text-gray-800">Oops, something went wrong</h1>
-              <p className="mt-2 text-gray-600">
+              <h1 className="mt-5 text-2xl font-bold text-[#056968]">Oops, something went wrong</h1>
+              <p className="mt-2 text-[#056968]">
                 We apologize for the inconvenience. Our team has been notified about this issue.
               </p>
               {typeof window !== 'undefined' && process.env.NODE_ENV === 'development' && (
                 <div className="mt-4 p-4 bg-gray-100 rounded-md text-left overflow-auto max-h-60">
                   <p className="font-medium text-red-600">{this.state.error?.toString()}</p>
                   {this.state.errorInfo && (
-                    <pre className="mt-2 text-xs text-gray-700">
+                    <pre className="mt-2 text-xs text-[#056968]">
                       {this.state.errorInfo.componentStack}
                     </pre>
                   )}

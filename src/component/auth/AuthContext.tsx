@@ -5,6 +5,7 @@ import { User, onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, getDoc, getDocs, collection, setDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../../lib/firebase';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 const SESSION_TIMEOUT = 30 * 60 * 1000;
 
@@ -111,6 +112,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   const [loading, setLoading] = useState(true);
   const sessionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [initialized, setInitialized] = useState(false);
+  const router = useRouter();
 
   const updateActivity = React.useCallback(async () => {
     if (!currentUser || !initialized) return;
@@ -150,7 +152,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       logoutUser();
       toast.error("Session expired - You've been logged out due to inactivity");
     }, SESSION_TIMEOUT);
-  }, []);
+  }, []); 
 
   const fetchUserData = React.useCallback(async (user: User) => {
     try {
@@ -206,7 +208,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   }, []);
 
   const fetchBookings = React.useCallback(async () => {
-    if (!currentUser) return;
+    if (!currentUser || loading) return;
 
     try {
       const bookingSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'bookings'));
@@ -238,7 +240,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   }, [currentUser]);
 
   const fetchEmergencyCare = React.useCallback(async () => {
-    if (!currentUser) return;
+    if (!currentUser || loading) return;
 
     try {
       const emergencyCareSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'emergencyCare'));
@@ -254,7 +256,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   }, [currentUser]);
 
   const fetchHomeServices = React.useCallback(async () => {
-    if (!currentUser) return;
+    if (!currentUser || loading) return;
 
     try {
       const homeServicesSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'homeServices'));
@@ -270,7 +272,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   }, [currentUser]);
 
   const fetchPediatricServices = React.useCallback(async () => {
-    if (!currentUser) return;
+    if (!currentUser || loading) return;
 
     try {
       const pediatricServicesSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'pediatricServices'));
@@ -286,10 +288,9 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   }, [currentUser]);
 
   const fetchUserActivity = React.useCallback(async () => {
-    if (!currentUser) return;
+    if (!currentUser || loading) return;
 
     try {
-      // Fetch bookings
       const bookingSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'bookings'));
       const bookingsData = bookingSnapshot.docs.map(doc => {
         const data = doc.data();
@@ -300,7 +301,6 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
         };
       }) as UserActivity[];
 
-      // Fetch senior care
       const seniorCareSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'seniorCare'));
       const seniorCareData = seniorCareSnapshot.docs.map(doc => {
         const data = doc.data();
@@ -311,7 +311,6 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
         };
       }) as UserActivity[];
 
-      // Fetch emergency care
       const emergencyCareSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'emergencyCare'));
       const emergencyCareData = emergencyCareSnapshot.docs.map(doc => {
         const data = doc.data();
@@ -322,7 +321,6 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
         };
       }) as UserActivity[];
 
-      // Fetch home services
       const homeServicesSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'homeServices'));
       const homeServicesData = homeServicesSnapshot.docs.map(doc => {
         const data = doc.data();
@@ -333,7 +331,6 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
         };
       }) as UserActivity[];
 
-      // Fetch pediatric services
       const pediatricServicesSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'pediatricServices'));
       const pediatricServicesData = pediatricServicesSnapshot.docs.map(doc => {
         const data = doc.data();
@@ -344,7 +341,6 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
         };
       }) as UserActivity[];
 
-      // Fetch login/logout activities
       const activitySnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'activity'));
       const activityData = activitySnapshot.docs.map(doc => ({
         type: doc.data().type,
@@ -352,7 +348,6 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
         details: doc.data().details,
       })) as UserActivity[];
 
-      // Combine and sort by timestamp
       const allActivity = [
         ...bookingsData,
         ...seniorCareData,
@@ -368,6 +363,35 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       toast.error("Failed to load your activity. Please try again.");
     }
   }, [currentUser]);
+
+  const logoutUser = async () => {
+    try {
+      if (sessionTimeoutRef.current) clearTimeout(sessionTimeoutRef.current);
+      toast.loading("Logging out...");
+
+      if (currentUser) {
+        const activityRef = doc(collection(db, 'users', currentUser.uid, 'activity'));
+        try {
+          await setDoc(activityRef, {
+            type: 'logout',
+            timestamp: new Date().toISOString(),
+            details: { email: currentUser.email },
+          });
+        } catch (activityError) {
+          console.error("Failed to log logout activity:", activityError);
+        }
+      }
+
+      await signOut(auth);
+      toast.dismiss();
+      toast.success("Successfully logged out");
+    } catch (error) {
+      toast.dismiss();
+      toast.error("Error: Failed to log out");
+      console.error("Logout error:", error);
+      throw error;
+    }
+  };
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -396,6 +420,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
         setPediatricServices([]);
         setUserActivity([]);
         if (sessionTimeoutRef.current) clearTimeout(sessionTimeoutRef.current);
+        router.push('/');
       }
 
       setLoading(false);
@@ -412,6 +437,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
     fetchPediatricServices,
     fetchUserActivity,
     resetSessionTimer,
+    router,
   ]);
 
   useEffect(() => {
@@ -429,30 +455,6 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       if (sessionTimeoutRef.current) clearTimeout(sessionTimeoutRef.current);
     };
   }, [updateActivity, initialized]);
-
-  const logoutUser = async () => {
-    try {
-      if (sessionTimeoutRef.current) clearTimeout(sessionTimeoutRef.current);
-      toast.loading("Logging out...");
-
-      if (currentUser) {
-        const activityRef = doc(collection(db, 'users', currentUser.uid, 'activity'));
-        await setDoc(activityRef, {
-          type: 'logout',
-          timestamp: new Date().toISOString(),
-          details: { email: currentUser.email },
-        });
-      }
-
-      await signOut(auth);
-      toast.dismiss();
-      toast.success("Successfully logged out");
-    } catch (error) {
-      toast.dismiss();
-      toast.error("Error: Failed to log out");
-      throw error;
-    }
-  };
 
   const checkUserRole = async (): Promise<UserRole> => {
     if (!currentUser) return 'user';
