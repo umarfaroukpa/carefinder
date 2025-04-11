@@ -1,5 +1,3 @@
-// component/auth/AuthProvider.tsx
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -23,8 +21,10 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
 
     if (loading) {
         return (
-            <div className="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-50">
-                <p className="text-lg font-semibold text-gray-800">Please Wait...</p>
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-75">
+                <div className="text-center">
+                    <p className="text-xl font-semibold text-[#056968] animate-pulse">Loading Please Wait...</p>
+                </div>
             </div>
         );
     }

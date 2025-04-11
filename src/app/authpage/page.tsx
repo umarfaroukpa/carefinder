@@ -304,7 +304,7 @@ const AuthPage = () => {
               </button>
               <button
                 type="submit"
-                className="bg-[#056968] text-white py-2 px-4 rounded-md hover:[#edb138] transition disabled:bg-blue-300"
+                className="bg-[#056968] text-white py-2 px-4 rounded-md cursor-pointer hover:[#edb138] transition disabled:bg-blue-300"
                 disabled={isResetting}
               >
                 {isResetting ? 'Sending...' : 'Send Reset Link'}
@@ -357,7 +357,7 @@ const AuthPage = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-[#056968] text-white py-2 rounded-md hover:bg-[#edb138] transition"
+              className="w-full bg-[#056968]  cursor-pointer text-white py-2 rounded-md hover:bg-[#edb138] transition"
             >
               Create Account
             </button>
@@ -369,21 +369,21 @@ const AuthPage = () => {
             <span className="w-full border-t"></span>
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-white px-2 text-gray-500">
+            <span className="bg-white  cursor-pointer px-2 text-[#056968]">
               Or continue with
             </span>
           </div>
         </div>
         <div className="space-y-4">
           <button
-            className="w-full flex items-center justify-center gap-2 py-2 border rounded-md hover:bg-[#edb138] transition"
+            className="w-full flex items-center  cursor-pointer justify-center gap-2 py-2 border rounded-md hover:bg-[#edb138] transition"
             onClick={signInWithGoogle}
           >
             <GoogleIcon />
             Sign in with Google
           </button>
           <button
-            className="w-full flex items-center justify-center gap-2 py-2 border rounded-md hover:bg-[#edb138] transition"
+            className="w-full flex items-center  cursor-pointer justify-center gap-2 py-2 border rounded-md hover:bg-[#edb138] transition"
             onClick={signInWithGithub}
           >
             <Github className="h-5 w-5" />
