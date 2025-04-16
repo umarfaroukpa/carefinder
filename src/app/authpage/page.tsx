@@ -1,13 +1,13 @@
-// pages/authpage.tsx
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Github, Mail, Lock, User } from 'lucide-react';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, GithubAuthProvider, sendPasswordResetEmail } from 'firebase/auth';
 import { doc, getDoc, setDoc, collection } from 'firebase/firestore';
 import { auth, db } from '../../lib/firebase';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { useAuth } from '../../component/auth/AuthContext';
 
 interface FirebaseAuthError {
   code: string;
@@ -45,6 +45,7 @@ const GoogleIcon = () => (
 );
 
 const AuthPage = () => {
+  const { currentUser, loading } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -54,7 +55,14 @@ const AuthPage = () => {
   const [isResetting, setIsResetting] = useState(false);
   const router = useRouter();
 
-  const logActivity = async (userId: string, type: string, details: any) => {
+  // Redirect authenticated users to home
+  useEffect(() => {
+    if (!loading && currentUser) {
+      router.push('/');
+    }
+  }, [currentUser, loading, router]);
+
+  const logActivity = async (userId: string, type: string, details: unknown) => {
     try {
       const activityRef = doc(collection(db, 'users', userId, 'activity'));
       await setDoc(activityRef, {
@@ -209,6 +217,19 @@ const AuthPage = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-indigo-100 to-purple-100 p-8">
+        <div>Loading authentication...</div>
+      </div>
+    );
+  }
+
+  // Render nothing until redirect is handled by useEffect
+  if (currentUser) {
+    return null;
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br pt-28 from-indigo-100 to-purple-100 p-8">
       <div className="w-full max-w-md bg-white rounded-xl shadow-2xl p-6">
@@ -273,7 +294,7 @@ const AuthPage = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-[#056968] text-white py-2 rounded-md hover:bg-[#edb138] transition"
+              className="w-full bg-[#056968] cursor-pointer text-white py-2 rounded-md hover:bg-[#edb138] transition"
             >
               Login
             </button>
@@ -357,7 +378,7 @@ const AuthPage = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-[#056968]  cursor-pointer text-white py-2 rounded-md hover:bg-[#edb138] transition"
+              className="w-full bg-[#056968] cursor-pointer text-white py-2 rounded-md hover:bg-[#edb138] transition"
             >
               Create Account
             </button>
@@ -369,21 +390,21 @@ const AuthPage = () => {
             <span className="w-full border-t"></span>
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-white  cursor-pointer px-2 text-[#056968]">
+            <span className="bg-white cursor-pointer px-2 text-[#056968]">
               Or continue with
             </span>
           </div>
         </div>
         <div className="space-y-4">
           <button
-            className="w-full flex items-center  cursor-pointer justify-center gap-2 py-2 border rounded-md hover:bg-[#edb138] transition"
+            className="w-full flex items-center cursor-pointer justify-center gap-2 py-2 border rounded-md hover:bg-[#edb138] transition"
             onClick={signInWithGoogle}
           >
             <GoogleIcon />
             Sign in with Google
           </button>
           <button
-            className="w-full flex items-center  cursor-pointer justify-center gap-2 py-2 border rounded-md hover:bg-[#edb138] transition"
+            className="w-full flex items-center cursor-pointer justify-center gap-2 py-2 border rounded-md hover:bg-[#edb138] transition"
             onClick={signInWithGithub}
           >
             <Github className="h-5 w-5" />

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { AlertCircle, Phone, MapPin, Clock, Ambulance, Hospital, Shield, Search } from 'lucide-react';
-import ProtectedRoute from '../../component/auth/ProtectedRoute';
+import ProtectedRoute from '../../component/auth/ProtectedAction';
 
 // Emergency service provider interface
 interface EmergencyProvider {

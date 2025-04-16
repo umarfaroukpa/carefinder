@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { Baby, Calendar, Clock, MapPin, Phone, Star, Search, Filter, Heart, User, BookOpen } from 'lucide-react';
-import ProtectedRoute from '../../component/auth/ProtectedRoute';
+import Image from 'next/image';
+import ProtectedRoute from '../../component/auth/ProtectedAction';
 
 // Pediatric doctor/specialist interface
 interface Doctor {
@@ -185,7 +186,7 @@ const PediatricCare = () => {
                         <h1 className="text-3xl md:text-4xl font-bold text-[#056968] mb-4">Pediatric Care Services</h1>
                         <p className="text-[#056968] max-w-2xl mx-auto">
                             Quality healthcare for your child from trusted pediatricians and specialists.
-                            Find the right doctor for your child's specific needs.
+                            Find the right doctor for your child specific needs.
                         </p>
                     </header>
 
@@ -305,7 +306,7 @@ const PediatricCare = () => {
                                         <div className="p-6">
                                             <div className="flex items-center mb-4">
                                                 <div className="w-16 h-16 bg-gray-200 rounded-full overflow-hidden mr-4">
-                                                    <img
+                                                    <Image
                                                         src={doctor.image}
                                                         alt={doctor.name}
                                                         className="w-full h-full object-cover"
@@ -394,7 +395,7 @@ const PediatricCare = () => {
                             <div className="bg-green-50 p-4 rounded-md">
                                 <h4 className="font-bold text-[#056968] mb-2">Developmental Milestones</h4>
                                 <p className="text-sm text-[#056968]">
-                                    Learn about important physical, cognitive, and social milestones to track your child's development
+                                    Learn about important physical, cognitive, and social milestones to track your child development
                                     from infancy through adolescence.
                                 </p>
                                 <button className="mt-4 text-[#056968] text-sm font-medium hover:text-[#edb138]">
@@ -405,7 +406,7 @@ const PediatricCare = () => {
                                 <h4 className="font-bold text-[#056968] mb-2">Nutrition & Healthy Habits</h4>
                                 <p className="text-sm text-[#056968]">
                                     Find guidance on age-appropriate nutrition, establishing healthy eating habits, and
-                                    supporting your child's physical activity needs.
+                                    supporting your child physical activity needs.
                                 </p>
                                 <button className="mt-4 text-[#056968] text-sm font-medium hover:text-[#edb138]">
                                     Get Nutrition Tips →

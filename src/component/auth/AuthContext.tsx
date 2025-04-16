@@ -5,7 +5,7 @@ import { User, onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, getDoc, getDocs, collection, setDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../../lib/firebase';
 import toast from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 const SESSION_TIMEOUT = 30 * 60 * 1000;
 
@@ -113,6 +113,45 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   const sessionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [initialized, setInitialized] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
+
+  const logoutUser = React.useCallback(async () => {
+    try {
+      if (sessionTimeoutRef.current) clearTimeout(sessionTimeoutRef.current);
+      toast.loading("Logging out...");
+
+      if (currentUser) {
+        const activityRef = doc(collection(db, 'users', currentUser.uid, 'activity'));
+        try {
+          await setDoc(activityRef, {
+            type: 'logout',
+            timestamp: new Date().toISOString(),
+            details: { email: currentUser.email },
+          });
+        } catch (activityError) {
+          console.error("Failed to log logout activity:", activityError);
+        }
+      }
+
+      await signOut(auth);
+      toast.dismiss();
+      toast.success("Successfully logged out");
+    } catch (error) {
+      toast.dismiss();
+      toast.error("Error: Failed to log out");
+      console.error("Logout error:", error);
+      throw error;
+    }
+  }, [currentUser]);
+
+  const resetSessionTimer = React.useCallback(() => {
+    if (sessionTimeoutRef.current) clearTimeout(sessionTimeoutRef.current);
+  
+    sessionTimeoutRef.current = setTimeout(() => {
+      logoutUser();
+      toast.error("Session expired - You've been logged out due to inactivity");
+    }, SESSION_TIMEOUT);
+  }, [logoutUser]);
 
   const updateActivity = React.useCallback(async () => {
     if (!currentUser || !initialized) return;
@@ -143,16 +182,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
     }
 
     resetSessionTimer();
-  }, [currentUser, userData, initialized]);
-
-  const resetSessionTimer = React.useCallback(() => {
-    if (sessionTimeoutRef.current) clearTimeout(sessionTimeoutRef.current);
-
-    sessionTimeoutRef.current = setTimeout(() => {
-      logoutUser();
-      toast.error("Session expired - You've been logged out due to inactivity");
-    }, SESSION_TIMEOUT);
-  }, []); 
+  }, [currentUser, userData, initialized, resetSessionTimer]);
 
   const fetchUserData = React.useCallback(async (user: User) => {
     try {
@@ -221,7 +251,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       console.error("Error fetching bookings:", error);
       toast.error("Failed to load your bookings. Please try again.");
     }
-  }, [currentUser]);
+  }, [currentUser, loading]);
 
   const fetchSeniorCare = React.useCallback(async () => {
     if (!currentUser) return;
@@ -253,7 +283,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       console.error("Error fetching emergency care:", error);
       toast.error("Failed to load your emergency care activities. Please try again.");
     }
-  }, [currentUser]);
+  }, [currentUser, loading]);
 
   const fetchHomeServices = React.useCallback(async () => {
     if (!currentUser || loading) return;
@@ -269,7 +299,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       console.error("Error fetching home services:", error);
       toast.error("Failed to load your home services. Please try again.");
     }
-  }, [currentUser]);
+  }, [currentUser, loading]);
 
   const fetchPediatricServices = React.useCallback(async () => {
     if (!currentUser || loading) return;
@@ -285,10 +315,10 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       console.error("Error fetching pediatric services:", error);
       toast.error("Failed to load your pediatric services. Please try again.");
     }
-  }, [currentUser]);
+  }, [currentUser, loading]);
 
   const fetchUserActivity = React.useCallback(async () => {
-    if (!currentUser || loading) return;
+    if (!currentUser) return;
 
     try {
       const bookingSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'bookings'));
@@ -364,33 +394,22 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
     }
   }, [currentUser]);
 
-  const logoutUser = async () => {
+  const checkUserRole = async (): Promise<UserRole> => {
+    if (!currentUser) return 'user';
+
     try {
-      if (sessionTimeoutRef.current) clearTimeout(sessionTimeoutRef.current);
-      toast.loading("Logging out...");
+      const userRef = doc(db, 'users', currentUser.uid);
+      const userSnap = await getDoc(userRef);
 
-      if (currentUser) {
-        const activityRef = doc(collection(db, 'users', currentUser.uid, 'activity'));
-        try {
-          await setDoc(activityRef, {
-            type: 'logout',
-            timestamp: new Date().toISOString(),
-            details: { email: currentUser.email },
-          });
-        } catch (activityError) {
-          console.error("Failed to log logout activity:", activityError);
-        }
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        return userData.role || 'user';
       }
-
-      await signOut(auth);
-      toast.dismiss();
-      toast.success("Successfully logged out");
     } catch (error) {
-      toast.dismiss();
-      toast.error("Error: Failed to log out");
-      console.error("Logout error:", error);
-      throw error;
+      console.error("Error checking user role:", error);
     }
+
+    return 'user';
   };
 
   useEffect(() => {
@@ -420,7 +439,10 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
         setPediatricServices([]);
         setUserActivity([]);
         if (sessionTimeoutRef.current) clearTimeout(sessionTimeoutRef.current);
-        router.push('/');
+        // Only redirect to '/' if not on /authpage
+        if (pathname !== '/authpage') {
+          router.push('/');
+        }
       }
 
       setLoading(false);
@@ -438,6 +460,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
     fetchUserActivity,
     resetSessionTimer,
     router,
+    pathname,
   ]);
 
   useEffect(() => {
@@ -455,24 +478,6 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       if (sessionTimeoutRef.current) clearTimeout(sessionTimeoutRef.current);
     };
   }, [updateActivity, initialized]);
-
-  const checkUserRole = async (): Promise<UserRole> => {
-    if (!currentUser) return 'user';
-
-    try {
-      const userRef = doc(db, 'users', currentUser.uid);
-      const userSnap = await getDoc(userRef);
-
-      if (userSnap.exists()) {
-        const userData = userSnap.data();
-        return userData.role || 'user';
-      }
-    } catch (error) {
-      console.error("Error checking user role:", error);
-    }
-
-    return 'user';
-  };
 
   const value = {
     currentUser,

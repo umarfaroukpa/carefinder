@@ -3,9 +3,9 @@
 import { useAuth } from '../../component/auth/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import ProtectedRoute from '../../component/auth/ProtectedRoute';
-import { 
-  Calendar, LogIn, LogOut, Home, Heart, 
+import ProtectedRoute from '../../component/auth/ProtectedAction';
+import {
+  Calendar, LogIn, LogOut, Home, Heart,
   Baby, Stethoscope, User, Clock, Activity, BriefcaseMedical
 } from 'lucide-react';
 import { doc, deleteDoc } from 'firebase/firestore';
@@ -13,22 +13,43 @@ import { db } from '../../lib/firebase';
 import toast from 'react-hot-toast';
 import { FirebaseError } from 'firebase/app';
 
+
+interface BookingDetails {
+  hospitalName: string;
+  date: string;
+  status: string;
+}
+
+interface ServiceDetails {
+  providerName: string;
+  date: string;
+  status: string;
+}
+
+interface AuthDetails {
+  email: string;
+  method?: string;
+}
+
+
 // Type guards to narrow down the type of activity.details
-const isBookingDetails = (details: any, type: string): details is { hospitalName: string; date: string; status: string } => {
-  return type === 'booking' && 'hospitalName' in details && 'date' in details && 'status' in details;
+const isBookingDetails = (details: unknown, type: string): details is BookingDetails => {
+  return type === 'booking' && typeof details === 'object' && details !== null &&
+    'hospitalName' in details && 'date' in details && 'status' in details;
 };
 
-const isServiceDetails = (details: any, type: string): details is { providerName: string; date: string; status: string } => {
+const isServiceDetails = (details: unknown, type: string): details is ServiceDetails => {
   return (
     (type === 'seniorCare' || type === 'emergencyCare' || type === 'homeService' || type === 'pediatricService') &&
-    'providerName' in details &&
-    'date' in details &&
-    'status' in details
+    typeof details === 'object' && details !== null &&
+    'providerName' in details && 'date' in details && 'status' in details
   );
 };
 
-const isAuthDetails = (details: any, type: string): details is { email: string; method?: string } => {
-  return (type === 'login' || type === 'logout') && 'email' in details;
+const isAuthDetails = (details: unknown, type: string): details is AuthDetails => {
+  return (type === 'login' || type === 'logout') &&
+    typeof details === 'object' && details !== null &&
+    'email' in details;
 };
 
 // Activity category mapping
@@ -125,7 +146,7 @@ export default function Account() {
           fetchPediatricServices();
           break;
       }
-       // Refresh the activity timeline
+      // Refresh the activity timeline
       fetchUserActivity();
     } catch (error) {
       console.error(`Error cancelling ${collection}:`, error);
@@ -176,7 +197,7 @@ export default function Account() {
                 </div>
               </div>
             </div>
-            
+
             <div className="p-6">
               <div className="grid md:grid-cols-3 gap-4">
                 <div className="p-4 bg-gray-50 rounded-lg">
@@ -204,11 +225,10 @@ export default function Account() {
           <div className="flex mb-6 border-b">
             <button
               onClick={() => setActiveTab('activity')}
-              className={`px-6 py-3 font-medium text-sm focus:outline-none ${
-                activeTab === 'activity'
-                  ? 'text-[#056968] border-b-2 border-[#056968]'
-                  : 'text-gray-500 hover:text-[#056968]'
-              }`}
+              className={`px-6 py-3 font-medium text-sm focus:outline-none ${activeTab === 'activity'
+                ? 'text-[#056968] border-b-2 border-[#056968]'
+                : 'text-gray-500 hover:text-[#056968]'
+                }`}
             >
               <div className="flex items-center">
                 <Activity className="h-4 w-4 mr-2" />
@@ -217,11 +237,10 @@ export default function Account() {
             </button>
             <button
               onClick={() => setActiveTab('healthcare')}
-              className={`px-6 py-3 font-medium text-sm focus:outline-none ${
-                activeTab === 'healthcare'
-                  ? 'text-[#056968] border-b-2 border-[#056968]'
-                  : 'text-gray-500 hover:text-[#056968]'
-              }`}
+              className={`px-6 py-3 font-medium text-sm focus:outline-none ${activeTab === 'healthcare'
+                ? 'text-[#056968] border-b-2 border-[#056968]'
+                : 'text-gray-500 hover:text-[#056968]'
+                }`}
             >
               <div className="flex items-center">
                 <BriefcaseMedical className="h-4 w-4 mr-2" />
@@ -230,11 +249,10 @@ export default function Account() {
             </button>
             <button
               onClick={() => setActiveTab('profile')}
-              className={`px-6 py-3 font-medium text-sm focus:outline-none ${
-                activeTab === 'profile'
-                  ? 'text-[#056968] border-b-2 border-[#056968]'
-                  : 'text-gray-500 hover:text-[#056968]'
-              }`}
+              className={`px-6 py-3 font-medium text-sm focus:outline-none ${activeTab === 'profile'
+                ? 'text-[#056968] border-b-2 border-[#056968]'
+                : 'text-gray-500 hover:text-[#056968]'
+                }`}
             >
               <div className="flex items-center">
                 <User className="h-4 w-4 mr-2" />
@@ -251,7 +269,7 @@ export default function Account() {
                   <Activity className="h-5 w-5 mr-2" />
                   Recent Activity
                 </h2>
-                
+
                 {userActivity.length === 0 ? (
                   <div className="text-center py-12">
                     <Calendar className="h-12 w-12 text-gray-300 mx-auto mb-3" />
@@ -275,7 +293,7 @@ export default function Account() {
                                 {new Date(activity.timestamp).toLocaleString()}
                               </span>
                             </div>
-                            
+
                             <div className="mt-2 text-gray-600 text-sm">
                               {isBookingDetails(activity.details, activity.type) && (
                                 <div className="grid grid-cols-2 gap-2 mt-2">
@@ -289,19 +307,18 @@ export default function Account() {
                                   </div>
                                   <div>
                                     <span className="block text-xs text-gray-500">Status</span>
-                                    <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
-                                      activity.details.status.toLowerCase() === 'confirmed'
-                                        ? 'bg-green-100 text-green-800'
-                                        : activity.details.status.toLowerCase() === 'cancelled'
+                                    <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${activity.details.status.toLowerCase() === 'confirmed'
+                                      ? 'bg-green-100 text-green-800'
+                                      : activity.details.status.toLowerCase() === 'cancelled'
                                         ? 'bg-red-100 text-red-800'
                                         : 'bg-yellow-100 text-yellow-800'
-                                    }`}>
+                                      }`}>
                                       {activity.details.status}
                                     </span>
                                   </div>
                                 </div>
                               )}
-                              
+
                               {isServiceDetails(activity.details, activity.type) && (
                                 <div className="grid grid-cols-2 gap-2 mt-2">
                                   <div>
@@ -314,19 +331,18 @@ export default function Account() {
                                   </div>
                                   <div>
                                     <span className="block text-xs text-gray-500">Status</span>
-                                    <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
-                                      activity.details.status.toLowerCase() === 'completed'
-                                        ? 'bg-green-100 text-green-800'
-                                        : activity.details.status.toLowerCase() === 'cancelled'
+                                    <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${activity.details.status.toLowerCase() === 'completed'
+                                      ? 'bg-green-100 text-green-800'
+                                      : activity.details.status.toLowerCase() === 'cancelled'
                                         ? 'bg-red-100 text-red-800'
                                         : 'bg-yellow-100 text-yellow-800'
-                                    }`}>
+                                      }`}>
                                       {activity.details.status}
                                     </span>
                                   </div>
                                 </div>
                               )}
-                              
+
                               {isAuthDetails(activity.details, activity.type) && (
                                 <div className="grid grid-cols-2 gap-2 mt-2">
                                   <div>
@@ -561,7 +577,7 @@ export default function Account() {
                   <User className="h-5 w-5 mr-2" />
                   Profile Details
                 </h2>
-                
+
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-3">Personal Information</h3>
@@ -586,7 +602,7 @@ export default function Account() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div>
                     <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-3">Account Settings</h3>
                     <div className="flex flex-col space-y-3">

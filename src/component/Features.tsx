@@ -60,18 +60,7 @@ export default function Features() {
         }
     };
 
-    // Card hover animation
-    const cardVariants = {
-        hover: {
-            y: -15,
-            boxShadow: "0px 25px 50px rgba(0, 0, 0, 0.1)",
-            transition: {
-                type: "spring",
-                stiffness: 400,
-                damping: 15
-            }
-        }
-    };
+
 
     return (
         <section className="py-20 bg-gradient-to-b from-blue-50 to-white overflow-hidden">

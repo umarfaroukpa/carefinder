@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../../lib/firebase';
-import ProtectedRoute from '../../component/auth/ProtectedRoute';
+import ProtectedRoute from '../../component/auth/ProtectedAction';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import Link from 'next/link';
 
@@ -86,9 +86,9 @@ export default function BookAppointment() {
 
                         {!user && (
                             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8 text-center">
-                                <p className="text-blue-800">
+                                <p className="text-[#056968]">
                                     <span className="font-medium">Note:</span> Creating an account allows you to track your appointments and medical history.
-                                    <Link href="/authpage" className="ml-2 text-blue-600 hover:underline font-medium">
+                                    <Link href="/authpage" className="ml-2 text-[#edb138] hover:underline font-medium">
                                         Login or Sign Up
                                     </Link>
                                 </p>
@@ -97,16 +97,16 @@ export default function BookAppointment() {
 
                         {submitSuccess ? (
                             <div className="bg-green-50 border border-green-200 rounded-lg p-8 text-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-green-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-[#056968] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <h2 className="text-2xl font-bold text-green-800 mb-2">Appointment Booked Successfully!</h2>
-                                <p className="text-green-700 mb-6">
-                                    We've received your appointment request and will send you a confirmation email shortly.
+                                <h2 className="text-2xl font-bold text-[#056968] mb-2">Appointment Booked Successfully!</h2>
+                                <p className="text-[#056968] mb-6">
+                                    We have received your appointment request and will send you a confirmation email shortly.
                                 </p>
                                 <button
                                     onClick={() => setSubmitSuccess(false)}
-                                    className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-md"
+                                    className="bg-[#056968] hover:bg-[#edb138] text-white font-medium py-2 px-6 rounded-md"
                                 >
                                     Book Another Appointment
                                 </button>
@@ -272,7 +272,7 @@ export default function BookAppointment() {
                                     </div>
                                     <h3 className="font-semibold text-[#edb138] text-lg mb-2">Confirmation</h3>
                                     <p className="text-[#056968]">
-                                        You'll receive an email confirmation within 24 hours of your appointment request.
+                                        You will receive an email confirmation within 24 hours of your appointment request.
                                     </p>
                                 </div>
 

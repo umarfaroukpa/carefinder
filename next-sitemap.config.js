@@ -1,5 +1,13 @@
-/** @type {import('next-sitemap').IConfig} */
-module.exports = {
-    siteUrl: process.env.SITE_URL || 'https://carefinder.example.com',
+
+export default {
+    siteUrl: "http://localhost:3000",
     generateRobotsTxt: true,
-  }
+    sitemapSize: 7000,
+    exclude: ["/admin", "/authpage", "/useraccount"],
+    robotsTxtOptions: {
+      policies: [
+        { userAgent: "*", allow: "/" },
+        { userAgent: "*", disallow: ["/admin", "/authpage", "/useraccount"] },
+      ],
+    },
+  };

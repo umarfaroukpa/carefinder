@@ -4,8 +4,6 @@ import { AuthProviderContext } from '../component/auth/AuthContext';
 import AuthProvider from '../component/AuthProvider';
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
-import Header from '../component/Header';
-import Footer from '../component/Footer';
 import ErrorBoundaryWithHooks from './errorRout/ErrorBoundary';
 
 export const metadata: Metadata = {

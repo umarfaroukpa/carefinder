@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Building, Search, X } from 'lucide-react';
+import { MapPin, Phone, Mail, Search, X } from 'lucide-react';
 import Link from 'next/link';
 
 // Define the hospital type interface

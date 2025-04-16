@@ -23,7 +23,7 @@ interface RequestData {
 }
 
 export const sendHospitalList = functions.https.onCall(
-    async (request: functions.https.CallableRequest<RequestData>, _context) => {
+    async (request: functions.https.CallableRequest<RequestData>, ) => {
         const { email, hospitals } = request.data;
 
         if (!email || !hospitals) {

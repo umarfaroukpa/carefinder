@@ -213,7 +213,7 @@ export default function Header() {
                                 </Link>
                                 <button
                                     onClick={handleLogout}
-                                    className="text-sm text-white bg-red-500 px-2 py-1 rounded hover:bg-red-600"
+                                    className="text-sm text-white cursor-pointer bg-red-500 px-2 py-1 rounded hover:bg-red-600"
                                 >
                                     Logout
                                 </button>
@@ -245,7 +245,7 @@ export default function Header() {
                         <Link
                             href="/"
                             className="hover:text-[#edb13b] py-2"
-                            onClick={(e) => setIsMobileMenuOpen(false)}
+                            onClick={() => setIsMobileMenuOpen(false)}
                         >
                             Home
                         </Link>
@@ -347,7 +347,7 @@ export default function Header() {
                                 </Link>
                                 <button
                                     onClick={handleLogout}
-                                    className="text-sm text-white bg-red-500 px-2 py-1 rounded hover:bg-red-600 w-full"
+                                    className="text-sm text-white cursor-pointer bg-red-500 px-2 py-1 rounded hover:bg-red-600 w-full"
                                 >
                                     Logout
                                 </button>

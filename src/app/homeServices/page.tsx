@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Home, Heart, Clock, Phone, MapPin, User, Calendar } from 'lucide-react';
-import ProtectedRoute from '../../component/auth/ProtectedRoute';
+import ProtectedRoute from '../../component/auth/ProtectedAction';
 
 // Home care service types
 interface ServiceType {

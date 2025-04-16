@@ -12,4 +12,5 @@ export interface Hospital {
     specializations?: string[];
     coordinates?: number[]; // From schema
     functionalStatus?: string; // From schema
+    isExternal?: boolean;
 }

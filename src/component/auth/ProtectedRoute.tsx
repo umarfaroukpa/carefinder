@@ -16,10 +16,10 @@ type ProtectedRouteProps = {
 export default function ProtectedRoute({
     children,
     requiredRole = null,
-    redirectTo = '/', 
+    redirectTo = '/',
     fallback
 }: ProtectedRouteProps) {
-    const { currentUser, userData, loading, isAdmin, isModerator } = useAuth();
+    const { currentUser, loading, isAdmin, isModerator } = useAuth(); // Removed userData
     const router = useRouter();
     const [isAuthorized, setIsAuthorized] = useState(false);
 

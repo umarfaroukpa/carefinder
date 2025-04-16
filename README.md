@@ -1,39 +1,141 @@
-# carefinder
+# CareFinder
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![CareFinder Logo](/logo.png)
 
-## Getting Started
+## Overview
 
-First, run the development server:
+CareFinder is a comprehensive web application designed to help users find and book hospitals in Nigeria. The platform simplifies the process of locating healthcare facilities, comparing services, and booking appointments.
 
-bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+
+- **Hospital Search**: Find hospitals based on location, services, and specialties
+- **Detailed Hospital Information**: View comprehensive details about each hospital
+- **User Authentication**: Secure login and registration system
+- **Role-Based Access Control**: Different permissions for users, moderators, and administrators
+- **Mobile Responsive Design**: Seamless experience across all devices
+- **Share Functionality**: Easily share hospital lists with others
+- **User Reviews and Ratings**: Make informed decisions based on others' experiences
+
+## Technology Stack
+
+- **Frontend**: React, Next.js, TypeScript, Tailwind CSS
+- **Backend**: Mongodb, Firebase (Authentication, Firestore, Storage)
+- **State Management**: React Context API
+- **Styling**: Tailwind CSS, Custom Components
+- **Notifications**: React Hot Toast
+- **Icons**: Lucide React
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/carefinder.git
+   cd carefinder
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env.local` file in the root directory with your Firebase configuration:
+   ```
+   NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+   NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+   ```
+
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+   The application will be available at http://localhost:3000
+
+## Project Structure
+
+```
+carefinder/
+├── app/                  # Next.js app directory
+│   ├── errorRout/        # Error handling components
+│   ├── hospitalsearch/   # Hospital search page
+│   ├── index.tsx         # Home page
+│   └── layout.tsx        # Root layout with providers
+├── component/            # Reusable components
+│   ├── auth/             # Authentication components
+│   │   ├── AuthContext.tsx    # Authentication context provider
+│   │   ├── AuthProvider.tsx   # Auth provider with loading state
+│   │   └── ProtectedRoute.tsx # Route protection component
+│   ├── Header.tsx        # Site header
+│   ├── Footer.tsx        # Site footer
+│   ├── HospitalList.tsx  # Hospital results display
+│   ├── HeroSection.tsx   # Homepage hero section
+│   └── ...               # Other UI components
+├── lib/                  # Utility functions and libraries
+│   └── firebase.ts       # Firebase configuration
+├── types/                # TypeScript type definitions
+│   └── Hospital.ts       # Hospital interface
+└── styles/               # Global styles
+    └── globals.css       # Global CSS
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Authentication and Authorization
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+CareFinder implements a comprehensive authentication system with three user roles:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **User**: Can search for hospitals and book appointments
+- **Moderator**: Additional capabilities to manage hospital listings
+- **Admin**: Full access to all system features and user management
 
-## Learn More
+Protected routes ensure that users can only access features appropriate for their role.
 
-To learn more about Next.js, take a look at the following resources:
+## Components
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Authentication Components
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **AuthContext**: Manages authentication state across the application
+- **AuthProvider**: Handles user authentication flow with loading states
+- **ProtectedRoute**: Restricts access to routes based on authentication status and user roles
 
-## Deploy on Vercel
+### UI Components
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **HospitalSearch**: Advanced search interface for finding hospitals
+- **HospitalList**: Displays search results in a user-friendly format
+- **ShareButton**: Allows users to share hospital lists
+- **Features**: Highlights key application features
+- **Testimonials**: Displays user testimonials and success stories
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
- 450ae50 (Initial commit from Create Next App)
+## Deployment
+
+The application is configured for deployment on Vercel, Netlify, or any other Next.js-compatible hosting service.
+
+To deploy:
+
+1. Connect your repository to your hosting service
+2. Configure the environment variables
+3. Deploy the application
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact
+
+For any inquiries or issues, please open an issue on GitHub or contact the development team.
+
+---
+
+© 2025 CareFinder. All Rights Reserved.

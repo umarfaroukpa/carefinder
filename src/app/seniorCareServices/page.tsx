@@ -2,7 +2,8 @@
 
 import React, { useState, useMemo, Suspense } from 'react';
 import { Clock, Home, MapPin, Phone, Search, Shield, Users, Heart, Activity, Star } from 'lucide-react';
-import ProtectedRoute from '../../component/auth/ProtectedRoute';
+import Image from 'next/image';
+import ProtectedRoute from '../../component/auth/ProtectedAction';
 
 // Interfaces remain the same
 interface ServiceType {
@@ -12,34 +13,6 @@ interface ServiceType {
   icon: React.ReactNode;
 }
 
-interface CareProvider {
-  id: string;
-  name: string;
-  type: string;
-  services: string[];
-  rating: number;
-  reviews: number;
-  address: string;
-  phone: string;
-  hours: string;
-  insurance: string[];
-  specialFeatures: string[];
-}
-
-interface Facility {
-  id: string;
-  name: string;
-  type: 'nursing' | 'assisted' | 'independent' | 'memory';
-  image: string;
-  address: string;
-  phone: string;
-  rating: number;
-  reviews: number;
-  pricing: string;
-  amenities: string[];
-  medicalServices: string[];
-  availability: boolean;
-}
 
 const SeniorCare = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -49,12 +22,12 @@ const SeniorCare = () => {
   const [selectedInsurance, setSelectedInsurance] = useState<string[]>([]);
 
   const serviceTypes: ServiceType[] = [
-    // ... unchanged
+
     {
       id: 'home',
       name: 'In-Home Care',
       description: 'Professional caregivers providing assistance with daily activities in the comfort of one\'s home.',
-      icon: <Home className="h-8 w-8 text-green-500" />
+      icon: <Home className="h-8 w-8 text-[#056968]" />
     },
     {
       id: 'medical',
@@ -72,7 +45,7 @@ const SeniorCare = () => {
       id: 'residential',
       name: 'Residential Care',
       description: 'Full-time residential facilities offering varying levels of assistance and medical care.',
-      icon: <Users className="h-8 w-8 text-blue-500" />
+      icon: <Users className="h-8 w-8 text-[#056968]" />
     }
   ];
 
@@ -81,55 +54,70 @@ const SeniorCare = () => {
     'Aetna', 'UnitedHealthcare', 'Humana', 'Kaiser Permanente'
   ];
 
-  const careProviders: CareProvider[] = [
-    // ... unchanged
-    {
-      id: 'p1',
-      name: 'Golden Years Home Care',
-      type: 'home',
-      services: ['Personal care', 'Medication management', 'Light housekeeping', 'Transportation'],
-      rating: 4.8,
-      reviews: 156,
-      address: '123 Elder Care Lane, Suite 101',
-      phone: '(555) 123-4567',
-      hours: 'Available 24/7',
-      insurance: ['Medicare', 'Medicaid', 'Blue Cross Blue Shield', 'Aetna'],
-      specialFeatures: ['Multilingual caregivers', 'Specialty trained in dementia care']
-    },
-    // ... other providers
-  ];
+  const memoizedCareProviders = useMemo(() => {
+    return [
+      {
+        id: 'p1',
+        name: 'Golden Years Home Care',
+        type: 'home',
+        services: ['Personal care', 'Medication management', 'Light housekeeping', 'Transportation'],
+        rating: 4.8,
+        reviews: 156,
+        address: '123 Elder Care Lane, Suite 101',
+        phone: '(555) 123-4567',
+        hours: 'Available 24/7',
+        insurance: ['Medicare', 'Medicaid', 'Blue Cross Blue Shield', 'Aetna'],
+        specialFeatures: ['Multilingual caregivers', 'Specialty trained in dementia care']
+      },
+      {
+        id: 'p2',
+        name: 'Compassionate Hearts Nursing Services',
+        type: 'medical',
+        services: ['Skilled nursing', 'Physical therapy', 'Occupational therapy'],
+        rating: 4.6,
+        reviews: 89,
+        address: '456 Caregiver Avenue, Suite 202',
+        phone: '(555) 987-6543',
+        hours: 'Monday - Friday, 8 AM - 5 PM',
+        insurance: ['UnitedHealthcare', 'Humana'],
+        specialFeatures: ['Telehealth services available', 'In-home assessments']
+      },
+    ];
+  }, []);
 
-  const facilities: Facility[] = [
-    {
-      id: 'f1',
-      name: 'Sunset Gardens Assisted Living',
-      type: 'assisted',
-      image: 'https://placehold.co/400x300', // Fixed placeholder
-      address: '100 Comfort Lane',
-      phone: '(555) 222-3333',
-      rating: 4.5,
-      reviews: 87,
-      pricing: '$3,500 - $5,200/month',
-      amenities: ['Private apartments', 'Restaurant-style dining', 'Gardens', 'Social activities', 'Transportation services'],
-      medicalServices: ['24/7 staff', 'Medication management', 'Physical therapy'],
-      availability: true
-    },
-    {
-      id: 'f2',
-      name: 'Tranquil Pines Nursing Home',
-      type: 'nursing',
-      image: 'https://placehold.co/400x300',
-      address: '200 Care Boulevard',
-      phone: '(555) 333-4444',
-      rating: 4.3,
-      reviews: 62,
-      pricing: '$6,800 - $9,500/month',
-      amenities: ['Semi-private rooms', 'Dining hall', 'Common areas', 'Garden access'],
-      medicalServices: ['24/7 nursing care', 'Physician visits', 'Rehabilitation services', 'Specialized care programs'],
-      availability: false
-    },
-    // ... other facilities with updated image URLs
-  ];
+  const memoizedFacilityProviders = useMemo(() => {
+
+    return [
+      {
+        id: 'f1',
+        name: 'Sunset Gardens Assisted Living',
+        type: 'assisted',
+        image: 'https://placehold.co/400x300',
+        address: '100 Comfort Lane',
+        phone: '(555) 222-3333',
+        rating: 4.5,
+        reviews: 87,
+        pricing: '$3,500 - $5,200/month',
+        amenities: ['Private apartments', 'Restaurant-style dining', 'Gardens', 'Social activities', 'Transportation services'],
+        medicalServices: ['24/7 staff', 'Medication management', 'Physical therapy'],
+        availability: true
+      },
+      {
+        id: 'f2',
+        name: 'Tranquil Pines Nursing Home',
+        type: 'nursing',
+        image: 'https://placehold.co/400x300',
+        address: '200 Care Boulevard',
+        phone: '(555) 333-4444',
+        rating: 4.3,
+        reviews: 62,
+        pricing: '$6,800 - $9,500/month',
+        amenities: ['Semi-private rooms', 'Dining hall', 'Common areas', 'Garden access'],
+        medicalServices: ['24/7 nursing care', 'Physician visits', 'Rehabilitation services', 'Specialized care programs'],
+        availability: false
+      },
+    ];
+  }, []);
 
   const handleInsuranceChange = (insurance: string) => {
     setSelectedInsurance(prev =>
@@ -138,7 +126,7 @@ const SeniorCare = () => {
   };
 
   const filteredProviders = useMemo(() => {
-    return careProviders.filter(provider => {
+    return memoizedCareProviders.filter(provider => {
       const matchesSearch =
         searchQuery === '' ||
         provider.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -149,10 +137,11 @@ const SeniorCare = () => {
         selectedInsurance.some(insurance => provider.insurance.includes(insurance));
       return matchesSearch && matchesType && matchesInsurance;
     });
-  }, [searchQuery, selectedType, selectedInsurance]);
+  }, [searchQuery, selectedType, selectedInsurance, memoizedCareProviders]);
+
 
   const filteredFacilities = useMemo(() => {
-    return facilities.filter(facility => {
+    return memoizedFacilityProviders.filter(facility => {
       const matchesSearch =
         searchQuery === '' ||
         facility.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -164,7 +153,7 @@ const SeniorCare = () => {
         (selectedType === facility.type);
       return matchesSearch && matchesType;
     });
-  }, [searchQuery, selectedType]);
+  }, [searchQuery, selectedType, memoizedFacilityProviders]);
 
   const handleContactProvider = (providerId: string) => {
     alert(`Contact request sent to provider ID: ${providerId}. They will reach out to schedule a consultation.`);
@@ -181,7 +170,7 @@ const SeniorCare = () => {
           <header className="text-center mb-12">
             <h1 className="text-3xl md:text-4xl font-bold text-[#056968] mb-4">Senior Care Services</h1>
             <p className="text-[#056968] max-w-2xl mx-auto">
-              Compassionate care services designed to support seniors' health, independence, and quality of life.
+              Compassionate care services designed to support seniors  health, independence, and quality of life.
               Find the right care options for your loved ones.
             </p>
           </header>
@@ -316,7 +305,7 @@ const SeniorCare = () => {
                         key={facility.id}
                         className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition"
                       >
-                        <img
+                        <Image
                           src={facility.image}
                           alt={facility.name}
                           className="w-full h-48 object-cover rounded-t-md mb-4"

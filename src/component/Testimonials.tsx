@@ -44,20 +44,20 @@ export default function Testimonials() {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
 
   // Check if viewport is mobile
   useEffect(() => {
     const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      const isMobile = window.innerWidth < 768;
+      document.documentElement.classList.toggle('mobile', isMobile);
     };
-    
+
     // Initial check
     checkIfMobile();
-    
+
     // Add event listener
     window.addEventListener('resize', checkIfMobile);
-    
+
     // Clean up
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
@@ -76,18 +76,18 @@ export default function Testimonials() {
         <h2 className="text-3xl md:text-4xl font-bold text-center text-[#056968] mb-8">
           What Our Users Say
         </h2>
-        
+
         {/* Desktop Grid View */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {testimonials.map((testimonial, index) => (
             <TestimonialCard key={index} testimonial={testimonial} />
           ))}
         </div>
-        
+
         {/* Mobile Carousel View */}
         <div className="md:hidden">
           <div className="overflow-hidden relative">
-            <div 
+            <div
               className="flex transition-transform duration-300 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
@@ -98,21 +98,20 @@ export default function Testimonials() {
               ))}
             </div>
           </div>
-          
+
           {/* Carousel Indicators */}
           <div className="flex justify-center mt-4 space-x-2">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full ${
-                  currentIndex === index ? 'bg-[#056968]' : 'bg-gray-300'
-                }`}
+                className={`w-3 h-3 rounded-full ${currentIndex === index ? 'bg-[#056968]' : 'bg-gray-300'
+                  }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
             ))}
           </div>
-          
+
           {/* Carousel Controls */}
           <div className="flex justify-between mt-6">
             <button
@@ -168,7 +167,7 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
     <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
       <div className="flex items-center mb-4">
         <Image
-        
+
           width={48}
           height={48}
           src={testimonial.image}
@@ -180,7 +179,7 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
           <p className="text-sm text-[#edb138]">{testimonial.location}</p>
         </div>
       </div>
-      <p className="text-[#056968] italic flex-grow">"{testimonial.quote}"</p>
+      <p className="text-[#056968] italic flex-grow">&ldquo;{testimonial.quote}&rdquo;</p>
     </div>
   );
 }
