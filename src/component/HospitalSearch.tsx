@@ -279,15 +279,13 @@ export default function HospitalSearch({ onSearch }: HospitalSearchProps) {
         {isModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 transition-opacity duration-300">
             <div className="bg-white rounded-xl p-6 w-full max-w-4xl max-h-[85vh] overflow-y-auto relative shadow-2xl animate-slide-up">
-              <ProtectedAction>
                 <button
                   onClick={closeModal}
-                  className="absolute top-4 right-4 text-[#056968] hover:text-[#056968] transition duration-200"
+                  className="absolute top-4 right-4 text-[#056968] hover:text-[#056968] cursor-pointer transition duration-200"
                   aria-label="Close modal"
                 >
                   <X size={24} aria-hidden="true" />
                 </button>
-              </ProtectedAction>
               <h2 className="text-2xl md:text-3xl font-bold text-[#056968] mb-6">Search Results</h2>
 
               {showAddHospitalPrompt && (
