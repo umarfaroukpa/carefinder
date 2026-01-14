@@ -49,9 +49,9 @@ async function importHospitals() {
 
     if (transformedHospitals.length > 0) {
       // Fix: Explicitly type the filter as an empty query
-      await Hospital.deleteMany({} as any); // Option 1: Use 'as any' to bypass strict typing
+      await Hospital.deleteMany({} as any); 
       // OR
-      // await Hospital.deleteMany(); // Option 2: Omit filter to delete all documents
+      // await Hospital.deleteMany();
       console.log("Cleared existing hospital data");
       await Hospital.insertMany(transformedHospitals);
       console.log(`Imported ${transformedHospitals.length} hospitals from health.json`);

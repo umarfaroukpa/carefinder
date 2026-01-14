@@ -9,7 +9,7 @@ import {
   Baby, Stethoscope, User, Clock, Activity, BriefcaseMedical
 } from 'lucide-react';
 import { doc, deleteDoc } from 'firebase/firestore';
-import { db } from '../../lib/firebase';
+import { db } from '../../lib/firebase-client';
 import toast from 'react-hot-toast';
 import { FirebaseError } from 'firebase/app';
 

@@ -1,4 +1,3 @@
-// components/HospitalSearch.tsx
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
@@ -88,24 +87,24 @@ export default function HospitalSearch({ onSearch }: HospitalSearchProps) {
   );
 
   const debouncedSearch = useCallback(
-    (term: string, type: string) => {
-      if (!term) return;
+  (term: string, type: string) => {
+    if (!term || term.length < 3) return; // ← prevent short/spammy searches like "k", "ka"
 
-      const performSearch = async () => {
-        try {
-          setErrorMessage(null);
-          const results = await searchHospitals(term, type);
-          handleSearchResults(results, term);
-        } catch {
-          setErrorMessage("Failed to fetch hospitals. Please try again.");
-        }
-      };
+    const performSearch = async () => {
+      try {
+        setErrorMessage(null);
+        const results = await searchHospitals(term, type);
+        handleSearchResults(results, term);
+      } catch {
+        setErrorMessage("Failed to fetch hospitals. Please try again.");
+      }
+    };
 
-      const debounceTimer = setTimeout(performSearch, 500);
-      return () => clearTimeout(debounceTimer);
-    },
-    [handleSearchResults, searchHospitals]
-  );
+    const debounceTimer = setTimeout(performSearch, 800); 
+    return () => clearTimeout(debounceTimer);
+  },
+  [handleSearchResults, searchHospitals]
+);
 
   const onSubmit = async (data: FormData) => {
     try {

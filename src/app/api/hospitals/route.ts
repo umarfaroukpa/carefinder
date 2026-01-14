@@ -33,17 +33,44 @@ interface ExternalHospital {
   };
 }
 
-async function searchExternalHospitals(location: string): Promise<ExternalHospital[]> {
-  try {
-    const response = await fetch(
-      `https://maps.googleapis.com/maps/api/place/textsearch/json?query=hospitals+in+${encodeURIComponent(location)}&type=hospital&key=${process.env.GOOGLE_MAPS_API_KEY}`
-    );
-    const data = await response.json();
-    return data.results || [];
-  } catch (error) {
-    console.error("External API search error:", error);
-    return [];
+async function searchExternalHospitals(searchTerm: string): Promise<any[]> {
+  const maxRetries = 3;
+  let attempt = 0;
+
+  while (attempt < maxRetries) {
+    try {
+      const url = `https://us1.locationiq.com/v1/search?` + new URLSearchParams({
+        key: process.env.LOCATIONIQ_TOKEN!,
+        q: `${searchTerm} hospital`,
+        countrycodes: "ng",
+        tag: "amenity:hospital",
+        format: "json",
+        limit: "15",
+        addressdetails: "1",
+      }).toString();
+
+      const response = await fetch(url);
+
+      if (response.status === 429) {
+        // Wait exponentially longer (1s → 2s → 4s)
+        const delay = Math.pow(2, attempt) * 1000;
+        console.log(`Rate limited (429), retrying after ${delay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        attempt++;
+        continue;
+      }
+
+      if (!response.ok) throw new Error(`LocationIQ error: ${response.status}`);
+
+      const data = await response.json();
+      return data || [];
+    } catch (error) {
+      console.error("LocationIQ search error:", error);
+      if (attempt >= maxRetries - 1) return [];
+      attempt++;
+    }
   }
+  return [];
 }
 
 interface TransformedHospital {
@@ -61,18 +88,18 @@ interface TransformedHospital {
   coordinates: number[];
 }
 
-function transformExternalHospitalData(result: ExternalHospital): TransformedHospital {
+function transformExternalHospitalData(item: any): TransformedHospital {
   return {
-    id: `ext_${result.place_id}`,
-    name: result.name,
-    location: result.formatted_address,
-    address: result.formatted_address,
-    specializations: [],
-    contactNumber: result.formatted_phone_number || "Not available",
+    id: `ext_${item.place_id || Math.random().toString(36)}`,
+    name: item.display_name?.split(",")[0] || item.display_name || "Unnamed Hospital",
+    location: item.display_name || "Unknown",
+    address: item.display_name || "",
+    specializations: [], // Not usually provided — keep empty or enhance later
+    contactNumber: item.address?.phone || "Not available",
     isExternal: true,
-    coordinates: result.geometry?.location ? [result.geometry.location.lng, result.geometry.location.lat] : [],
-    city: undefined,
-    region: undefined,
+    coordinates: item.lat && item.lon ? [parseFloat(item.lon), parseFloat(item.lat)] : [],
+    city: item.address?.city || item.address?.town || undefined,
+    region: item.address?.state || undefined,
     email: undefined,
     description: undefined,
   };

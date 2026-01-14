@@ -1,34 +1,58 @@
-'use client';
-import { useState } from 'react';
-import { Hospital } from '../types/Hospital';
-import { getFunctions, httpsCallable } from 'firebase/functions';
+"use client";
 
-export default function ShareButton({ hospitals }: { hospitals: Hospital[] }) {
-    const [email, setEmail] = useState('');
-    const functions = getFunctions();
+import { useState, useEffect } from "react";
+import { Share2 } from "lucide-react";
+import { auth } from "@/lib/firebase-client";
 
-    const shareViaEmail = async () => {
-        const sendHospitalList = httpsCallable(functions, 'sendHospitalList');
-        await sendHospitalList({ email, hospitals });
-        setEmail('');
-        alert('List shared successfully!');
+export default function ShareButton() {
+  const [mounted, setMounted] = useState(false);
+  const [canShare, setCanShare] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    // Check if the browser supports native sharing
+    setCanShare(typeof navigator !== "undefined" && !!navigator.share);
+  }, []);
+
+  const handleShare = async () => {
+    // Check if user is authenticated (only if auth is available)
+    if (auth?.currentUser) {
+      // User is logged in, proceed
+    } else {
+      // User not logged in - you might want to handle this differently
+      console.log("User not authenticated");
+    }
+
+    const shareData = {
+      title: "CareFinder",
+      text: "Find healthcare providers near you with CareFinder",
+      url: window.location.href,
     };
 
-    return (
-        <div>
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter email to share"
-                className="border p-2 rounded"
-            />
-            <button
-                onClick={shareViaEmail}
-                className="ml-2 bg-purple-500 text-white p-2 rounded"
-            >
-                Share via Email
-            </button>
-        </div>
-    );
+    try {
+      if (canShare) {
+        await navigator.share(shareData);
+      } else {
+        // Fallback: copy to clipboard
+        await navigator.clipboard.writeText(window.location.href);
+        alert("Link copied to clipboard!");
+      }
+    } catch (error) {
+      console.error("Error sharing:", error);
+    }
+  };
+
+  // Don't render until mounted (prevents hydration errors)
+  if (!mounted) return null;
+
+  return (
+    <button
+      onClick={handleShare}
+      className="flex items-center gap-2 px-4 py-2 bg-[#056968] text-white rounded-lg hover:bg-[#edb138] transition-colors"
+      aria-label="Share this page"
+    >
+      <Share2 size={20} />
+      Share
+    </button>
+  );
 }

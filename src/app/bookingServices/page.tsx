@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, db } from '../../lib/firebase';
+import { auth, db } from '../../lib/firebase-client';
 import ProtectedRoute from '../../component/auth/ProtectedAction';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import Link from 'next/link';

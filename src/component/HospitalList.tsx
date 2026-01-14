@@ -1,4 +1,3 @@
-// components/HospitalList.tsx
 "use client";
 
 import { useState } from "react";

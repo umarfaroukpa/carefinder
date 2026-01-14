@@ -1,52 +1,48 @@
-// src/component/AuthProvider.tsx
 "use client";
+
 import { useState, useEffect } from "react";
-import { auth } from "../lib/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useFirebaseAuth } from "../hooks/useFirebaseAuth";
+import { auth } from "@/lib/firebase-client";
+import { setPersistence, browserLocalPersistence } from "firebase/auth";
 import Header from "./Header";
 import Footer from "./Footer";
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, loading, error] = useAuthState(auth);
+  const { user, loading, error } = useFirebaseAuth();
   const [mounted, setMounted] = useState(false);
   const [isTimedOut, setIsTimedOut] = useState(false);
 
-  // Handle hydration
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Debug auth state
   useEffect(() => {
     console.log("AuthProvider state:", { user: !!user, loading, error, mounted, isTimedOut });
   }, [user, loading, error, mounted, isTimedOut]);
 
-  // Timeout for loading
   useEffect(() => {
     if (loading && mounted && !isTimedOut) {
       const timer = setTimeout(() => {
         console.warn("Auth loading timed out");
         setIsTimedOut(true);
-      }, 10000); // Increased to 10 seconds
+      }, 10000);
       return () => clearTimeout(timer);
     }
   }, [loading, mounted, isTimedOut]);
 
-  // Initialize Firebase auth persistence (optional, if needed)
+  // Set persistence (only if auth is available)
   useEffect(() => {
-    import("firebase/auth")
-      .then(({ setPersistence, browserLocalPersistence }) => {
-        setPersistence(auth, browserLocalPersistence).catch((err) =>
-          console.error("Persistence error:", err)
-        );
-      })
-      .catch((err) => console.error("Import error:", err));
+    if (auth) {
+      setPersistence(auth, browserLocalPersistence).catch((err) =>
+        console.error("Persistence error:", err)
+      );
+    }
   }, []);
 
-  if (!mounted) {
-    return null; // Prevent SSR mismatch
-  }
+  // Don't render until mounted (prevents hydration mismatch)
+  if (!mounted) return null;
 
+  // Show loading state
   if (loading && !isTimedOut) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-75">
@@ -59,6 +55,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     );
   }
 
+  // Show error state
   if (error || isTimedOut) {
     console.error("AuthProvider error:", error?.message || "Loading timed out");
     return (
@@ -71,7 +68,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
           </p>
           <button
             onClick={() => window.location.reload()}
-            className="bg-[#056968] text-white px-4 py-2 rounded-lg hover:bg-[#edb13b]"
+            className="bg-[#056968] text-white px-4 py-2 rounded-lg hover:bg-[#edb138]"
           >
             Retry
           </button>

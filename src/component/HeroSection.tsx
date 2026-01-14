@@ -1,4 +1,3 @@
-// components/Hero.tsx
 "use client";
 
 import React, { useRef, useEffect, useState, useCallback } from "react";
@@ -12,7 +11,7 @@ import HospitalList from "../component/HospitalList";
 import { useHospitalSearch } from "../component/useHospitalSearch";
 import ProtectedAction from "../component/auth/ProtectedAction";
 import { Hospital } from "../types/Hospital";
-import toast from "react-hot-toast"; // Add toast import
+import toast from "react-hot-toast"; 
 
 export default function Hero() {
   const { currentUser, loading } = useAuth();
@@ -319,5 +318,5 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 100 } },
+  visible: { y: 0, opacity: 1, transition: { type: "spring" as const, stiffness: 100 } },
 };
