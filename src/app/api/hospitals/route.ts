@@ -34,17 +34,43 @@ interface ExternalHospital {
 }
 
 async function searchExternalHospitals(searchTerm: string): Promise<any[]> {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/locationiq-proxy?q=${encodeURIComponent(searchTerm)}`
-    );
-    if (!res.ok) return [];
-    const data = await res.json();
-    return data || [];
-  } catch (error) {
-    console.error("Proxy fetch error:", error);
-    return [];
+  const maxRetries = 3;
+  let attempt = 0;
+
+  while (attempt < maxRetries) {
+    try {
+      const url = `https://us1.locationiq.com/v1/search?` + new URLSearchParams({
+        key: process.env.LOCATIONIQ_TOKEN!,
+        q: `${searchTerm} hospital`,
+        countrycodes: "ng",
+        tag: "amenity:hospital",
+        format: "json",
+        limit: "15",
+        addressdetails: "1",
+      }).toString();
+
+      const response = await fetch(url);
+
+      if (response.status === 429) {
+        // Wait exponentially longer (1s → 2s → 4s)
+        const delay = Math.pow(2, attempt) * 1000;
+        console.log(`Rate limited (429), retrying after ${delay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        attempt++;
+        continue;
+      }
+
+      if (!response.ok) throw new Error(`LocationIQ error: ${response.status}`);
+
+      const data = await response.json();
+      return data || [];
+    } catch (error) {
+      console.error("LocationIQ search error:", error);
+      if (attempt >= maxRetries - 1) return [];
+      attempt++;
+    }
   }
+  return [];
 }
 
 interface TransformedHospital {
