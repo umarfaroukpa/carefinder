@@ -29,25 +29,28 @@ if (typeof window !== "undefined") {
 
     try {
       _storage = getStorage(_app);
-    } catch (error) {
-      console.warn("[Firebase Client] Storage not available");
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      console.warn("[Firebase Client] Storage not available:", errorMessage);
     }
 
     console.log("[Firebase Client] Initialized successfully");
-  } catch (error) {
-    console.error("[Firebase Client] Initialization failed:", error);
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    console.error("[Firebase Client] Initialization failed:", errorMessage);
   }
 }
 
 // Helper function to ensure Firebase is initialized
-function ensureInitialized(): void {
-  if (typeof window === "undefined") {
-    throw new Error("Firebase can only be used in the browser");
-  }
-  if (!_auth || !_db) {
-    throw new Error("Firebase not initialized. Check your configuration.");
-  }
-}
+// Remove or comment out if not used anywhere
+// function ensureInitialized(): void {
+//   if (typeof window === "undefined") {
+//     throw new Error("Firebase can only be used in the browser");
+//   }
+//   if (!_auth || !_db) {
+//     throw new Error("Firebase not initialized. Check your configuration.");
+//   }
+// }
 
 // Safe getters that throw helpful errors if not initialized
 export function getAuthInstance(): Auth {
@@ -68,8 +71,7 @@ export function getStorageInstance(): FirebaseStorage | null {
   return _storage || null;
 }
 
-// Export the direct instances for convenience (use with caution)
-// These can be undefined, so always check before using
+// Export the direct instances for convenience
 export const app = _app;
 export const auth = _auth;
 export const db = _db;

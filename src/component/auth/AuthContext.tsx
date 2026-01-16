@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useState, useRef } from 'react';
 import { User, onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, getDoc, getDocs, collection, setDoc, updateDoc } from 'firebase/firestore';
-import { auth, db } from '../../lib/firebase-client';
+import { getAuthInstance, getDbInstance } from '../../lib/firebase-client';
 import toast from 'react-hot-toast';
 import { useRouter, usePathname } from 'next/navigation';
 
@@ -101,6 +101,8 @@ export function useAuth() {
 }
 
 export function AuthProviderContext({ children }: { children: React.ReactNode }) {
+  const auth = getAuthInstance();
+  const db = getDbInstance();
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -142,7 +144,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       console.error("Logout error:", error);
       throw error;
     }
-  }, [currentUser]);
+  }, [currentUser, auth, db]);
 
   const resetSessionTimer = React.useCallback(() => {
     if (sessionTimeoutRef.current) clearTimeout(sessionTimeoutRef.current);
@@ -182,7 +184,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
     }
 
     resetSessionTimer();
-  }, [currentUser, userData, initialized, resetSessionTimer]);
+  }, [currentUser, userData, initialized, resetSessionTimer, db]);
 
   const fetchUserData = React.useCallback(async (user: User) => {
     try {
@@ -235,7 +237,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
         lastActive: now,
       });
     }
-  }, []);
+  }, [db]);
 
   const fetchBookings = React.useCallback(async () => {
     if (!currentUser || loading) return;
@@ -251,7 +253,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       console.error("Error fetching bookings:", error);
       toast.error("Failed to load your bookings. Please try again.");
     }
-  }, [currentUser, loading]);
+  }, [currentUser, loading, db]);
 
   const fetchSeniorCare = React.useCallback(async () => {
     if (!currentUser) return;
@@ -267,10 +269,10 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       console.error("Error fetching senior care:", error);
       toast.error("Failed to load your senior care activities. Please try again.");
     }
-  }, [currentUser]);
+  }, [currentUser, db]);
 
   const fetchEmergencyCare = React.useCallback(async () => {
-    if (!currentUser || loading) return;
+    if (!currentUser) return;
 
     try {
       const emergencyCareSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'emergencyCare'));
@@ -283,7 +285,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       console.error("Error fetching emergency care:", error);
       toast.error("Failed to load your emergency care activities. Please try again.");
     }
-  }, [currentUser, loading]);
+  }, [currentUser, db]);
 
   const fetchHomeServices = React.useCallback(async () => {
     if (!currentUser || loading) return;
@@ -299,7 +301,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       console.error("Error fetching home services:", error);
       toast.error("Failed to load your home services. Please try again.");
     }
-  }, [currentUser, loading]);
+  }, [currentUser, loading, db]);
 
   const fetchPediatricServices = React.useCallback(async () => {
     if (!currentUser || loading) return;
@@ -315,7 +317,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       console.error("Error fetching pediatric services:", error);
       toast.error("Failed to load your pediatric services. Please try again.");
     }
-  }, [currentUser, loading]);
+  }, [currentUser, loading, db]);
 
   const fetchUserActivity = React.useCallback(async () => {
     if (!currentUser) return;
@@ -392,7 +394,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       console.error("Error fetching user activity:", error);
       toast.error("Failed to load your activity. Please try again.");
     }
-  }, [currentUser]);
+  }, [currentUser, db]);
 
   const checkUserRole = async (): Promise<UserRole> => {
     if (!currentUser) return 'user';
@@ -461,6 +463,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
     resetSessionTimer,
     router,
     pathname,
+    auth,
   ]);
 
   useEffect(() => {

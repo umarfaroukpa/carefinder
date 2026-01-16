@@ -4,12 +4,9 @@ import { useAuth } from '../../component/auth/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import ProtectedRoute from '../../component/auth/ProtectedAction';
-import {
-  Calendar, LogIn, LogOut, Home, Heart,
-  Baby, Stethoscope, User, Clock, Activity, BriefcaseMedical
-} from 'lucide-react';
+import { Calendar, LogIn, LogOut, Home, Heart, Baby, Stethoscope, User, Clock, Activity, BriefcaseMedical} from 'lucide-react';
 import { doc, deleteDoc } from 'firebase/firestore';
-import { db } from '../../lib/firebase-client';
+import { getDbInstance } from '../../lib/firebase-client';
 import toast from 'react-hot-toast';
 import { FirebaseError } from 'firebase/app';
 
@@ -91,6 +88,7 @@ export default function Account() {
     fetchPediatricServices,
   } = useAuth();
   const router = useRouter();
+  const db = getDbInstance();
   const [activeTab, setActiveTab] = useState('activity');
   const [isCancelling, setIsCancelling] = useState<string | null>(null);
 

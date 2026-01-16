@@ -13,6 +13,7 @@ import ProtectedAction from "../component/auth/ProtectedAction";
 import { Hospital } from "../types/Hospital";
 import toast from "react-hot-toast"; 
 
+
 export default function Hero() {
   const { currentUser, loading } = useAuth();
   const router = useRouter();

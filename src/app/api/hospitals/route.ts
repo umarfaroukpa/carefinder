@@ -20,20 +20,21 @@ const hospitalSchema = z.object({
   specializations: z.array(z.string()).optional(),
 });
 
-interface ExternalHospital {
-  place_id: string;
-  name: string;
-  formatted_address: string;
-  formatted_phone_number?: string;
-  geometry?: {
-    location: {
-      lng: number;
-      lat: number;
-    };
+// Define interface for LocationIQ response
+interface LocationIQResponseItem {
+  place_id?: string;
+  display_name?: string;
+  lat?: string;
+  lon?: string;
+  address?: {
+    city?: string;
+    town?: string;
+    state?: string;
+    phone?: string;
   };
 }
 
-async function searchExternalHospitals(searchTerm: string): Promise<any[]> {
+async function searchExternalHospitals(searchTerm: string): Promise<LocationIQResponseItem[]> {
   const maxRetries = 3;
   let attempt = 0;
 
@@ -52,7 +53,6 @@ async function searchExternalHospitals(searchTerm: string): Promise<any[]> {
       const response = await fetch(url);
 
       if (response.status === 429) {
-        // Wait exponentially longer (1s → 2s → 4s)
         const delay = Math.pow(2, attempt) * 1000;
         console.log(`Rate limited (429), retrying after ${delay}ms...`);
         await new Promise(resolve => setTimeout(resolve, delay));
@@ -62,7 +62,7 @@ async function searchExternalHospitals(searchTerm: string): Promise<any[]> {
 
       if (!response.ok) throw new Error(`LocationIQ error: ${response.status}`);
 
-      const data = await response.json();
+      const data: LocationIQResponseItem[] = await response.json();
       return data || [];
     } catch (error) {
       console.error("LocationIQ search error:", error);
@@ -88,13 +88,13 @@ interface TransformedHospital {
   coordinates: number[];
 }
 
-function transformExternalHospitalData(item: any): TransformedHospital {
+function transformExternalHospitalData(item: LocationIQResponseItem): TransformedHospital {
   return {
     id: `ext_${item.place_id || Math.random().toString(36)}`,
     name: item.display_name?.split(",")[0] || item.display_name || "Unnamed Hospital",
     location: item.display_name || "Unknown",
     address: item.display_name || "",
-    specializations: [], // Not usually provided — keep empty or enhance later
+    specializations: [],
     contactNumber: item.address?.phone || "Not available",
     isExternal: true,
     coordinates: item.lat && item.lon ? [parseFloat(item.lon), parseFloat(item.lat)] : [],
@@ -174,7 +174,7 @@ export async function GET(request: NextRequest) {
     console.log("Searching external API for:", validatedParams.data.searchTerm);
     const externalResults = await searchExternalHospitals(validatedParams.data.searchTerm);
     const externalHospitals = externalResults
-      .slice(0, 5) // Limit to top 5 external results
+      .slice(0, 5)
       .map(transformExternalHospitalData);
     console.log("External API results count:", externalHospitals.length);
 

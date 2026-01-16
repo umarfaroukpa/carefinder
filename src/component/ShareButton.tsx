@@ -1,58 +1,43 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Hospital } from "../types/Hospital";
 import { Share2 } from "lucide-react";
-import { auth } from "@/lib/firebase-client";
+import toast from "react-hot-toast";
 
-export default function ShareButton() {
-  const [mounted, setMounted] = useState(false);
-  const [canShare, setCanShare] = useState(false);
+interface ShareButtonProps {
+  hospitals: Hospital[];
+}
 
-  useEffect(() => {
-    setMounted(true);
-    // Check if the browser supports native sharing
-    setCanShare(typeof navigator !== "undefined" && !!navigator.share);
-  }, []);
-
-  const handleShare = async () => {
-    // Check if user is authenticated (only if auth is available)
-    if (auth?.currentUser) {
-      // User is logged in, proceed
-    } else {
-      // User not logged in - you might want to handle this differently
-      console.log("User not authenticated");
+export default function ShareButton({ hospitals }: ShareButtonProps) {
+  const handleShare = () => {
+    if (hospitals.length === 0) {
+      toast.error("No hospitals to share");
+      return;
     }
-
-    const shareData = {
-      title: "CareFinder",
-      text: "Find healthcare providers near you with CareFinder",
-      url: window.location.href,
-    };
-
-    try {
-      if (canShare) {
-        await navigator.share(shareData);
-      } else {
-        // Fallback: copy to clipboard
-        await navigator.clipboard.writeText(window.location.href);
-        alert("Link copied to clipboard!");
-      }
-    } catch (error) {
-      console.error("Error sharing:", error);
+    
+    const text = `Found ${hospitals.length} hospitals on Carefinder! Top results: ${hospitals.slice(0, 3).map(h => h.name).join(", ")}`;
+    
+    if (navigator.share) {
+      navigator.share({
+        title: 'Carefinder Hospitals',
+        text: text,
+        url: window.location.href,
+      });
+    } else {
+      navigator.clipboard.writeText(text);
+      toast.success('Results copied to clipboard!');
     }
   };
 
-  // Don't render until mounted (prevents hydration errors)
-  if (!mounted) return null;
-
   return (
-    <button
-      onClick={handleShare}
-      className="flex items-center gap-2 px-4 py-2 bg-[#056968] text-white rounded-lg hover:bg-[#edb138] transition-colors"
-      aria-label="Share this page"
-    >
-      <Share2 size={20} />
-      Share
-    </button>
+    <div className="mt-8 flex justify-center">
+      <button
+        onClick={handleShare}
+        className="flex items-center gap-2 px-6 py-3 bg-[#056968] hover:bg-[#047c78] text-white font-medium rounded-lg transition-colors shadow-sm"
+      >
+        <Share2 size={20} />
+        Share {hospitals.length} Hospital{hospitals.length !== 1 ? 's' : ''}
+      </button>
+    </div>
   );
 }

@@ -1,10 +1,9 @@
 import './styles/globals.css';
 import { Toaster } from 'react-hot-toast';
-import { AuthProviderContext } from '../component/auth/AuthContext';
-import AuthProvider from '../component/AuthProvider';
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
 import ErrorBoundaryWithHooks from './errorRout/ErrorBoundary';
+import Providers from '../app/providers'; 
 
 export const metadata: Metadata = {
   title: 'Carefinder',
@@ -25,13 +24,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className="overflow-x-hidden">
       <body className="overflow-x-hidden">
         <ErrorBoundaryWithHooks>
-          <AuthProviderContext>
-            <AuthProvider>
-            <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
-            <main className="-mt-4 w-full">{ children }</main>
-            </AuthProvider>
-          </AuthProviderContext>
+          <Providers> {/* Wrap with Providers */}
+            <main className="-mt-4 w-full">{children}</main>
+          </Providers>
         </ErrorBoundaryWithHooks>
+        <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
       </body>
     </html>
   );

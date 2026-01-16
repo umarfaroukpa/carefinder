@@ -1,21 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { MapPin, Phone, Mail, Building, Activity, Download, Share2 } from "lucide-react";
+import { MapPin, Phone, Mail, Activity, Download, Share2 } from "lucide-react";
 import toast from "react-hot-toast";
 import { Hospital } from "../types/Hospital";
 import { useAuth } from "./auth/AuthContext";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface HospitalListProps {
   hospitals: Hospital[];
   onHospitalAdded?: (updatedHospital: Hospital) => void;
 }
 
-export default function HospitalList({ hospitals, onHospitalAdded }: HospitalListProps) {
+export default function HospitalList({ hospitals }: HospitalListProps) {
   const { currentUser, isAdmin } = useAuth();
   const router = useRouter();
-  const pathname = usePathname();
   const [isBooking, setIsBooking] = useState<string | null>(null);
   const [isAdding, setIsAdding] = useState<string | null>(null);
 
@@ -74,7 +73,7 @@ export default function HospitalList({ hospitals, onHospitalAdded }: HospitalLis
       setTimeout(() => {
         router.push(`/admin?searchTerm=${encodeURIComponent(hospitalData.city || hospitalData.name)}`);
       }, 800);
-    } catch (error) {
+    } catch {
       toast.error("Failed to prepare data");
     } finally {
       setIsAdding(null);

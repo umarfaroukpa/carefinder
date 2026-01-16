@@ -21,6 +21,7 @@ type FormData = yup.InferType<typeof schema>;
 
 interface HospitalSearchProps {
   onSearch: (hospitals: Hospital[]) => void;
+   onHospitalAdded?: (updatedHospital: Hospital) => void;
 }
 
 export default function HospitalSearch({ onSearch }: HospitalSearchProps) {

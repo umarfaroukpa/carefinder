@@ -1,16 +1,8 @@
-// components/auth/ProtectedAction.tsx
 "use client";
 
 import { useAuth } from './AuthContext';
 import { useRouter } from 'next/navigation';
-import {
-  ReactNode,
-  MouseEvent,
-  cloneElement,
-  isValidElement,
-  ReactElement,
-  useCallback,
-} from 'react';
+import { ReactNode, MouseEvent, cloneElement,  isValidElement, ReactElement, useCallback, } from 'react';
 import toast from 'react-hot-toast';
 
 interface ProtectedActionProps {

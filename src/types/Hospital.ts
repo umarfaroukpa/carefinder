@@ -13,4 +13,6 @@ export interface Hospital {
     coordinates?: number[]; // From schema
     functionalStatus?: string; // From schema
     isExternal?: boolean;
+    hospitals: Hospital[];
+    onHospitalAdded?: (updatedHospital: Hospital) => void;
 }
