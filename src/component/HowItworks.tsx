@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapPin, Calendar, Share2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, easeOut } from 'framer-motion';
 
 export default function HowItWorks() {
     const containerVariants = {
@@ -17,7 +17,7 @@ export default function HowItWorks() {
         visible: {
             opacity: 1,
             y: 0,
-            transition: { duration: 0.7, ease: "easeOut" }
+            transition: { duration: 0.7, ease: easeOut }
         }
     };
 
@@ -26,7 +26,7 @@ export default function HowItWorks() {
         visible: {
             scale: 1,
             transition: {
-                type: "spring",
+                type: "spring" as const,
                 stiffness: 260,
                 damping: 20,
                 delay: 0.2
@@ -40,7 +40,7 @@ export default function HowItWorks() {
             scale: 1,
             rotate: 0,
             transition: {
-                type: "spring",
+                type: "spring" as const,
                 stiffness: 200,
                 damping: 15
             }

@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, db } from '../../lib/firebase-client';
+import { getAuthInstance, getDbInstance } from '../../lib/firebase-client';
 import ProtectedRoute from '../../component/auth/ProtectedAction';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import Link from 'next/link';
@@ -18,7 +18,10 @@ interface AppointmentFormData {
 }
 
 export default function BookAppointment() {
+    const auth = getAuthInstance();
+    const db = getDbInstance();
     const [user] = useAuthState(auth);
+    
     const [formData, setFormData] = useState<AppointmentFormData>({
         name: '',
         email: '',
@@ -80,14 +83,13 @@ export default function BookAppointment() {
                             <h1 className="text-3xl font-bold text-[#056968] mb-4">Book Your Appointment</h1>
                             <p className="text-[#056968] max-w-2xl mx-auto">
                                 Schedule your appointment with our healthcare professionals quickly and easily.
-                                Choose from a wide range of services and find a time that works for you.
                             </p>
                         </div>
 
                         {!user && (
                             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8 text-center">
                                 <p className="text-[#056968]">
-                                    <span className="font-medium">Note:</span> Creating an account allows you to track your appointments and medical history.
+                                    <span className="font-medium">Note:</span> Creating an account allows you to track your appointments.
                                     <Link href="/authpage" className="ml-2 text-[#edb138] hover:underline font-medium">
                                         Login or Sign Up
                                     </Link>
@@ -102,7 +104,7 @@ export default function BookAppointment() {
                                 </svg>
                                 <h2 className="text-2xl font-bold text-[#056968] mb-2">Appointment Booked Successfully!</h2>
                                 <p className="text-[#056968] mb-6">
-                                    We have received your appointment request and will send you a confirmation email shortly.
+                                    We will send you a confirmation email shortly.
                                 </p>
                                 <button
                                     onClick={() => setSubmitSuccess(false)}
@@ -171,12 +173,6 @@ export default function BookAppointment() {
                                             <option value="Specialist Consultation">Specialist Consultation</option>
                                             <option value="Diagnostic Tests">Diagnostic Tests</option>
                                             <option value="Vaccination">Vaccination</option>
-                                            <option value="Prenatal Care">Prenatal Care</option>
-                                            <option value="Pediatric Checkup">Pediatric Checkup</option>
-                                            <option value="Geriatric Care">Geriatric Care</option>
-                                            <option value="Dental Services">Dental Services</option>
-                                            <option value="Eye Examination">Eye Examination</option>
-                                            <option value="Physical Therapy">Physical Therapy</option>
                                         </select>
                                     </div>
 
@@ -209,37 +205,7 @@ export default function BookAppointment() {
                                             <option value="10:00 AM">10:00 AM</option>
                                             <option value="11:00 AM">11:00 AM</option>
                                             <option value="12:00 PM">12:00 PM</option>
-                                            <option value="1:00 PM">1:00 PM</option>
-                                            <option value="2:00 PM">2:00 PM</option>
-                                            <option value="3:00 PM">3:00 PM</option>
-                                            <option value="4:00 PM">4:00 PM</option>
                                         </select>
-                                    </div>
-
-                                    <div className="md:col-span-2">
-                                        <label htmlFor="doctor" className="block text-[#056968] font-medium mb-2">Preferred Doctor (Optional)</label>
-                                        <input
-                                            type="text"
-                                            id="doctor"
-                                            name="doctor"
-                                            value={formData.doctor}
-                                            onChange={handleChange}
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#056968] focus:border-transparent"
-                                            placeholder="Enter doctor's name if you have a preference"
-                                        />
-                                    </div>
-
-                                    <div className="md:col-span-2">
-                                        <label htmlFor="notes" className="block text-[#056968] font-medium mb-2">Additional Notes</label>
-                                        <textarea
-                                            id="notes"
-                                            name="notes"
-                                            value={formData.notes}
-                                            onChange={handleChange}
-                                            rows={4}
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#056968] focus:border-transparent"
-                                            placeholder="Please provide any additional information about your appointment request"
-                                        ></textarea>
                                     </div>
                                 </div>
 
@@ -253,54 +219,13 @@ export default function BookAppointment() {
                                     <button
                                         type="submit"
                                         disabled={isSubmitting}
-                                        className="bg-[#edb138] hover:bg-[#045857] text-white font-medium py-3 px-8 rounded-md transition duration-300 ease-in-out"
+                                        className="bg-[#edb138] hover:bg-[#045857] text-white font-medium py-3 px-8 rounded-md transition duration-300"
                                     >
                                         {isSubmitting ? 'Booking...' : 'Book Appointment'}
                                     </button>
                                 </div>
                             </form>
                         )}
-
-                        <div className="mt-12 bg-white shadow-md rounded-lg p-8">
-                            <h2 className="text-2xl font-bold text-[#056968] mb-6">What to Expect</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div className="text-center">
-                                    <div className="bg-[#e6f7f7] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#056968]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                        </svg>
-                                    </div>
-                                    <h3 className="font-semibold text-[#edb138] text-lg mb-2">Confirmation</h3>
-                                    <p className="text-[#056968]">
-                                        You will receive an email confirmation within 24 hours of your appointment request.
-                                    </p>
-                                </div>
-
-                                <div className="text-center">
-                                    <div className="bg-[#e6f7f7] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#056968]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                                        </svg>
-                                    </div>
-                                    <h3 className="font-semibold text-[#edb138] text-lg mb-2">Preparation</h3>
-                                    <p className="text-[#056968]">
-                                        Bring your ID, insurance information, and a list of current medications to your appointment.
-                                    </p>
-                                </div>
-
-                                <div className="text-center">
-                                    <div className="bg-[#e6f7f7] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#056968]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </div>
-                                    <h3 className="font-semibold text-[#edb138] text-lg mb-2">Arrival</h3>
-                                    <p className="text-[#056968]">
-                                        Please arrive 15 minutes before your scheduled appointment time to complete any necessary paperwork.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

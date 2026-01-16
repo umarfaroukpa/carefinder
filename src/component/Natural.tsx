@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from 'framer-motion';
+import { motion, easeOut } from 'framer-motion';
 
 const NaturalMedicineSection = () => {
     // Animation variants
@@ -22,9 +22,9 @@ const NaturalMedicineSection = () => {
             opacity: 1,
             y: 0,
             transition: {
-                type: "spring",
+                type: "spring" as const,
                 stiffness: 100,
-                duration: 0.8
+                damping: 10
             }
         }
     };
@@ -35,9 +35,9 @@ const NaturalMedicineSection = () => {
             opacity: 1,
             scale: 1,
             transition: {
-                type: "spring",
+                type: "spring" as const,
                 damping: 15,
-                duration: 0.6
+                stiffness: 100
             }
         }
     };
@@ -63,10 +63,9 @@ const NaturalMedicineSection = () => {
             opacity: 1,
             scale: 1,
             transition: {
-                type: "spring",
+                type: "spring" as const,
                 damping: 8,
                 stiffness: 100,
-                duration: 0.8,
                 delay: 0.3
             }
         }

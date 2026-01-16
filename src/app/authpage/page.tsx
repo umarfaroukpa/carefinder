@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Github, Mail, Lock, User } from 'lucide-react';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, GithubAuthProvider, sendPasswordResetEmail } from 'firebase/auth';
 import { doc, getDoc, setDoc, collection } from 'firebase/firestore';
-import { auth, db } from '../../lib/firebase-client';
+import { getAuthInstance, getDbInstance } from '../../lib/firebase-client';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../component/auth/AuthContext';
@@ -45,6 +45,8 @@ const GoogleIcon = () => (
 );
 
 const AuthPage = () => {
+   const auth = getAuthInstance();
+  const db = getDbInstance();
   const { currentUser, loading } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

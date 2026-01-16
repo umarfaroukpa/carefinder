@@ -19,7 +19,7 @@ export default function Features() {
         visible: {
             opacity: 1,
             y: 0,
-            transition: { duration: 0.6, ease: "easeOut" }
+            transition: { duration: 0.6, ease: "easeOut" as const }
         }
     };
 
@@ -29,7 +29,7 @@ export default function Features() {
             scale: 1,
             opacity: 1,
             transition: {
-                type: "spring",
+                type: "spring" as const,
                 stiffness: 200,
                 damping: 10,
                 delay: 0.1
@@ -44,7 +44,7 @@ export default function Features() {
             rotate: 0,
             opacity: 1,
             transition: {
-                type: "spring",
+                type: "spring" as const,
                 stiffness: 260,
                 damping: 20
             }
@@ -53,7 +53,7 @@ export default function Features() {
             scale: 1.15,
             rotate: 15,
             transition: {
-                type: "spring",
+                type: "spring" as const,
                 stiffness: 400,
                 damping: 10
             }
@@ -228,3 +228,4 @@ export default function Features() {
         </section>
     );
 }
+

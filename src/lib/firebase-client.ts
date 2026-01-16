@@ -14,42 +14,68 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Initialize only in browser environment
-function initializeFirebase() {
-  if (typeof window === "undefined") {
-    return {
-      app: undefined,
-      auth: undefined,
-      db: undefined,
-      storage: undefined,
-    };
-  }
+// Private variables (can be undefined)
+let _app: FirebaseApp | undefined;
+let _auth: Auth | undefined;
+let _db: Firestore | undefined;
+let _storage: FirebaseStorage | undefined;
 
+// Initialize Firebase only in browser
+if (typeof window !== "undefined") {
   try {
-    const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    let storage: FirebaseStorage | undefined;
+    _app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+    _auth = getAuth(_app);
+    _db = getFirestore(_app);
 
     try {
-      storage = getStorage(app);
+      _storage = getStorage(_app);
     } catch (error) {
       console.warn("[Firebase Client] Storage not available");
     }
 
     console.log("[Firebase Client] Initialized successfully");
-    return { app, auth, db, storage };
   } catch (error) {
     console.error("[Firebase Client] Initialization failed:", error);
-    return {
-      app: undefined,
-      auth: undefined,
-      db: undefined,
-      storage: undefined,
-    };
   }
 }
 
-const { app, auth, db, storage } = initializeFirebase();
+// Helper function to ensure Firebase is initialized
+function ensureInitialized(): void {
+  if (typeof window === "undefined") {
+    throw new Error("Firebase can only be used in the browser");
+  }
+  if (!_auth || !_db) {
+    throw new Error("Firebase not initialized. Check your configuration.");
+  }
+}
 
-export { app, auth, db, storage };
+// Safe getters that throw helpful errors if not initialized
+export function getAuthInstance(): Auth {
+  if (!_auth) {
+    throw new Error("Firebase Auth not initialized. Make sure you're using this in a client component.");
+  }
+  return _auth;
+}
+
+export function getDbInstance(): Firestore {
+  if (!_db) {
+    throw new Error("Firebase Firestore not initialized. Make sure you're using this in a client component.");
+  }
+  return _db;
+}
+
+export function getStorageInstance(): FirebaseStorage | null {
+  return _storage || null;
+}
+
+// Export the direct instances for convenience (use with caution)
+// These can be undefined, so always check before using
+export const app = _app;
+export const auth = _auth;
+export const db = _db;
+export const storage = _storage;
+
+// Export a helper to check if Firebase is ready
+export const isFirebaseInitialized = (): boolean => {
+  return !!_auth && !!_db;
+};

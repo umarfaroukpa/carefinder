@@ -25,7 +25,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
       const timer = setTimeout(() => {
         console.warn("Auth loading timed out");
         setIsTimedOut(true);
-      }, 10000);
+      }, 30000);
       return () => clearTimeout(timer);
     }
   }, [loading, mounted, isTimedOut]);
