@@ -21,7 +21,9 @@ let _db: Firestore | undefined;
 let _storage: FirebaseStorage | undefined;
 
 // Initialize Firebase only in browser
-if (typeof window !== "undefined") {
+function initializeFirebase() {
+  if (typeof window === "undefined" || _auth) return;
+  
   try {
     _app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
     _auth = getAuth(_app);
@@ -41,43 +43,33 @@ if (typeof window !== "undefined") {
   }
 }
 
-// Helper function to ensure Firebase is initialized
-// Remove or comment out if not used anywhere
-// function ensureInitialized(): void {
-//   if (typeof window === "undefined") {
-//     throw new Error("Firebase can only be used in the browser");
-//   }
-//   if (!_auth || !_db) {
-//     throw new Error("Firebase not initialized. Check your configuration.");
-//   }
-// }
-
-// Safe getters that throw helpful errors if not initialized
-export function getAuthInstance(): Auth {
-  if (!_auth) {
-    throw new Error("Firebase Auth not initialized. Make sure you're using this in a client component.");
-  }
+// Safe getters that return undefined during SSR
+export function getAuthInstance(): Auth | undefined {
+  if (typeof window === "undefined") return undefined;
+  initializeFirebase();
   return _auth;
 }
 
-export function getDbInstance(): Firestore {
-  if (!_db) {
-    throw new Error("Firebase Firestore not initialized. Make sure you're using this in a client component.");
-  }
+export function getDbInstance(): Firestore | undefined {
+  if (typeof window === "undefined") return undefined;
+  initializeFirebase();
   return _db;
 }
 
 export function getStorageInstance(): FirebaseStorage | null {
+  if (typeof window === "undefined") return null;
+  initializeFirebase();
   return _storage || null;
 }
 
 // Export the direct instances for convenience
-export const app = _app;
-export const auth = _auth;
-export const db = _db;
-export const storage = _storage;
+export const getFirebaseApp = () => _app;
+export const getFirebaseAuth = () => _auth;
+export const getDb = () => _db;
+export const getFirebaseStorage = () => _storage;
+
 
 // Export a helper to check if Firebase is ready
 export const isFirebaseInitialized = (): boolean => {
-  return !!_auth && !!_db;
+  return typeof window !== "undefined" && !!_auth && !!_db;
 };

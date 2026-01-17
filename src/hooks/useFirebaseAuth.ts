@@ -24,7 +24,7 @@ export function useFirebaseAuth() {
       console.log("[useFirebaseAuth] Auth is ready, subscribing to state changes...");
 
       const unsubscribe = onAuthStateChanged(
-        auth,
+        auth!,
         (firebaseUser) => {
           console.log("[useFirebaseAuth] User state changed:", firebaseUser ? "logged in" : "logged out");
           setUser(firebaseUser);

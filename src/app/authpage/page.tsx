@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Github, Mail, Lock, User } from 'lucide-react';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, GithubAuthProvider, sendPasswordResetEmail } from 'firebase/auth';
 import { doc, getDoc, setDoc, collection } from 'firebase/firestore';
-import { getAuthInstance, getDbInstance } from '../../lib/firebase-client';
+import { getAuthInstance, getDbInstance, isFirebaseInitialized } from '../../lib/firebase-client';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../component/auth/AuthContext';
@@ -55,9 +55,15 @@ const AuthPage = () => {
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
   const [forgotEmail, setForgotEmail] = useState('');
   const [isResetting, setIsResetting] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const router = useRouter();
 
   // Redirect authenticated users to home
+
+  useEffect(() => {
+    setIsReady(isFirebaseInitialized());
+  }, []);
+
   useEffect(() => {
     if (!loading && currentUser) {
       router.push('/');
@@ -66,7 +72,7 @@ const AuthPage = () => {
 
   const logActivity = async (userId: string, type: string, details: unknown) => {
     try {
-      const activityRef = doc(collection(db, 'users', userId, 'activity'));
+      const activityRef = doc(collection(db!, 'users', userId, 'activity'));
       await setDoc(activityRef, {
         type,
         timestamp: new Date().toISOString(),
@@ -80,10 +86,10 @@ const AuthPage = () => {
   const handleEmailSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth!, email, password);
       const user = userCredential.user;
 
-      const userRef = doc(db, 'users', user.uid);
+      const userRef = doc(db!, 'users', user.uid);
       const now = Date.now();
       await setDoc(userRef, {
         email: user.email,
@@ -108,7 +114,7 @@ const AuthPage = () => {
   const handleEmailLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth!, email, password);
       const user = userCredential.user;
 
       await logActivity(user.uid, 'login', { email: user.email, method: 'email' });
@@ -126,10 +132,10 @@ const AuthPage = () => {
   const signInWithGoogle = async () => {
     try {
       const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth!, provider);
       const user = result.user;
 
-      const userRef = doc(db, 'users', user.uid);
+      const userRef = doc(db!, 'users', user.uid);
       const userSnap = await getDoc(userRef);
       if (!userSnap.exists()) {
         const now = Date.now();
@@ -157,10 +163,10 @@ const AuthPage = () => {
   const signInWithGithub = async () => {
     try {
       const provider = new GithubAuthProvider();
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth!, provider);
       const user = result.user;
 
-      const userRef = doc(db, 'users', user.uid);
+      const userRef = doc(db!, 'users', user.uid);
       const userSnap = await getDoc(userRef);
       if (!userSnap.exists()) {
         const now = Date.now();
@@ -194,7 +200,7 @@ const AuthPage = () => {
 
     setIsResetting(true);
     try {
-      await sendPasswordResetEmail(auth, forgotEmail);
+      await sendPasswordResetEmail(auth!, forgotEmail);
       toast.success('Password reset email sent! Please check your inbox.');
       setIsForgotPasswordOpen(false);
       setForgotEmail('');
@@ -218,6 +224,10 @@ const AuthPage = () => {
       setIsResetting(false);
     }
   };
+
+  if (!isReady) {
+    return <div>Loading...</div>;
+  }
 
   if (loading) {
     return (

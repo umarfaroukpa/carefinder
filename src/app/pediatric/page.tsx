@@ -308,6 +308,8 @@ const PediatricCare = () => {
                                                 <div className="w-16 h-16 bg-gray-200 rounded-full overflow-hidden mr-4">
                                                     <Image
                                                         src={doctor.image}
+                                                        width={300}
+                                                        height={300}
                                                         alt={doctor.name}
                                                         className="w-full h-full object-cover"
                                                     />

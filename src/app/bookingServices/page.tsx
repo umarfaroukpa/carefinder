@@ -1,7 +1,7 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { getAuthInstance, getDbInstance } from '../../lib/firebase-client';
+import { getAuthInstance, getDbInstance, isFirebaseInitialized } from '../../lib/firebase-client';
 import ProtectedRoute from '../../component/auth/ProtectedAction';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import Link from 'next/link';
@@ -20,8 +20,9 @@ interface AppointmentFormData {
 export default function BookAppointment() {
     const auth = getAuthInstance();
     const db = getDbInstance();
-    const [user] = useAuthState(auth);
-    
+    const [user] = useAuthState(auth!);
+    const [isReady, setIsReady] = useState(false);
+
     const [formData, setFormData] = useState<AppointmentFormData>({
         name: '',
         email: '',
@@ -36,6 +37,10 @@ export default function BookAppointment() {
     const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
     const [submitError, setSubmitError] = useState('');
 
+    useEffect(() => {
+        setIsReady(isFirebaseInitialized());
+    }, []);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
@@ -47,7 +52,7 @@ export default function BookAppointment() {
         setSubmitError('');
 
         try {
-            await addDoc(collection(db, "appointments"), {
+            await addDoc(collection(db!, "appointments"), {
                 ...formData,
                 userEmail: user?.email || formData.email,
                 userId: user?.uid || null,
@@ -73,6 +78,10 @@ export default function BookAppointment() {
             setIsSubmitting(false);
         }
     };
+
+    if (!isReady) {
+    return <div>Loading...</div>;
+  }
 
     return (
         <ProtectedRoute>

@@ -2,15 +2,22 @@
 
 import { useState, useEffect } from "react";
 import { useFirebaseAuth } from "../hooks/useFirebaseAuth";
-import { auth } from "@/lib/firebase-client";
+import { getAuthInstance, isFirebaseInitialized } from "../lib/firebase-client";
 import { setPersistence, browserLocalPersistence } from "firebase/auth";
 import Header from "./Header";
 import Footer from "./Footer";
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
+  const auth = getAuthInstance();
   const { user, loading, error } = useFirebaseAuth();
   const [mounted, setMounted] = useState(false);
   const [isTimedOut, setIsTimedOut] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+
+  // Check Firebase initialization
+  useEffect(() => {
+    setIsReady(isFirebaseInitialized());
+  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -37,7 +44,12 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
         console.error("Persistence error:", err)
       );
     }
-  }, []);
+  }, [auth]);
+
+  if (!isReady) {
+    return <div>Loading...</div>;
+  }
+
 
   // Don't render until mounted (prevents hydration mismatch)
   if (!mounted) return null;

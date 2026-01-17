@@ -1,8 +1,8 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState, useRef } from 'react';
-import { User, onAuthStateChanged, signOut } from 'firebase/auth';
-import { doc, getDoc, getDocs, collection, setDoc, updateDoc } from 'firebase/firestore';
+import { User, Auth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { Firestore, doc, getDoc, getDocs, collection, setDoc, updateDoc } from 'firebase/firestore';
 import { getAuthInstance, getDbInstance } from '../../lib/firebase-client';
 import toast from 'react-hot-toast';
 import { useRouter, usePathname } from 'next/navigation';
@@ -101,8 +101,8 @@ export function useAuth() {
 }
 
 export function AuthProviderContext({ children }: { children: React.ReactNode }) {
-  const auth = getAuthInstance();
-  const db = getDbInstance();
+  const [auth, setAuth] = useState<Auth | undefined>(undefined);
+  const [db, setDb] = useState<Firestore | undefined>(undefined);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -114,11 +114,49 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   const [loading, setLoading] = useState(true);
   const sessionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [initialized, setInitialized] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  
+  // Always call hooks unconditionally
   const router = useRouter();
   const pathname = usePathname();
 
+  // Mount detection
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Initialize Firebase on client mount
+  useEffect(() => {
+    // Only run on client
+    if (typeof window === 'undefined') {
+      setLoading(false);
+      return;
+    }
+
+    // Wait a tick for Firebase to initialize
+    const timer = setTimeout(() => {
+      const authInstance = getAuthInstance();
+      const dbInstance = getDbInstance();
+      
+      if (authInstance && dbInstance) {
+        setAuth(authInstance);
+        setDb(dbInstance);
+      } else {
+        console.warn('Firebase not fully initialized');
+        setLoading(false);
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const logoutUser = React.useCallback(async () => {
     try {
+      if (!auth || !db) {
+        console.error('Firebase not initialized for logout');
+        return;
+      }
+
       if (sessionTimeoutRef.current) clearTimeout(sessionTimeoutRef.current);
       toast.loading("Logging out...");
 
@@ -156,7 +194,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   }, [logoutUser]);
 
   const updateActivity = React.useCallback(async () => {
-    if (!currentUser || !initialized) return;
+    if (!currentUser || !initialized || !db) return;
 
     const now = Date.now();
     if (now - (userData?.lastActive || 0) <= 60000) return;
@@ -187,6 +225,8 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   }, [currentUser, userData, initialized, resetSessionTimer, db]);
 
   const fetchUserData = React.useCallback(async (user: User) => {
+    if (!db) return;
+
     try {
       const userRef = doc(db, 'users', user.uid);
       const userSnap = await getDoc(userRef);
@@ -240,7 +280,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   }, [db]);
 
   const fetchBookings = React.useCallback(async () => {
-    if (!currentUser || loading) return;
+    if (!currentUser || loading || !db) return;
 
     try {
       const bookingSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'bookings'));
@@ -256,7 +296,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   }, [currentUser, loading, db]);
 
   const fetchSeniorCare = React.useCallback(async () => {
-    if (!currentUser) return;
+    if (!currentUser || !db) return;
 
     try {
       const seniorCareSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'seniorCare'));
@@ -272,7 +312,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   }, [currentUser, db]);
 
   const fetchEmergencyCare = React.useCallback(async () => {
-    if (!currentUser) return;
+    if (!currentUser || !db) return;
 
     try {
       const emergencyCareSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'emergencyCare'));
@@ -288,7 +328,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   }, [currentUser, db]);
 
   const fetchHomeServices = React.useCallback(async () => {
-    if (!currentUser || loading) return;
+    if (!currentUser || loading || !db) return;
 
     try {
       const homeServicesSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'homeServices'));
@@ -304,7 +344,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   }, [currentUser, loading, db]);
 
   const fetchPediatricServices = React.useCallback(async () => {
-    if (!currentUser || loading) return;
+    if (!currentUser || loading || !db) return;
 
     try {
       const pediatricServicesSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'pediatricServices'));
@@ -320,7 +360,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   }, [currentUser, loading, db]);
 
   const fetchUserActivity = React.useCallback(async () => {
-    if (!currentUser) return;
+    if (!currentUser || !db) return;
 
     try {
       const bookingSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'bookings'));
@@ -351,7 +391,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
           timestamp: new Date(data.createdAt).getTime(),
           details: { id: doc.id, ...data },
         };
-      }) as UserActivity[];
+      }) as UserActivity[]; 
 
       const homeServicesSnapshot = await getDocs(collection(db, 'users', currentUser.uid, 'homeServices'));
       const homeServicesData = homeServicesSnapshot.docs.map(doc => {
@@ -397,7 +437,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
   }, [currentUser, db]);
 
   const checkUserRole = async (): Promise<UserRole> => {
-    if (!currentUser) return 'user';
+    if (!currentUser || !db) return 'user';
 
     try {
       const userRef = doc(db, 'users', currentUser.uid);
@@ -414,11 +454,9 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
     return 'user';
   };
 
+  // Setup auth state listener when Firebase is ready
   useEffect(() => {
-    if (typeof window === 'undefined') {
-      setLoading(false);
-      return;
-    }
+    if (!auth || !db || !mounted) return;
 
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setCurrentUser(user);
@@ -441,8 +479,9 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
         setPediatricServices([]);
         setUserActivity([]);
         if (sessionTimeoutRef.current) clearTimeout(sessionTimeoutRef.current);
-        // Only redirect to '/' if not on /authpage
-        if (pathname !== '/authpage') {
+        
+        // Only redirect if mounted and not on /authpage
+        if (mounted && pathname !== '/authpage') {
           router.push('/');
         }
       }
@@ -453,6 +492,11 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
 
     return unsubscribe;
   }, [
+    auth,
+    db,
+    mounted,
+    router,
+    pathname,
     fetchUserData,
     fetchBookings,
     fetchSeniorCare,
@@ -461,13 +505,10 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
     fetchPediatricServices,
     fetchUserActivity,
     resetSessionTimer,
-    router,
-    pathname,
-    auth,
   ]);
 
   useEffect(() => {
-    if (!initialized) return;
+    if (!initialized || !auth || !db) return;
 
     const handleActivity = () => {
       updateActivity();
@@ -480,7 +521,7 @@ export function AuthProviderContext({ children }: { children: React.ReactNode })
       events.forEach((event) => window.removeEventListener(event, handleActivity));
       if (sessionTimeoutRef.current) clearTimeout(sessionTimeoutRef.current);
     };
-  }, [updateActivity, initialized]);
+  }, [updateActivity, initialized, auth, db]);
 
   const value = {
     currentUser,

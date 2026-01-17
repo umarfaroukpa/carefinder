@@ -123,7 +123,7 @@ export default function Account() {
 
     setIsCancelling(itemId);
     try {
-      const itemRef = doc(db, 'users', userData.uid, collection, itemId);
+      const itemRef = doc(db!, 'users', userData.uid, collection, itemId);
       await deleteDoc(itemRef);
       toast.success(`${collection} cancelled successfully`);
       // Refresh the relevant data after cancellation
